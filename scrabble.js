@@ -67,7 +67,7 @@ Scrabble.prototype.minBy = function (array) {
   return array[result.indexOf(min)];
 };
 }; // end of Scrabble
-
+// ==================PLAYER=========================
 var Player = function(name) {
   this.name = name;
   this.plays = [];
@@ -111,11 +111,53 @@ Player.prototype.highestWordScore = function(){
 };
 //}; // end of Player
 
+// ==================TILE BAG=========================
+var TileBag = function() {
+
+  var notShaffledTiles = ["D","L","S","U","D","L","S","U","D","L","S",
+                    "U","D","L","S","U","G","G","G","Q","J","K",
+                    "X","Z","M","B","C","F","H","V","W","Y","P",
+                    "M","B","C","F","H","V","W","Y","P","E","E",
+                    "E","E","E","E","E","E","E","E","E","E","I",
+                    "I","I","I","I","I","I","I","I","O","O","O",
+                    "O","O","O","O","O","R","R","R","R","R","R",
+                    "T","T","T","T","T","T","N","N","N","N","N",
+                    "N"];
+  this.tileBag = TileBag.prototype.shuffleBag(notShaffledTiles);
+};
+
+TileBag.prototype.shuffleBag = function(array){
+  var currentIndex = array.length, temporaryValue, randomIndex;
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
+};
+
+
+TileBag.prototype.drawTiles = function(number){
+var drawnTiles = [];
+  for(var i = 0; i < number; i++){
+    drawnTiles.push(this.tileBag.shift());
+  }
+  return drawnTiles;
+};
+
+TileBag.prototype.tilesRemaining = function(){
+  return this.tileBag;
+};
 
 
 
 // ==================TESTING=========================
 var newScrabble = new Scrabble();
+var tileBag = new TileBag();
+console.log("Draw tiles from tile bag: " tileBag.drawTiles(4));
+
 var player1 = new Player("Natalia");
 console.log("PLayer one name: " + player1.name);
 var player2 = new Player("David");
