@@ -1,3 +1,7 @@
+// var Scrabble = require('./scrabble');
+// var Scrabble = require('./dictionary');
+// var Scrabble = require('tilebag');
+// var Scrabble = require('player');
 var Scrabble = function() { //};
 Scrabble.prototype.TILES = {
   A: 1, E: 1, I: 1,O: 1, U: 1, L: 1, N: 1, R: 1, S: 1, T: 1,
@@ -24,7 +28,6 @@ Scrabble.prototype.score = function(word) {
 
 Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
   var maxWords = this.findMax(arrayOfWords);
-  // console.log(maxWords[0]);
   if (maxWords.length > 1) {
     return tie(maxWords);
   }
@@ -111,18 +114,18 @@ Player.prototype.highestWordScore = function(){
 };
 //}; // end of Player
 
-// ==================TILE BAG=========================
+// // ==================TILE BAG=========================
 var TileBag = function() {
 
   var notShaffledTiles = ["D","L","S","U","D","L","S","U","D","L","S",
-                    "U","D","L","S","U","G","G","G","Q","J","K",
-                    "X","Z","M","B","C","F","H","V","W","Y","P",
-                    "M","B","C","F","H","V","W","Y","P","E","E",
-                    "E","E","E","E","E","E","E","E","E","E","I",
-                    "I","I","I","I","I","I","I","I","O","O","O",
-                    "O","O","O","O","O","R","R","R","R","R","R",
-                    "T","T","T","T","T","T","N","N","N","N","N",
-                    "N"];
+                          "U","D","L","S","U","G","G","G","Q","J","K",
+                          "X","Z","M","B","C","F","H","V","W","Y","P",
+                          "M","B","C","F","H","V","W","Y","P","E","E",
+                          "E","E","E","E","E","E","E","E","E","E","I",
+                          "I","I","I","I","I","I","I","I","O","O","O",
+                          "O","O","O","O","O","R","R","R","R","R","R",
+                          "T","T","T","T","T","T","N","N","N","N","N",
+                          "N"];
   this.tileBag = TileBag.prototype.shuffleBag(notShaffledTiles);
 };
 
@@ -138,9 +141,8 @@ TileBag.prototype.shuffleBag = function(array){
   return array;
 };
 
-
 TileBag.prototype.drawTiles = function(number){
-var drawnTiles = [];
+  var drawnTiles = [];
   for(var i = 0; i < number; i++){
     drawnTiles.push(this.tileBag.shift());
   }
@@ -150,13 +152,52 @@ var drawnTiles = [];
 TileBag.prototype.tilesRemaining = function(){
   return this.tileBag;
 };
+// ==================DICTIONARY=========================
+
+// var Dictionary = function() {
+//   var fs = require("fs");
+//   var text = parsfs.readFileSync("words.txt");
+//
+//   this.words = 'aple'
+//
+// };
+// Dictionary.prototype.validWord = function(word){
+//   return this.words.includes(word.toLowerCase());
+// };
+
+// ==================BOARD=========================
+var Board = function() {
+  this.board = new Array(15);
+  for (var i = 0; i < 15; i++){
+    this.board = new Array(15);
+  }
+  this.board.fill("[ ]");
+};
+Board.prototype.displayBoard = function(){
+  // console.table(this.board);
+
+  for (var i = 0; i < this.board.length; i++){
+      var line = ""
+    for (var j = 0; j < this.board.length; j++){
+      line += this.board[j];
+    }
+    console.log(line);
+      console.log();
+  }
+};
 
 
 
 // ==================TESTING=========================
+var board = new Board();
+board.displayBoard();
+
+// var dictionary = new Dictionary();
+// var result = dictionary.validWord("apple");
+// console.log("Is apple a valid word for game?" + result);
 var newScrabble = new Scrabble();
 var tileBag = new TileBag();
-console.log("Draw tiles from tile bag: " tileBag.drawTiles(4));
+console.log("Draw tiles from tile bag: " + tileBag.drawTiles(4));
 
 var player1 = new Player("Natalia");
 console.log("PLayer one name: " + player1.name);
