@@ -1,4 +1,4 @@
-var Scrabble = function() {
+var Scrabble = function() {};
     Scrabble.prototype.TILES = {
     A: 1, E: 1, I: 1,O: 1, U: 1, L: 1, N: 1, R: 1, S: 1, T: 1,
     D: 2, G: 2,
@@ -23,7 +23,7 @@ var Scrabble = function() {
   };
 
   Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
-    var maxWords =   Scrabble.prototype.findMax(arrayOfWords);
+    var maxWords = this.findMax(arrayOfWords);
     if (maxWords.length > 1) {
       return tie(maxWords);
     }
@@ -32,13 +32,11 @@ var Scrabble = function() {
     }
   };
 
-
-
   Scrabble.prototype.findMax = function(arrayOfWords){
     var max = 0;
     var maxWords = [];
     for (i=0; i < arrayOfWords.length; i++){
-      score =   Scrabble.prototype.score(arrayOfWords[i]);
+      score =this.score(arrayOfWords[i]);
       if (score == max){
         maxWords << arrayOfWords[i];
       }
@@ -50,42 +48,36 @@ var Scrabble = function() {
     return maxWords;
   };
 
-
-
-
-  function isEqualSeven(x) {
-    return x == 7;
-  };
-
-
   Scrabble.prototype.tie = function(maxWords){
-    // var maxWord = maxWords.filter(function(x) x.length == 7);
-    var maxWord = maxWords.filter(isEqualSeven);
+    var maxWord = maxWords.filter(function(element){ return element.length == 7; })
     if (maxWord.length == 0) {
       return maxWord[0];
     }
     else {
-      maxWord = minBy(maxWords);
+      maxWord = Scrabble.prototype.minBy(maxWords);
       return maxWord;
     }
   };
 
-
-  function minBy(array) {
+    Scrabble.prototype.minBy = function (array) {
     var result = array.map(function (el) { return el.length; });
     var min = Math.min.apply(null, result);
     return array[result.indexOf(min)];
   };
-};
+// };
 
 var newScrabble = new Scrabble();
-var testWord = newScrabble.score("NATA");
-console.log(testWord);
+var word = newScrabble.score("NATA");
+console.log(word);
 
-var highest3 = newScrabble.highestScoreFrom(['ABC', 'JQD', 'QQQQBK']);
-console.log(highest3); // 'QQQQBK'
+var highest = newScrabble.highestScoreFrom(['AEIOUN', 'JQQQQ','STRNLO']);
+console.log(highest);
 
+var tie1 = newScrabble.tie(['FHVWYAA', 'FHWWYAA']);
+console.log(tie1);
 
+var max = newScrabble.findMax(['SASASASA', 'STSlRNLUO']);
+console.log(max);
 
 
 module.exports = Scrabble;
