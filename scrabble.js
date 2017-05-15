@@ -1,5 +1,5 @@
 var Scrabble = function() {
-  this.TILES = {
+    Scrabble.prototype.TILES = {
     A: 1, E: 1, I: 1,O: 1, U: 1, L: 1, N: 1, R: 1, S: 1, T: 1,
     D: 2, G: 2,
     B: 3, C: 3, M: 3, P: 3,
@@ -23,8 +23,7 @@ var Scrabble = function() {
   };
 
   Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
-    var maxWords = findMax(arrayOfWords);
-    console.log(maxWords);
+    var maxWords =   Scrabble.prototype.findMax(arrayOfWords);
     if (maxWords.length > 1) {
       return tie(maxWords);
     }
@@ -33,11 +32,13 @@ var Scrabble = function() {
     }
   };
 
+
+
   Scrabble.prototype.findMax = function(arrayOfWords){
     var max = 0;
     var maxWords = [];
     for (i=0; i < arrayOfWords.length; i++){
-      score = score(arrayOfWords[i]);
+      score =   Scrabble.prototype.score(arrayOfWords[i]);
       if (score == max){
         maxWords << arrayOfWords[i];
       }
@@ -48,6 +49,9 @@ var Scrabble = function() {
     }
     return maxWords;
   };
+
+
+
 
   function isEqualSeven(x) {
     return x == 7;
@@ -75,12 +79,13 @@ var Scrabble = function() {
 };
 
 var newScrabble = new Scrabble();
-  var testWord = newScrabble.score("NATA");
-  console.log(testWord);
+var testWord = newScrabble.score("NATA");
+console.log(testWord);
+
+var highest3 = newScrabble.highestScoreFrom(['ABC', 'JQD', 'QQQQBK']);
+console.log(highest3); // 'QQQQBK'
 
 
 
 
-
-
-  module.exports = Scrabble;
+module.exports = Scrabble;
