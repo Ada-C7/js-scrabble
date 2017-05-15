@@ -1,4 +1,4 @@
-var Scrabble = function() {};
+var Scrabble = function() { //};
     Scrabble.prototype.TILES = {
     A: 1, E: 1, I: 1,O: 1, U: 1, L: 1, N: 1, R: 1, S: 1, T: 1,
     D: 2, G: 2,
@@ -38,7 +38,7 @@ var Scrabble = function() {};
     for (i=0; i < arrayOfWords.length; i++){
       score =this.score(arrayOfWords[i]);
       if (score == max){
-        maxWords << arrayOfWords[i];
+        maxWords.push(arrayOfWords[i]);
       }
       else if (score > max) {
         max = score;
@@ -64,7 +64,54 @@ var Scrabble = function() {};
     var min = Math.min.apply(null, result);
     return array[result.indexOf(min)];
   };
-// };
+}; // end of Scrabble
+
+var Player = function(name) {
+  // constructor(name){
+    this.name = name;
+    this.plays = [];
+  };
+
+  Player.prototype.play = function(word){
+    if (this.hasWon){
+      return false;
+    }
+    this.plays.push(word);
+  };
+
+    Player.prototype.totalScore = function(){
+      var total = 0;
+      this.plays.forEach(function(word){
+        total += Scrabble.prototype.score(word);
+      });
+      return total;
+    };
+
+    Player.prototype.hasWon = function(){
+      if (this.totalScore > 100){
+        return true;
+      }
+      else {
+        return false;
+      }
+    };
+
+    Player.prototype.highestScoringWord = function(){
+      Scrabble.prototype.highestScoreFrom(this.plays);
+    };
+
+    Player.prototype.highestWordScore = function(){
+      Scrabble.prototype.score(Player.prototype.highestScoringWord);
+    };
+//}; // end of Player
+
+
+
+
+// ==================TESTING=========================
+
+var player = new Player("Natalia");
+console.log(player.name);
 
 var newScrabble = new Scrabble();
 var word = newScrabble.score("NATA");
@@ -78,6 +125,5 @@ console.log(tie1);
 
 var max = newScrabble.findMax(['SASASASA', 'STSlRNLUO']);
 console.log(max);
-
 
 module.exports = Scrabble;
