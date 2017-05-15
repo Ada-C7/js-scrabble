@@ -16,15 +16,16 @@ var Scrabble = function() {
       var score = this.TILES[input[i]];
       total += score;
     }
-    if (userInput.length === 7) {
+    if (input.length === 7) {
       total += 50;
     }
     return total;
   };
 
   Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
-    maxWords = findMax(arrayOfWords)
-    if maxWords.length > 1{
+    var maxWords = findMax(arrayOfWords);
+    console.log(maxWords);
+    if (maxWords.length > 1) {
       return tie(maxWords);
     }
     else{
@@ -45,32 +46,41 @@ var Scrabble = function() {
         maxWords = [arrayOfWords[i]];
       }
     }
+    return maxWords;
   };
 
+  function isEqualSeven(x) {
+    return x == 7;
+  };
+
+
   Scrabble.prototype.tie = function(maxWords){
-    var maxWord = maxWords.filter(function(x) x.length == 7);
-    if maxWord.length == 0 {
-      return maxWord[0]
+    // var maxWord = maxWords.filter(function(x) x.length == 7);
+    var maxWord = maxWords.filter(isEqualSeven);
+    if (maxWord.length == 0) {
+      return maxWord[0];
     }
     else {
-      maxWord = minBy(maxWords)
-      return maxWord
+      maxWord = minBy(maxWords);
+      return maxWord;
     }
-  }
+  };
+
 
   function minBy(array) {
     var result = array.map(function (el) { return el.length; });
     var min = Math.min.apply(null, result);
     return array[result.indexOf(min)];
-  }
-
-
-
-
-}
-// YOUR CODE HERE
-Scrabble.prototype.helloWorld = function() {
-  return 'hello world!';
+  };
 };
 
-module.exports = Scrabble;
+var newScrabble = new Scrabble();
+  var testWord = newScrabble.score("NATA");
+  console.log(testWord);
+
+
+
+
+
+
+  module.exports = Scrabble;
