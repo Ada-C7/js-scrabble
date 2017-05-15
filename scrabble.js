@@ -48,13 +48,26 @@ var Scrabble = function() {
   };
 
   Scrabble.prototype.tie = function(maxWords){
+    var maxWord = maxWords.filter(function(x) x.length == 7);
+    if maxWord.length == 0 {
+      return maxWord[0]
+    }
+    else {
+      maxWord = minBy(maxWords)
+      return maxWord
+    }
+  }
 
+  function minBy(array) {
+    var result = array.map(function (el) { return el.length; });
+    var min = Math.min.apply(null, result);
+    return array[result.indexOf(min)];
   }
 
 
 
 
-
+}
 // YOUR CODE HERE
 Scrabble.prototype.helloWorld = function() {
   return 'hello world!';
