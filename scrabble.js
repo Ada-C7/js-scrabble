@@ -24,6 +24,7 @@ Scrabble.prototype.score = function(word) {
 
 Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
   var maxWords = this.findMax(arrayOfWords);
+  // console.log(maxWords[0]);
   if (maxWords.length > 1) {
     return tie(maxWords);
   }
@@ -35,7 +36,8 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
 Scrabble.prototype.findMax = function(arrayOfWords){
   var max = 0;
   var maxWords = [];
-  for (i=0; i < arrayOfWords.length; i++){
+
+  for (var i = 0; i < arrayOfWords.length; i++){
     score =this.score(arrayOfWords[i]);
     if (score == max){
       maxWords.push(arrayOfWords[i]);
@@ -90,7 +92,7 @@ Player.prototype.totalScore = function(){
 };
 
 Player.prototype.hasWon = function(){
-  if (this.totalScore() > 100){
+  if (this.totalScore() >= 100){
     return true;
   }
   else {
@@ -99,11 +101,13 @@ Player.prototype.hasWon = function(){
 };
 
 Player.prototype.highestScoringWord = function(){
-  Scrabble.prototype.highestScoreFrom(this.plays);
+  var result = Scrabble.prototype.highestScoreFrom(this.plays);
+  return result;
 };
 
 Player.prototype.highestWordScore = function(){
-  Scrabble.prototype.score(Player.prototype.highestScoringWord);
+  var result = Scrabble.prototype.score(this.highestScoringWord());
+  return result;
 };
 //}; // end of Player
 
@@ -125,6 +129,10 @@ console.log("Return true if player1 won: " + player1.play("QQQQWER"));
 console.log("Return true if player2 won: " + player2.play("AA"));
 console.log("Total score of player 1: " + player1.totalScore());
 console.log("Total score of player 2: " + player2.totalScore());
+console.log("Highest scoring word for player 1: " + player1.highestScoringWord());
+console.log("Highest scoring word for player 2: " + player2.highestScoringWord());
+console.log("Highest word score for player 1: " + player1.highestWordScore());
+console.log("Highest word score for player 2: " + player2.highestWordScore());
 
 // var word = newScrabble.score("NATA");
 // console.log(word);
