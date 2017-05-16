@@ -1,8 +1,11 @@
 var Scrabble = function() {};
 
-Scrabble.prototype.score = function(word) {
+// Scrabble.score = function(word) {
+  score = function(word) {
 
-  // TO DO -- Error handling:
+  if ( typeof(word) !== 'string' || word.length > 7 ){
+    return "Invalid word" };
+
   // raise ArgumentError.new("That is not String.") if word.class != String
   // raise ArgumentError.new("That word includes invalid characters!") if !word.match(/^[a-zA-Z]+$/)
   // raise ArgumentError.new("That word is too long! Must be 7 characters or less.") if word.length > 7
@@ -26,62 +29,49 @@ Scrabble.prototype.score = function(word) {
   return wordScore;
 };
 
-
-Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
+// Scrabble.highestScoreFrom = function(arrayOfWords) {
+highestScoreFrom = function(arrayOfWords) {
 
   // TO DO -- Error Handling:
   // make sure input is actually an array
 
-  var highestScore = undefined;
+  var highestScore = 0;
+  var winner = undefined; // needs to return the actual word
+
+  arrayOfWords.forEach(function(word) {
+    if ( score(word) > highestScore ){
+      highestScore = score(word);
+      winner = word; }
+    // else if ( score(word) == hightestScore)
+    //   if ( winner.length == 7 || word.length == 7)
+    //   else if ()
+
+  });
+
+  return "The winner was: " + winner + " for " + highestScore + " points";
 };
 
-// raise ArgumentError.new("That's not an array") if array_of_words.class != Array
-// winner = ""
-//
-// highest_score = 0
-// array_of_words.each do |word|
-//   word_score = self.score(word)
-//   if word_score > highest_score
-//     highest_score = word_score
-//     winner = word
-//   elsif word_score == highest_score
-//     self.tiebreaker(word, winner)
-//   end
-// end
-//
-// return winner
-//
-//
-// STARTED BUT DIDN'T FINISH
-//
-// word_scores = array_of_words.map { | word | self.score(word) }
-//
-// word_plus_score = array_of_words.zip(word_scores).to_h
-//
-// max_score_count = word_plus_score.values.count(word_plus_score.values.max)
-//
-// tiebreaker if max_score_count > 1
-//
-// winning_score = word_plus_score.max_by { | word, score | score }[1]
-// winning_word = word_plus_score.max_by { | word, score | score }[0]
-
-
-Scrabble.prototype.tieBreaker = function(word1, word2) {
+// Scrabble.tieBreaker = function(word1, word2) {
 //   if winner.length == 7 || word.length == 7
 //   winner.length <= word.length ? tie_winner = word : tie_winner = winner
 // else
 //   word.length <= winner.length ? tie_winner = winner : tie_winner = word
 // end
-};
+// };
 
 myGame = new Scrabble();
 
-// var myWordsList = ["ostrich", "badger", "whale", "tiger", "flamingo"];
-// console.log(myGame.highestScoreFrom(myWordsList));
+// console.log(myGame.score("zzzzzz"));
+console.log(score("hotdog"));
 
-console.log(myGame.score("hippo"));
+
+var myWordsList = ["ostrich", "cat", "whale", "tiger", "flamingo", "zzzzzzzzzzzz"];
+// console.log(myGame.highestScoreFrom(myWordsList));
+console.log(highestScoreFrom(myWordsList));
+
 
 // ===============================================================
+
 // WAVE 2
 
 // Create a new Player object. The object should have the following functions:
