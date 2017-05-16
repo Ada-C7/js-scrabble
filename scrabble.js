@@ -16,7 +16,7 @@ Scrabble.prototype = {
         score += SCORE_CHART[letterToUpCase[i]];
       }; return score;
     },
-    
+
     highestScoreFrom: function(arrayOfWords) {
       if (arrayOfWords.length === 0) {
         return false;
@@ -46,9 +46,9 @@ Scrabble.prototype = {
   //
   var scrabble = new Scrabble();
   // console.log(scrabble.helloWorld());
-  console.log(scrabble.score("cat"));
-  console.log(scrabble.score("natalia"));
-  console.log(scrabble.highestScoreFrom(["natalia", "abc", "aaa"]));
+  // console.log(scrabble.score("cat"));
+  // console.log(scrabble.score("natalia"));
+  // console.log(scrabble.highestScoreFrom(["natalia", "abc", "aaa"]));
 
   module.exports = Scrabble;
 

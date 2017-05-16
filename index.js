@@ -8,9 +8,9 @@ We're focusing on learning the module pattern and writing basic JavaScript class
 we won't be bringing anything into this file. Later, we may make good
 use of this file.
 */
-var Scrabble = require('./scrabble');
-// var Player = require('./player');
-var scrabble = new Scrabble();
-console.log(scrabble.score("cat"));
-console.log(scrabble.score("natalia"));
-console.log(scrabble.highestScoreFrom(["natalia", "abc", "aaa"]));
+// var Scrabble = require('./scrabble');
+// // var Player = require('./player');
+// var scrabble = new Scrabble();
+// console.log(scrabble.score("cat"));
+// console.log(scrabble.score("natalia"));
+// console.log(scrabble.highestScoreFrom(["natalia", "abc", "aaa"]));
