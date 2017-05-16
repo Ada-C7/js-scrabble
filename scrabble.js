@@ -29,16 +29,38 @@ Scrabble.prototype = {
     }, this);
     return score;
   },
-  
+
   highestScoreFrom: function(arrayOfWords) {
     this.scores = [];
     arrayOfWords.forEach(function(word) {
       var score = this.score(word);
       this.scores.push(score);
     }, this);
+      var max = Math.max(...this.scores);
+      var ties = [];
+      for (var i = 0; i < this.scores.length; i++) {
+        if(this.scores[i] === max) {
+          ties.push(arrayOfWords[i]);
+        }
+      }
 
-      var index = this.scores.indexOf(Math.max(...this.scores));
-      return arrayOfWords[index];
+      if (ties.length === 1) {
+        return ties[0];
+      } else {
+      for (var i = 0; i < ties.length; i++) {
+        if(ties[i].length === 7) {
+          return ties[i];
+        }
+      }
+    }
+      lengths = ties.map(function(word) {
+        return word.length;
+      });
+
+      return ties[lengths.indexOf(Math.min(...lengths))];
+
+      // var index = this.scores.indexOf(Math.max(...this.scores));
+      // return arrayOfWords[index];
     }
 };
 
