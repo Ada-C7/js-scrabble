@@ -14,7 +14,7 @@ function findHighestScoring(words) {
   var wordsWithScores = {};
   var highestScore = 0;
 
-  // add word with its score into wordsWithScores obj will also find the highest score
+  // add word with its score into wordsWithScores obj - will also find the highest score
   words.forEach(function (word) {
     var score = Scrabble.prototype.score(word);
     wordsWithScores[word] = score;
@@ -42,26 +42,27 @@ Scrabble.prototype.score = function(word) {
     var score = letterScores[letter];
     total += score;
   });
-  // console.log(total);
-  return total;
+
+  return word.length == 7 ?  total += 50.0 : total;
 };
 
 Scrabble.prototype.highestScoreFrom = function(words){
   var highestScoringWords = findHighestScoring(words);
-  var highestWord = undefined
+  var highestWord = undefined;
 
   if (highestScoringWords.length == 1) {
     highestWord = highestScoringWords[0];
+  } else {
+    highestWord = breakTie(highestScoringWords);
   }
 
-  // var highestWord = handleTie(highestScoringWords);
   return highestWord
 };
 
 module.exports = Scrabble;
 
 // this works
-// console.log(Scrabble.prototype.score("HELLO"));
+console.log(Scrabble.prototype.score("HELLOOO"));
 // points 8, 5, 12
 words = ["hello", "cateee", "hi", "dog", "aaaaaaaa", "zooz"];
 // working - returning zoo
