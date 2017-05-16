@@ -22,11 +22,16 @@ Scrabble.prototype = {
     var ten = ["Q", "Z"];
 
     var wordScore = 0;
-    var upcaseWord = work.toUpperCase();
+    var upcaseWord = word.toUpperCase();
 
-    for (var i = 0, i < word.length, i++) {
-
+    // loop through each character
+    for (var i = 0; i < word.length; i++) {
+      // if else statments to assign each character a point value
+      if (one.includes(upcaseWord.charAt(i))) {
+        wordScore += 1;
+      }
     }
+    return wordScore;
   },
   highestScoreFrom: function(arrayOfWords){
     // top score tied between two words? choose shortest word
