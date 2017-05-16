@@ -61,3 +61,20 @@ var Player = function(name) {
 Player.prototype.play = function(word) {
   this.plays.push(word);
 };
+
+Player.prototype.totalScore = function() {
+  var total = 0;
+
+  for (var i = 0; i < this.plays.length; i++) {
+    total += Scrabble.score(this.plays[i]);
+  }
+  return total;
+};
+
+addie = new Player("Addie");
+addie.play("apple");
+console.log(addie.totalScore());
+addie.play("a");
+console.log(addie.totalScore());
+addie.play("q");
+console.log(addie.totalScore());
