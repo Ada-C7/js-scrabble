@@ -18,21 +18,15 @@ Scrabble.score = function(word) {
 Scrabble.highestScoreFrom = function(arrayOfWords) {
   var highScore = -1;
   var highScoreWord;
-  var winningWordLength = 8;
+  var winningWordLength;
 
   for (var i = 0; i < arrayOfWords.length; i++) {
     var word = arrayOfWords[i];
     var score = this.score(word);
+    var sevenBonus = (winningWordLength == 7);
+    var tieWinner = (!sevenBonus && (word.length == 7 || word.length < winningWordLength));
 
-    if (score == highScore) {
-      var sevenBonus = (winningWordLength == 7);
-
-      if (!sevenBonus && (word.length == 7 || word.length < winningWordLength)) {
-        highScore = score;
-        highScoreWord = word;
-        winningWordLength = word.length;
-      }
-    } else if (score > highScore) {
+    if (score > highScore || tieWinner) {
       highScore = score;
       highScoreWord = word;
       winningWordLength = word.length;
@@ -48,8 +42,8 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
   return highScoreWord;
 };
 
-// var highWord = Scrabble.highestScoreFrom(["aaa", "sss"]);
-// console.log(highWord);
+var highWord = Scrabble.highestScoreFrom(["aaa", "sss", "xxx", "qqaaaa", "qqqqqj", "aaaaaag"]);
+console.log(highWord);
 
 var Player = function(name) {
   this.name = name;
@@ -72,7 +66,7 @@ Player.prototype.totalScore = function() {
   return total;
 };
 
-Player.prototype.hasWon = function () {
+Player.prototype.hasWon = function() {
   return (this.totalScore() > 100) ? true : false;
 };
 
