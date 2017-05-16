@@ -6,6 +6,10 @@ var letterScores = {
   'T': 1, 'U': 1, 'V': 4, 'W': 4, 'X': 8, 'Y': 4, 'Z': 10
 };
 
+function breakTie(words) {
+
+}
+
 Scrabble.prototype.score = function(word) {
   var total = 0;
   var letters = word.toUpperCase().split('');
@@ -19,19 +23,15 @@ Scrabble.prototype.score = function(word) {
 };
 
 Scrabble.prototype.highestScoreFrom = function(words){
-  var highestScoringWord = "";
-  var highestScore = 0;
+  // var highestScoringWord = "";
+  // var highestScore = 0;
+  var wordsWithScores = {};
 
   words.forEach(function (word) {
     var score = Scrabble.prototype.score(word);
-
-    if (score > highestScore ) {
-
-      highestScoringWord = word;
-      highestScore = score;
-    }
+    wordsWithScores[word] = score;
   });
-  return highestScoringWord;
+  return wordsWithScores;
 };
 
 module.exports = Scrabble;
