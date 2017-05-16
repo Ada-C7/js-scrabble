@@ -11,13 +11,22 @@ module.exports = Scrabble;
 
 var score = function(word){
   total_score = 0;
-  word.forEach(function(letter) {
-    total_score += scoringChart[letter];
-  });
+  for(var i = 0; i < word.length; i++){
+    total_score += scoringChart[word[i]];
+  }
   return total_score;
 };
 
 
+var highestScoreFrom = function(arrayOfWords){
+  return arrayOfWords.reduce(function(winner, element){
+      if (score(element)> score(winner)) {
+        return element;
+      }else{
+        return winner;
+      }
+    }, "");
+  };
 
 
 var scoringChart = {
@@ -49,4 +58,7 @@ var scoringChart = {
   "z" : 10,
 };
 
-console.log(scoringChart.z);
+console.log(score('pizza'));
+console.log(score('coffee'));
+
+console.log(highestScoreFrom(['pizza', 'coffee']));
