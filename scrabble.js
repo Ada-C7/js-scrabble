@@ -52,3 +52,8 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
 // console.log(highWord);
 
 module.exports = Scrabble;
+
+var Player = function(name) {
+  this.name = name;
+  this.plays = [];
+};
