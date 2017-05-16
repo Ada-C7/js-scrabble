@@ -11,7 +11,6 @@ var Scrabble = function() {
     10: ["Q","Z"]
   };
 
-  this.scores = [];
 };
 
 // YOUR CODE HERE
@@ -31,16 +30,15 @@ Scrabble.prototype = {
   },
 
   highestScoreFrom: function(arrayOfWords) {
-    this.scores = [];
-    arrayOfWords.forEach(function(word) {
-      var score = this.score(word);
-      this.scores.push(score);
+
+    scores = arrayOfWords.map(function(word) {
+      return this.score(word);
     }, this);
 
-      var max = Math.max(...this.scores);
+      var max = Math.max(...scores);
       var ties = [];
-      for (var i = 0; i < this.scores.length; i++) {
-        if(this.scores[i] === max) {
+      for (var i = 0; i < scores.length; i++) {
+        if(scores[i] === max) {
           ties.push(arrayOfWords[i]);
         }
       }
@@ -91,7 +89,7 @@ Player.prototype = {
   },
 
   hasWon: function() {
-    return (this.points > 100 ? true : false);
+    return (this.totalScore() >= 100 ? true : false);
   },
 
   highestScoringWord: function() {
@@ -106,11 +104,12 @@ Player.prototype = {
 
 player = new Player("ada");
 console.log(player.playerScrabble.scoreCard);
-console.log(player.play("aaaaaaa"));
+console.log(player.play("qqqqqqqqqq"));
 console.log(player.play("ddda"));
 console.log(player.plays);
 console.log(player.totalScore());
 console.log(player.hasWon());
+console.log(player.play("word"));
 console.log(player.highestScoringWord());
 console.log(player.highestWordScore());
 
