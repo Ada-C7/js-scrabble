@@ -32,7 +32,7 @@ score = function(word) {
 // Scrabble.highestScoreFrom = function(arrayOfWords) {
 highestScoreFrom = function(arrayOfWords) {
 
-  if ( typeof(arrayOfWords) !== 'array' ) {
+  if ( typeof(arrayOfWords) !== "array" ) {
     return "Send me an array and we can try this again...";
   }
 
@@ -43,17 +43,16 @@ highestScoreFrom = function(arrayOfWords) {
     if ( score(word) > highestScore ){
       highestScore = score(word);
       winner = word; }
-    // else if ( score(word) == hightestScore)
-    //   if ( winner.length == 7 || word.length == 7)
-    //   else if ()
-
+    else if ( score(word) == hightestScore)
+      if ( winner.length == 7 || word.length == 7) {
+          winner = winner.length <= word.length ? word : winner; }
+      else {
+        winner = word.length <= winner.length ? winner : word; }
   });
 
   return "The winner was: " + winner + " for " + highestScore + " points";
 };
 
-// Scrabble.tieBreaker = function(word1, word2) {
-//   if winner.length == 7 || word.length == 7
 //   winner.length <= word.length ? tie_winner = word : tie_winner = winner
 // else
 //   word.length <= winner.length ? tie_winner = winner : tie_winner = word
@@ -68,6 +67,7 @@ console.log(score("hotdog"));
 
 var myWordsList = ["ostrich", "cat", "whale", "tiger", "flamingo", "zzzzzzzzzzzz"];
 // console.log(myGame.highestScoreFrom(myWordsList));
+console.log(typeof(myWordsList));
 console.log(highestScoreFrom(myWordsList));
 
 
