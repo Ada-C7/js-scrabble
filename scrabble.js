@@ -51,8 +51,6 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
 // var highWord = Scrabble.highestScoreFrom(["aaa", "sss"]);
 // console.log(highWord);
 
-module.exports = Scrabble;
-
 var Player = function(name) {
   this.name = name;
   this.plays = [];
@@ -118,3 +116,6 @@ Player.prototype.highestWordScore = function() {
 // addie.play("fd");
 // console.log(addie.plays);
 // console.log(addie.totalScore());
+
+module.exports = Scrabble;
+module.exports = Player;
