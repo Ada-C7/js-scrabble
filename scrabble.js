@@ -35,25 +35,19 @@ scoreChart = {
 // var score = function(word) {
 //     return totalScore;
 // };
-// word = ["d", "o", "g"]
-// // word = "dog"
-// var totalScore = 0;
-// word.forEach(function(letter){
-//   var letterScore = parseInt(scoreChart.letter);
-//   console.log(letterScore) ;
-//   // totalScore += letterscore;
-//
-// });
 
+var total = 0;
 
-var word = "dog"
-var total = 0
-for (var i = 0, len = word.length; i < len; i++) {
-  var letterScore = scoreChart[word[i]]
-  total += letterScore
-  console.log(total) ;
-}
+var score = function(word){
+  for (var i = 0, len = word.length; i < len; i++) {
+    var letterScore = scoreChart[word[i]];
+    total += letterScore;
+    // console.log(total);
+    return total;
+  };
+};
 
+score("dog")
 
       // var Dog = function(name="default name", breed="default breed") {
       //   this.name = name;
