@@ -20,10 +20,32 @@ Scrabble.prototype.score = function(word) {
   return total;
 };
 
+Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
+  //call score function on each word in arrayOfWords
+  var scores = [];
+  var self = this;
+
+  arrayOfWords.forEach(function(word) {
+    currentScore = self.score(word);
+    scores.push(currentScore);
+  });
+
+  //get index of maximum value in scores array and return corresponding word
+  var index = scores.indexOf(Math.max(...scores));
+  return arrayOfWords[index];
+
+
+  // if more than one word with max score
+  // seven letter word wins
+  // else word with smallest length
+  // if more than one word with smallest length, return first in list
+
+};
+
 module.exports = Scrabble;
 
 var scrab = new Scrabble;
-// console.log(scrab.helloWorld());
 console.log(scrab.score('tubrun'));
 console.log(scrab.score('heffalump'));
 console.log(scrab.score('qifanxi'));
+console.log(scrab.highestScoreFrom(['tubrun', 'heffalump', 'qifanxi']));
