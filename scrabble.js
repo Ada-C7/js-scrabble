@@ -69,12 +69,16 @@ Scrabble.prototype = {
         } else if (wordScore == highestScore) {
           winner = this.tiebreaker(word, winner);
         }
-      });
+      }, this);
 
       return winner;
     } else {
       throw "Sorry, invalid input! Please enter an array of words.";
     }
+  },
+  tieBreaker: function(word, winner) {
+    if (winner.length == 7 || word.length == 7)
+    
   }
 
   // tiebreaker method
@@ -90,7 +94,7 @@ console.log(myScrabble.score("niiice")); // 8
 // console.log(myScrabble.score(456)); // throw exception
 
 console.log(myScrabble.highestScoreFrom(["ZZzzZZ", "niiice", "cute"])); // "ZZzzZZ"
-console.log(myScrabble.highestScoreFrom(["niiice", ":)"])); // throw exception
+// console.log(myScrabble.highestScoreFrom(["niiice", ":)"])); // throw exception
 
 
 Scrabble.prototype.helloWorld = function() {
