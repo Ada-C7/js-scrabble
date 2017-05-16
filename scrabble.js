@@ -72,10 +72,12 @@ Player.prototype = {
   },
 
   highestScoringWord: function() {
+    return this.playerScrabble.highestScoreFrom(this.wordPlays);
   },
 
   highestWordScore: function() {
-
+    var word = this.highestScoringWord();
+    return this.playerScrabble.score(word);
   }
 };
 
@@ -86,5 +88,7 @@ console.log(player.play("carrot"));
 console.log(player.plays());
 console.log(player.totalScore());
 console.log(player.hasWon());
+console.log(player.highestScoringWord());
+console.log(player.highestWordScore());
 
 module.exports = Scrabble;
