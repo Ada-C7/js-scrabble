@@ -7,7 +7,19 @@ var letterScores = {
 };
 
 function breakTie(words) {
+  console.log(words);
 
+  var winner = undefined;
+  var length = 8;
+
+  words.forEach(function (word){
+    if ( word.length < length ){
+      winner = word;
+      length = word.length;
+    }
+  });
+
+  return winner;
 }
 
 function findHighestScoring(words) {
@@ -43,7 +55,7 @@ Scrabble.prototype.score = function(word) {
     total += score;
   });
 
-  return word.length == 7 ?  total += 50.0 : total;
+  return word.length === 7 ?  total += 50.0 : total;
 };
 
 Scrabble.prototype.highestScoreFrom = function(words){
@@ -62,8 +74,8 @@ Scrabble.prototype.highestScoreFrom = function(words){
 module.exports = Scrabble;
 
 // this works
-console.log(Scrabble.prototype.score("HELLOOO"));
+// console.log(Scrabble.prototype.score("HELLO"));
 // points 8, 5, 12
-words = ["hello", "cateee", "hi", "dog", "aaaaaaaa", "zooz"];
+words = ["hello", "cateee", "hi", "dog", "DAAAAA"];
 // working - returning zoo
 console.log(Scrabble.prototype.highestScoreFrom(words));
