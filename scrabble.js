@@ -71,10 +71,26 @@ Player.prototype.totalScore = function() {
   return total;
 };
 
-addie = new Player("Addie");
-addie.play("apple");
-console.log(addie.totalScore());
-addie.play("a");
-console.log(addie.totalScore());
-addie.play("q");
-console.log(addie.totalScore());
+Player.prototype.hasWon = function () {
+  return (this.totalScore() > 100) ? true : false;
+};
+
+// addie = new Player("Addie");
+// addie.play("apple");
+// console.log(addie.totalScore());
+// addie.play("a");
+// console.log(addie.totalScore());
+// addie.play("q");
+// console.log(addie.totalScore());
+// console.log(addie.hasWon());
+// addie.play("xxxxxx");
+// console.log(addie.totalScore());
+// addie.play("xxx");
+// console.log(addie.totalScore());
+// console.log(addie.hasWon());
+// addie.play("j");
+// console.log(addie.totalScore());
+// console.log(addie.hasWon());
+// addie.play("x");
+// console.log(addie.totalScore());
+// console.log(addie.hasWon());
