@@ -8,13 +8,45 @@ Scrabble.score = function(word) {
   for (var i = 0; i < word.length; i++) {
     total += scores[word[i]];
   }
-  
+
   if (word.length == 7) {
     total += 50;
   }
   return total;
 };
 
-console.log(Scrabble.score("wordnoo"));
+Scrabble.highestScoreFrom = function(arrayOfWords) {
+  var highScore = -1;
+  var highScoreWord;
+  var winningWordLength = 8;
+
+  for (var i = 0; i < arrayOfWords.length; i++) {
+    var word = arrayOfWords[i];
+    var score = this.score(word);
+
+    if (score == highScore) {
+      var sevenBonus = (winningWordLength == 7);
+
+      if (!sevenBonus && (word.length == 7 || word.length < winningWordLength)) {
+        highScore = score;
+        highScoreWord = word;
+        winningWordLength = word.length;
+      }
+    } else if (score > highScore) {
+      highScore = score;
+      highScoreWord = word;
+      winningWordLength = word.length;
+    }
+
+    console.log("++++++++");
+    console.log(word);
+    console.log("score: " + score);
+    console.log("high score: " + highScore);
+    console.log("winning word: " + highScoreWord);
+    console.log("winning word length: " + winningWordLength);
+  }
+};
+
+Scrabble.highestScoreFrom(["applex", "soup", "opplex", "qkd"]);
 
 module.exports = Scrabble;
