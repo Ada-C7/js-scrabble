@@ -23,12 +23,24 @@ Scrabble.prototype.score = function(word) {
 };
 
 Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
+  highestScoringWord = arrayOfWords[0];
+  highestScore = this.score(highestScoringWord);
 
+  for (i = 1; i < arrayOfWords.length; i++) {
+    currentWord = arrayOfWords[i];
+    currentScore = this.score(currentWord);
+
+    if (currentScore > highestScore) {
+      highestScoringWord = currentWord;
+    }
+  }
+  return highestScoringWord;
 };
 
 module.exports = Scrabble;
 
 // Tester code
 scrabs = new Scrabble();
-console.log(scrabs.letterScores.A);
-console.log(scrabs.score('ham'));
+console.log('The score of ham is ' + scrabs.score('ham'));
+console.log('The score of sandwich is ' + scrabs.score('sandwich'));
+console.log('The higher scoring word is ' + scrabs.highestScoreFrom(['ham', 'sandwich']));
