@@ -1,4 +1,6 @@
-var Scrabble = function() {};
+//constructor
+var Scrabble = function() {
+};
 
 // YOUR CODE HERE
 Scrabble.prototype.helloWorld = function() {
@@ -6,3 +8,5 @@ Scrabble.prototype.helloWorld = function() {
 };
 
 module.exports = Scrabble;
+var my_game = new Scrabble()
+console.log(my_game.helloWorld());
