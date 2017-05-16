@@ -29,6 +29,7 @@ Scrabble.prototype = {
     }, this);
     return score;
   },
+  
   highestScoreFrom: function(arrayOfWords) {
     this.scores = [];
     arrayOfWords.forEach(function(word) {
@@ -36,9 +37,9 @@ Scrabble.prototype = {
       this.scores.push(score);
     }, this);
 
-    var maxIndex = this.scores.indexOf(Math.max(...this.scores));
-    return arrayOfWords[maxIndex];
-  }
+      var index = this.scores.indexOf(Math.max(...this.scores));
+      return arrayOfWords[index];
+    }
 };
 
 var Player = function(name) {
@@ -54,7 +55,11 @@ Player.prototype = {
   },
 
   play: function(word) {
+    if(this.hasWon() === false) {
     this.wordPlays.push(word);
+    } else {
+    return "You have already won the game.";
+    }
   },
 
   totalScore: function() {
@@ -66,9 +71,7 @@ Player.prototype = {
   },
 
   hasWon: function() {
-
     return (this.points > 100 ? true : false);
-
   },
 
   highestScoringWord: function() {
@@ -83,8 +86,8 @@ Player.prototype = {
 
 player = new Player("ada");
 console.log(player.playerScrabble.scoreCard);
-console.log(player.play("elephant"));
-console.log(player.play("carrot"));
+console.log(player.play("aaaaa"));
+console.log(player.play("k"));
 console.log(player.plays());
 console.log(player.totalScore());
 console.log(player.hasWon());
