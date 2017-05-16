@@ -112,11 +112,10 @@ Player.prototype.highestWordScore = function(){
   var result = Scrabble.prototype.score(this.highestScoringWord());
   return result;
 };
-//}; // end of Player
+// end of Player
 
 // // ==================TILE BAG=========================
 var TileBag = function() {
-
   var notShaffledTiles = ["D","L","S","U","D","L","S","U","D","L","S",
   "U","D","L","S","U","G","G","G","Q","J","K",
   "X","Z","M","B","C","F","H","V","W","Y","P",
@@ -152,18 +151,19 @@ TileBag.prototype.drawTiles = function(number){
 TileBag.prototype.tilesRemaining = function(){
   return this.tileBag;
 };
+
 // ==================DICTIONARY=========================
 
-// var Dictionary = function() {
-//   var fs = require("fs");
-//   var text = parsfs.readFileSync("words.txt");
-//
-//   this.words = 'aple'
-//
-// };
-// Dictionary.prototype.validWord = function(word){
-//   return this.words.includes(word.toLowerCase());
-// };
+var Dictionary = function() {
+  var fs = require("fs");
+  var text = fs.readFileSync("words.txt");
+  text = text.toString();
+  this.words = text.split("\n");
+};
+
+Dictionary.prototype.validWord = function(word){
+  return this.words.includes(word.toLowerCase());
+};
 
 // ==================BOARD=========================
 var Board = function() {
@@ -173,6 +173,7 @@ var Board = function() {
   }
   this.board.fill("[ ]");
 };
+
 Board.prototype.displayBoard = function(){
   for (var i = 0; i < this.board.length; i++){
     var line = ""
@@ -199,24 +200,24 @@ Board.prototype.checkWordOnBoard = function(word, row, col, direction){
   return result;
 };
 
-
-
 // ==================TESTING=========================
+console.log("======TESTING BOARD======");
 var board = new Board();
 board.displayBoard();
-
-// var dictionary = new Dictionary();
-// var result = dictionary.validWord("apple");
-// console.log("Is apple a valid word for game?" + result);
+console.log("======TESTING DICTIONARY======");
+var dictionary = new Dictionary();
+var result = dictionary.validWord("apple");
+console.log("Is apple a valid word for game?" + result);
+console.log("======TESTING TILEBAG======");
 var newScrabble = new Scrabble();
 var tileBag = new TileBag();
 console.log("Draw tiles from tile bag: " + tileBag.drawTiles(4));
 
+console.log("======TESTING PLAYER======");
 var player1 = new Player("Natalia");
 console.log("PLayer one name: " + player1.name);
 var player2 = new Player("David");
 console.log("PLayer one name: " + player2.name);
-
 console.log("Return true if player1 won: " + player1.play("QQQWER"));
 console.log("Return true if player2 won: " + player2.play("AQQQWER"));
 console.log("Total score of player 1: " + player1.totalScore());
@@ -230,13 +231,14 @@ console.log("Highest scoring word for player 2: " + player2.highestScoringWord()
 console.log("Highest word score for player 1: " + player1.highestWordScore());
 console.log("Highest word score for player 2: " + player2.highestWordScore());
 
-// var word = newScrabble.score("NATA");
-// console.log(word);
-// var highest = newScrabble.highestScoreFrom(['AEIOUN', 'JQQQQ','STRNLO']);
-// console.log(highest);
-// var tie1 = newScrabble.tie(['FHVWYAA', 'FHWWYAA']);
-// console.log(tie1);
-// var max = newScrabble.findMax(['SASASASA', 'STSlRNLUO']);
-// console.log(max);
+console.log("======TESTING SCRABBLE======");
+var word = newScrabble.score("NATA");
+console.log("Scores for word NATA: " + word);
+var highest = newScrabble.highestScoreFrom(['AEIOUN', 'JQQQQ','STRNLO']);
+console.log("Highest score from ['AEIOUN', 'JQQQQ','STRNLO']" + highest);
+var tie1 = newScrabble.tie(['FHVWYAA', 'FHWWYAA']);
+console.log("Check if tie between words with same scores (must select first word) ['FHVWYAA', 'FHWWYAA']: " + tie1);
+var max = newScrabble.findMax(['SASASASA', 'STSlRNLUO', "LALALALA"]);
+console.log("Find max score between words in array: ['SASASASA', 'STSlRNLUO', 'LALALALA'] " + max);
 
 module.exports = Scrabble;
