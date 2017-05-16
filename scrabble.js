@@ -50,33 +50,41 @@ var Player = function(name) {
 
 Player.prototype = {
   plays: function() {
-
+    return this.wordPlays;
   },
 
   play: function(word) {
-
+    this.wordPlays.push(word);
   },
 
   totalScore: function() {
+    this.wordPlays.forEach(function(word) {
+      this.points += this.playerScrabble.score(word);
+    }, this);
 
+    return this.points;
   },
 
   hasWon: function() {
 
+    return (this.points > 100 ? true : false);
+
   },
 
   highestScoringWord: function() {
-
   },
 
   highestWordScore: function() {
 
   }
-}
+};
 
 player = new Player("ada");
 console.log(player.playerScrabble.scoreCard);
-console.log(player.playerScrabble.score("superfresh"));
-console.log(player.playerScrabble.highestScoreFrom(["hello", "world", "elephant"]));
+console.log(player.play("elephant"));
+console.log(player.play("carrot"));
+console.log(player.plays());
+console.log(player.totalScore());
+console.log(player.hasWon());
 
 module.exports = Scrabble;
