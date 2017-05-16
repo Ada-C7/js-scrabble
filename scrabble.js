@@ -27,9 +27,9 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
     return self.score(word);
   })
   //find maximum score
-  var max_score = Math.max.apply(null, scores);
+  var max_score = Math.max(...scores);
 
-// make array of words with max score
+  // make array of words with max score
   var top_words = [];
   for (var i = 0; i < arrayOfWords.length; i++) {
     if (scores[i] == max_score) {
@@ -37,26 +37,30 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
     }
   }
 
-
-
   // if only one, return it
   if (top_words.length == 1) {
     return top_words[0];
+  } else {
+    // otherwise check ties
+    var lengths = top_words.map(function(word) {
+      return word.length;
+    })
+    var max_length = Math.max(...lengths);
+    var min_length = Math.min(...lengths);
+    if (max_length >= 7) {
+      var tiebreak = max_length;
+    } else {
+      var tiebreak = min_length;
+    };
+      var index = lengths.indexOf(tiebreak);
+      return top_words[index];
   };
-
-
-
-  // if more than one:
-  // if there is at least one 7-letter word, return first
-  // else find the minimum length and return the first word of that length
-
-
 };
 
 module.exports = Scrabble;
 
 var scrab = new Scrabble;
-console.log(scrab.score('tubrun'));
-console.log(scrab.score('bubba'));
-console.log(scrab.score('quixote'));
-console.log(scrab.highestScoreFrom(['tubrun', 'bubba', 'quixote']));
+console.log(scrab.score('pigpigs'));
+console.log(scrab.score('bigbigs'));
+console.log(scrab.score('aa'));
+console.log(scrab.highestScoreFrom(['pigpiggies', 'bigbiggies', 'aa']));
