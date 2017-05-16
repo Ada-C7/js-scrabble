@@ -86,26 +86,35 @@ Player.prototype.highestScoringWord = function() {
   return word;
 };
 
-addie = new Player("Addie");
-addie.play("apple");
-console.log(addie.totalScore());
-addie.play("a");
-console.log(addie.totalScore());
-addie.play("q");
-console.log(addie.totalScore());
-console.log(addie.hasWon());
-addie.play("xxxxxx");
-console.log(addie.totalScore());
-addie.play("xxx");
-console.log(addie.totalScore());
-console.log(addie.hasWon());
-addie.play("j");
-console.log(addie.totalScore());
-console.log(addie.hasWon());
-addie.play("x");
-console.log(addie.totalScore());
-console.log(addie.hasWon());
-console.log(addie.highestScoringWord());
-addie.play("fd");
-console.log(addie.plays);
-console.log(addie.totalScore());
+Player.prototype.highestWordScore = function() {
+  if (this.plays == []) {
+    return this.name + " hasn't played any words yet.";
+  }
+  return Scrabble.score(this.highestScoringWord());
+};
+
+// addie = new Player("Addie");
+// addie.play("apple");
+// console.log(addie.totalScore());
+// addie.play("a");
+// console.log(addie.totalScore());
+// addie.play("q");
+// console.log(addie.totalScore());
+// console.log(addie.hasWon());
+// addie.play("xxxxxx");
+// console.log(addie.totalScore());
+// addie.play("xxx");
+// console.log(addie.totalScore());
+// console.log(addie.hasWon());
+// addie.play("j");
+// console.log(addie.totalScore());
+// console.log(addie.hasWon());
+// addie.play("x");
+// console.log(addie.totalScore());
+// console.log(addie.hasWon());
+// addie.play("qqaaaa");
+// console.log(addie.highestScoringWord());
+// console.log(addie.highestWordScore());
+// addie.play("fd");
+// console.log(addie.plays);
+// console.log(addie.totalScore());
