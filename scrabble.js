@@ -32,11 +32,6 @@ var Word = function(word) {
   this.length = word.length;
   this.baseScore = score(this.word);
   if (this.length == 7) {
-    this.bonus = true;
-  } else {
-    this.bonus = false;
-  }
-  if (this.bonus === true) {
     this.totalScore = this.baseScore + 50;
   } else {
     this.totalScore = this.baseScore;
@@ -63,9 +58,9 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
   var winningWords = [];
   var sevenLetters = [];
   var shortestWords = [];
-  for (var wobj in wordObjects) {
-    if (wordObjects[wobj].totalScore == highScore) {
-      winningWords.push(wordObjects[wobj]);
+  for (obj in wordObjects) {
+    if (wordObjects[obj].totalScore == highScore) {
+      winningWords.push(wordObjects[obj]);
     }
   }
   var lengths = [];
@@ -95,17 +90,64 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
   } else { // >1 winner and none are 7ltrs
     winner = shortestWords[0];
   }
-  console.log("The winning word is: " + winner.word);
+  return winner.word;
+  // console.log("The winning word is: " + winner.word);
 };
 
 
 var game = new Scrabble();
 
-game.highestScoreFrom(["cat", "dog", "puppy", "candle", "puppy", "jokey", "hazy"]); //winner should be hazy
-game.highestScoreFrom(["cat", "dog", "puppy", "candle", "puppy", "puppw"]); //winner should be puppy
-game.highestScoreFrom(["zymurgy", "squiffy"]); //winner should be zymurgy
-game.highestScoreFrom(["aaaaaaa", "puppy"]); //winner should be aaaaaaa
+// game.highestScoreFrom(["cat", "dog", "puppy", "candle", "puppy", "jokey", "hazy"]); //winner should be hazy
+// game.highestScoreFrom(["cat", "dog", "puppy", "candle", "puppy", "puppw"]); //winner should be puppy
+// game.highestScoreFrom(["zymurgy", "squiffy"]); //winner should be zymurgy
+// console.log("winning word is: " + game.highestScoreFrom(["aaaaaaa", "puppy"])); //winner should be aaaaaaa
 
+var Player = function(name) {
+  this.name = name;
+  this.plays = [];
+};
+
+Player.prototype.totalScore = function() {
+  var totalScore = 0;
+  for (var playword in this.plays) {
+    totalScore = totalScore + this.plays[playword].totalScore;
+  }
+  return totalScore;
+};
+
+Player.prototype.hasWon = function() {
+  if (this.totalScore() >= 100) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+
+Player.prototype.play = function(word) {
+  if (!this.hasWon()) {
+    newWord = new Word(word);
+    this.plays.push(newWord);
+  } else {
+    return false;
+  }
+};
+
+var aurora = new Player("Aurora");
+console.log(aurora.name);
+aurora.play("cat");
+console.log(aurora.plays);
+console.log("won? " + aurora.hasWon());
+console.log("score: " + aurora.totalScore());
+aurora.play("squiffy");
+console.log(aurora.plays);
+console.log("won? " + aurora.hasWon());
+console.log("score: " + aurora.totalScore());
+aurora.play("jiffy");
+console.log(aurora.plays);
+console.log("score: " + aurora.totalScore());
+
+console.log("won? " + aurora.hasWon());
 
 
 module.exports = Scrabble;
