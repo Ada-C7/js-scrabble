@@ -75,6 +75,14 @@ Player.prototype.hasWon = function () {
   return (this.totalScore() > 100) ? true : false;
 };
 
+Player.prototype.highestScoringWord = function() {
+  word = Scrabble.highestScoreFrom(this.plays);
+  if (!word) {
+    return this.name + " hasn't played any words yet.";
+  }
+  return word;
+};
+
 // addie = new Player("Addie");
 // addie.play("apple");
 // console.log(addie.totalScore());
@@ -94,3 +102,4 @@ Player.prototype.hasWon = function () {
 // addie.play("x");
 // console.log(addie.totalScore());
 // console.log(addie.hasWon());
+// console.log(addie.highestScoringWord());
