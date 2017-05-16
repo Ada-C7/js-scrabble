@@ -40,11 +40,41 @@ Scrabble.prototype = {
       letter = word[i];
       score += values[letter];
     }
+
+    if (word.length >= 7) {
+      score += 50;
+    }
+
     return score;
+  },
+
+  highestScoreFrom: function(arrayOfWords) {
+    var highestWord = arrayOfWords[0];
+    var highestScore = this.score(arrayOfWords[0]);
+
+    for (var i = 1; i < arrayOfWords.length; i++) {
+      var currentWord = arrayOfWords[i];
+      var currentWordScore = this.score(currentWord);
+
+      if (currentWordScore > highestScore) {
+        highestScore = currentWordScore;
+        highestWord = currentWord;
+      } else if (currentWordScore == highestScore){
+          if (currentWord.length == 7 || currentWord.length < highestWord.length) {
+            highestWord = currentWord;
+            highestScore = currentWordScore;
+          }
+      }
+    }
+  return highestWord;
   }
 };
 
 var test = new Scrabble();
-console.log(test.score("TEST"));
+console.log(test.score("zox"));
+console.log(test.score("exlax"));
+console.log(test.score("Boooooo"));
+
+console.log(test.highestScoreFrom(["TEST", "exlax", "hi", "bye", "zooz"]));
 
 module.exports = Scrabble;
