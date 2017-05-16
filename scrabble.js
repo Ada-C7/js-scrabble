@@ -59,6 +59,9 @@ var Player = function(name) {
 };
 
 Player.prototype.play = function(word) {
+  if (this.hasWon()) {
+    return false;
+  }
   this.plays.push(word);
 };
 
@@ -83,23 +86,26 @@ Player.prototype.highestScoringWord = function() {
   return word;
 };
 
-// addie = new Player("Addie");
-// addie.play("apple");
-// console.log(addie.totalScore());
-// addie.play("a");
-// console.log(addie.totalScore());
-// addie.play("q");
-// console.log(addie.totalScore());
-// console.log(addie.hasWon());
-// addie.play("xxxxxx");
-// console.log(addie.totalScore());
-// addie.play("xxx");
-// console.log(addie.totalScore());
-// console.log(addie.hasWon());
-// addie.play("j");
-// console.log(addie.totalScore());
-// console.log(addie.hasWon());
-// addie.play("x");
-// console.log(addie.totalScore());
-// console.log(addie.hasWon());
-// console.log(addie.highestScoringWord());
+addie = new Player("Addie");
+addie.play("apple");
+console.log(addie.totalScore());
+addie.play("a");
+console.log(addie.totalScore());
+addie.play("q");
+console.log(addie.totalScore());
+console.log(addie.hasWon());
+addie.play("xxxxxx");
+console.log(addie.totalScore());
+addie.play("xxx");
+console.log(addie.totalScore());
+console.log(addie.hasWon());
+addie.play("j");
+console.log(addie.totalScore());
+console.log(addie.hasWon());
+addie.play("x");
+console.log(addie.totalScore());
+console.log(addie.hasWon());
+console.log(addie.highestScoringWord());
+addie.play("fd");
+console.log(addie.plays);
+console.log(addie.totalScore());
