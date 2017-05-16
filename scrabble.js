@@ -22,23 +22,34 @@ Scrabble.prototype.score = function(word) {
 
 Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
   //call score function on each word in arrayOfWords
-  var scores = [];
   var self = this;
+  var scores = arrayOfWords.map(function(word) {
+    return self.score(word);
+  })
+  //find maximum score
+  var max_score = Math.max.apply(null, scores);
 
-  arrayOfWords.forEach(function(word) {
-    currentScore = self.score(word);
-    scores.push(currentScore);
-  });
+// make array of words with max score
+  var top_words = [];
+  for (var i = 0; i < arrayOfWords.length; i++) {
+    if (scores[i] == max_score) {
+      top_words.push(arrayOfWords[i]);
+    }
+  }
 
-  //get index of maximum value in scores array and return corresponding word
-  var index = scores.indexOf(Math.max(...scores));
-  return arrayOfWords[index];
 
 
-  // if more than one word with max score
-  // seven letter word wins
-  // else word with smallest length
-  // if more than one word with smallest length, return first in list
+  // if only one, return it
+  if (top_words.length == 1) {
+    return top_words[0];
+  };
+
+
+
+  // if more than one:
+  // if there is at least one 7-letter word, return first
+  // else find the minimum length and return the first word of that length
+
 
 };
 
@@ -46,6 +57,6 @@ module.exports = Scrabble;
 
 var scrab = new Scrabble;
 console.log(scrab.score('tubrun'));
-console.log(scrab.score('heffalump'));
-console.log(scrab.score('qifanxi'));
-console.log(scrab.highestScoreFrom(['tubrun', 'heffalump', 'qifanxi']));
+console.log(scrab.score('bubba'));
+console.log(scrab.score('quixote'));
+console.log(scrab.highestScoreFrom(['tubrun', 'bubba', 'quixote']));
