@@ -1,7 +1,5 @@
 var Scrabble = function() {};
 
-
-
 Scrabble.prototype = {
   score: function(word) {
     var values = {
@@ -60,7 +58,7 @@ Scrabble.prototype = {
         highestScore = currentWordScore;
         highestWord = currentWord;
       } else if (currentWordScore == highestScore){
-          if (currentWord.length == 7 || currentWord.length < highestWord.length) {
+          if ((currentWord.length == 7 && highestWord.length < 7) || currentWord.length < highestWord.length) {
             highestWord = currentWord;
             highestScore = currentWordScore;
           }
@@ -70,11 +68,38 @@ Scrabble.prototype = {
   }
 };
 
+// testing Scrabble
 var test = new Scrabble();
 console.log(test.score("zox"));
 console.log(test.score("exlax"));
 console.log(test.score("Boooooo"));
+console.log(test.score("Buuuuuu"));
 
-console.log(test.highestScoreFrom(["TEST", "exlax", "hi", "bye", "zooz"]));
+// should return shortest highest word - zooz
+console.log(test.highestScoreFrom(["exlax", "zooz"]));
+
+// if highest word is tie and both have 7 letters, return first booooo.
+console.log(test.highestScoreFrom(["Boooooo", "Buuuuuu"]));
+
+var Player = function(name) {
+  this.name = name;
+  this.plays = [];
+};
+
+Player.prototype = {
+  play: function(word) {
+    this.plays.push(word);
+  }
+};
+
+// testing Player
+var lynn = new Player("Lynn");
+
+console.log(lynn.name);
+console.log(lynn.plays);
+
+lynn.play("dog");
+
+console.log(lynn.plays);
 
 module.exports = Scrabble;
