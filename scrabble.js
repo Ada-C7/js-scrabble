@@ -57,3 +57,7 @@ var Player = function(name) {
   this.name = name;
   this.plays = [];
 };
+
+Player.prototype.play = function(word) {
+  this.plays.push(word);
+};
