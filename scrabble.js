@@ -41,9 +41,42 @@ Scrabble.prototype = {
   }
 };
 
-myScrabble = new Scrabble();
-console.log(myScrabble.scoreCard);
-console.log(myScrabble.score("superfresh"));
-console.log(myScrabble.highestScoreFrom(["hello", "world", "elephant"]));
+var Player = function(name) {
+  this.name = name;
+  this.wordPlays = [];
+  this.points = 0;
+  this.playerScrabble = new Scrabble();
+};
+
+Player.prototype = {
+  plays: function() {
+
+  },
+
+  play: function(word) {
+
+  },
+
+  totalScore: function() {
+
+  },
+
+  hasWon: function() {
+
+  },
+
+  highestScoringWord: function() {
+
+  },
+
+  highestWordScore: function() {
+
+  }
+}
+
+player = new Player("ada");
+console.log(player.playerScrabble.scoreCard);
+console.log(player.playerScrabble.score("superfresh"));
+console.log(player.playerScrabble.highestScoreFrom(["hello", "world", "elephant"]));
 
 module.exports = Scrabble;
