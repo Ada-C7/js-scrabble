@@ -36,11 +36,8 @@ highestScoreFrom = function(arrayOfWords) {
     return "Send me an array and we can try this again...";
   }
 
-  // TO DO -- Error Handling:
-  // make sure input is actually an array
-
   var highestScore = 0;
-  var winner = undefined; // needs to return the actual word
+  var winner = undefined;
 
   arrayOfWords.forEach(function(word) {
     if ( score(word) > highestScore ){
@@ -71,7 +68,7 @@ console.log(score("hotdog"));
 
 var myWordsList = ["ostrich", "cat", "whale", "tiger", "flamingo", "zzzzzzzzzzzz"];
 // console.log(myGame.highestScoreFrom(myWordsList));
-console.log(highestScoreFrom("heres's some words"));
+console.log(highestScoreFrom(myWordsList));
 
 
 // ===============================================================
