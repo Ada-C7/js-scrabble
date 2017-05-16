@@ -29,7 +29,6 @@ var Scrabble = function() {
   };
 };
 
-// YOUR CODE HERE
 Scrabble.prototype = {
   score: function(word) {
     var letters = word.toLowerCase().split(''),
@@ -78,8 +77,65 @@ Scrabble.prototype = {
 };
 
 var gameOne = new Scrabble();
-console.log(gameOne.score("watered"));
-console.log(gameOne.score("quest"));
-console.log(gameOne.highestScoreFrom(["", "uzi", "zzzzzii"]));
+console.log(gameOne.score("testing"));
+console.log(gameOne.score("queting"));
+console.log(gameOne.score("iiiiiii"));
+console.log(gameOne.highestScoreFrom(["melons", "clammy", "quest"]));
+console.log(gameOne.highestScoreFrom(["jam", "uzi", "zimmq"]));
+console.log(gameOne.highestScoreFrom(["quested", "uzi", "iiiiiii"]));
+
+var Player = function(name) {
+  this._name = name;
+  this._plays = [];
+  this._game = new Scrabble();
+};
+
+Player.prototype = {
+  play: function(word) {
+    if (this.hasWon) {
+      return false;
+    } else {
+      this._plays.push(word);
+    }
+  },
+  totalScore: function() {
+    var total = 0;
+    this._plays.forEach(function(word) {
+      total += this._game.score(word);
+    }, this);
+    return total;
+  },
+  hasWon: function() {
+    if (this.totalScore > 100) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  highestScoringWord: function() {
+    return this._game.highestScoreFrom(this._plays);
+  },
+  highestWordScore: function() {
+    return this._game.score(this.highestScoringWord);
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = Scrabble;
