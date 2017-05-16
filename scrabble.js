@@ -8,7 +8,7 @@ var letterScores = {
 
 Scrabble.prototype.score = function(word) {
   var total = 0;
-  var letters = word.split('');
+  var letters = word.toUpperCase().split('');
 
   letters.forEach(function (letter) {
     var score = letterScores[letter];
@@ -18,7 +18,27 @@ Scrabble.prototype.score = function(word) {
   return total;
 };
 
+Scrabble.prototype.highestScoreFrom = function(words){
+  var highestScoringWord = "";
+  var highestScore = 0;
+
+  words.forEach(function (word) {
+    var score = Scrabble.prototype.score(word);
+
+    if (score > highestScore ) {
+
+      highestScoringWord = word;
+      highestScore = score;
+    }
+  });
+  return highestScoringWord;
+};
+
 module.exports = Scrabble;
 
 // this works
-console.log(Scrabble.prototype.score("HELLO"));
+// console.log(Scrabble.prototype.score("HELLO"));
+// points 8, 5, 12
+words = ["hello", "cat", "zoo"];
+// working - returning zoo
+console.log(Scrabble.prototype.highestScoreFrom(words));
