@@ -36,6 +36,7 @@ Scrabble.prototype = {
       var score = this.score(word);
       this.scores.push(score);
     }, this);
+
       var max = Math.max(...this.scores);
       var ties = [];
       for (var i = 0; i < this.scores.length; i++) {
@@ -66,26 +67,23 @@ Scrabble.prototype = {
 
 var Player = function(name) {
   this.name = name;
-  this.wordPlays = [];
+  this.plays = [];
   this.points = 0;
   this.playerScrabble = new Scrabble();
 };
 
 Player.prototype = {
-  plays: function() {
-    return this.wordPlays;
-  },
 
   play: function(word) {
     if(this.hasWon() === false) {
-    this.wordPlays.push(word);
+      this.plays.push(word);
     } else {
-    return "You have already won the game.";
+      return "You have already won the game.";
     }
   },
 
   totalScore: function() {
-    this.wordPlays.forEach(function(word) {
+    this.plays.forEach(function(word) {
       this.points += this.playerScrabble.score(word);
     }, this);
 
@@ -97,7 +95,7 @@ Player.prototype = {
   },
 
   highestScoringWord: function() {
-    return this.playerScrabble.highestScoreFrom(this.wordPlays);
+    return this.playerScrabble.highestScoreFrom(this.plays);
   },
 
   highestWordScore: function() {
@@ -108,9 +106,9 @@ Player.prototype = {
 
 player = new Player("ada");
 console.log(player.playerScrabble.scoreCard);
-console.log(player.play("aaaaa"));
-console.log(player.play("k"));
-console.log(player.plays());
+console.log(player.play("aaaaaaa"));
+console.log(player.play("ddda"));
+console.log(player.plays);
 console.log(player.totalScore());
 console.log(player.hasWon());
 console.log(player.highestScoringWord());
