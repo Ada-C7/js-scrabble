@@ -1,5 +1,5 @@
 var Scrabble = function() {
-  this.letter_values = {
+  this.letterValues = {
     "a": 1,
     "b": 3,
     "c": 3,
@@ -30,24 +30,24 @@ var Scrabble = function() {
 };
 
 Scrabble.prototype = {
-  score: function(input_word) {
+  score: function(word) {
     // regex, raise errors
-    if (/^[a-zA-Z]+$/.test(input_word)) {
+    if (/^[a-zA-Z]+$/.test(word)) {
 
       // case insensitive
-      var word = input_word.toLowerCase();
+      var word = word.toLowerCase();
 
       // 7 letter word bonus
-      var word_score = (word.length == 7) ? 50 : 0;
+      var wordScore = (word.length == 7) ? 50 : 0;
 
       // isolate letters
       for (var i = 0; i < word.length; i++) {
         // assign scores to letters
-        word_score += this.letter_values[word.charAt(i)];
+        wordScore += this.letterValues[word.charAt(i)];
       }
 
       // return total score
-      return word_score;
+      return wordScore;
 
     } else {
       throw "Sorry, invalid input!";
@@ -56,23 +56,25 @@ Scrabble.prototype = {
 
   // highestScoreFrom(arrayOfWords): returns the word in the array with the highest score.
   highestScoreFrom: function(arrayOfWords) {
-    arrayOfWords.forEach (function(num) {
-      if (/^[a-zA-Z]+$/.test(input_word)) {
-        // iterate through words array
+    if (Array.isArray(arrayOfWords)) {
+      var highestScore = 0,
+      winner;
 
-        // scores array var
+      // iterate through words array
+      arrayOfWords.forEach (function(word) {
+        wordScore = this.score(word);
+        if (wordScore > highestScore) {
+          highestScore = wordScore;
+          winner = word;
+        } else if (wordScore == highestScore) {
+          winner = this.tiebreaker(word, winner);
+        }
+      });
 
-        // for each word, return score w score(word) (map to score array)
-
-        // use max of scores array to return winner
-
-
-
-
-      } else {
-        throw "Sorry, invalid input! Please enter a word.";
-      }
-    });
+      return winner;
+    } else {
+      throw "Sorry, invalid input! Please enter an array of words.";
+    }
   }
 
   // tiebreaker method
@@ -85,9 +87,10 @@ var myScrabble = new Scrabble();
 
 console.log(myScrabble.score("ZZzzZZ")); // 60
 console.log(myScrabble.score("niiice")); // 8
-// console.log(myScrabble.score(456));
+// console.log(myScrabble.score(456)); // throw exception
 
-
+console.log(myScrabble.highestScoreFrom(["ZZzzZZ", "niiice", "cute"])); // "ZZzzZZ"
+console.log(myScrabble.highestScoreFrom(["niiice", ":)"])); // throw exception
 
 
 Scrabble.prototype.helloWorld = function() {
