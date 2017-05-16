@@ -44,10 +44,13 @@ var Scrabble = {
         var score = Scrabble.score(word);
         wordsWithScores[word] = score;
 
+        // will determine max score
         if ( score > highestScore ){
           highestScore = score;
         }
       });
+
+      console.log(wordsWithScores);
         //find any tie words - or singular words with the highest score
       var highestScoring = Object.keys(wordsWithScores).filter( function(word) {
         if ( wordsWithScores[word] == highestScore ) {
@@ -55,12 +58,13 @@ var Scrabble = {
         }
       });
 
+      // returns words with the highest score (ie tie - this will have multiple words - just one highest - only one word)
       return highestScoring;
     },
 
   _breakTie:
     function(words){
-      console.log(words);
+      // console.log(words);
 
       var winner = undefined;
       var length = 8;
@@ -78,5 +82,7 @@ var Scrabble = {
 module.exports = Scrabble;
 
 words = ["hello", "cateee", "hi", "dog", "DAAAAA"];
+// words = ["zzzzzz", "hellooo"]
+// words = ["cat", "cat"]
 console.log(Scrabble.score("hello"));
 console.log(Scrabble.highestScoreFrom(words));
