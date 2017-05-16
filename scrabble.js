@@ -118,14 +118,14 @@ Player.prototype.highestWordScore = function(){
 var TileBag = function() {
 
   var notShaffledTiles = ["D","L","S","U","D","L","S","U","D","L","S",
-                          "U","D","L","S","U","G","G","G","Q","J","K",
-                          "X","Z","M","B","C","F","H","V","W","Y","P",
-                          "M","B","C","F","H","V","W","Y","P","E","E",
-                          "E","E","E","E","E","E","E","E","E","E","I",
-                          "I","I","I","I","I","I","I","I","O","O","O",
-                          "O","O","O","O","O","R","R","R","R","R","R",
-                          "T","T","T","T","T","T","N","N","N","N","N",
-                          "N"];
+  "U","D","L","S","U","G","G","G","Q","J","K",
+  "X","Z","M","B","C","F","H","V","W","Y","P",
+  "M","B","C","F","H","V","W","Y","P","E","E",
+  "E","E","E","E","E","E","E","E","E","E","I",
+  "I","I","I","I","I","I","I","I","O","O","O",
+  "O","O","O","O","O","R","R","R","R","R","R",
+  "T","T","T","T","T","T","N","N","N","N","N",
+  "N"];
   this.tileBag = TileBag.prototype.shuffleBag(notShaffledTiles);
 };
 
@@ -174,16 +174,29 @@ var Board = function() {
   this.board.fill("[ ]");
 };
 Board.prototype.displayBoard = function(){
-  // console.table(this.board);
-
   for (var i = 0; i < this.board.length; i++){
-      var line = ""
+    var line = ""
     for (var j = 0; j < this.board.length; j++){
       line += this.board[j];
     }
     console.log(line);
-      console.log();
+    console.log();
   }
+};
+
+Board.prototype.checkWordOnBoard = function(word, row, col, direction){
+  var result = false;
+  switch (direction){
+    case "up":
+    result = (row - word.length >= 0) ? true : false
+    case "down":
+    result = (row + word.length) <= 16 ? true : false
+    case "right":
+    result = (col + word.length) <= 16 ? true : false
+    case "left":
+    result = (col - word.length) >= 0 ? true : false
+  }
+  return result;
 };
 
 
