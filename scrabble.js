@@ -77,13 +77,15 @@ Scrabble.prototype = {
     }
   },
   tieBreaker: function(word, winner) {
-    if (winner.length == 7 || word.length == 7)
-    
-  }
+    // seven letter words get 50 points, if tied for top score, winner is 7 letter word (over shorter)
+    if (winner.length == 7 || word.length == 7) {
+      tieWinner = winner.length <= word.length ? word : winner;
 
-  // tiebreaker method
-  // if tied for top score, winner is shortest length
-  // seven letter words get 50 points, if tied for top score, winner is 7 letter word (over shorter)
+      // if tied for top score, winner is shortest length
+    } else {
+      tieWinner = word.length <= winner.length ? winner : word;
+    }
+  }
   // if multiple ties of same length, winner is first word
 };
 
