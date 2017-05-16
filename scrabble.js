@@ -113,9 +113,8 @@ Player.prototype.highestWordScore = function() {
 // addie.play("qqaaaa");
 // console.log(addie.highestScoringWord());
 // console.log(addie.highestWordScore());
-// addie.play("fd");
 // console.log(addie.plays);
 // console.log(addie.totalScore());
 
 module.exports = Scrabble;
-module.exports = Player;
+// module.exports = Player;
