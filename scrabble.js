@@ -53,6 +53,25 @@ Scrabble.prototype.score = function(word) {
 
 Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
   // returns the word in the array with the highest score
+  // var highestScoringWords = [];
+  // var score = this.score(arrayOfWords[0]);
+  //
+  // arrayOfWords.forEach (function(word) {
+  //   if (this.score(word) > score) {
+  //     highestScoringWords.push(word);
+  //   }
+  // }, this);
+  // console.log(highestScoringWords);
+
+  var scoringOfWords = arrayOfWords.map(function(scoredWord) {
+    var word = {};
+    word[scoredWord] = this.score(scoredWord);
+    return word;
+  }, this);
+
+
+  console.log(scoringOfWords);
+  console.log(maxValue);
 
   // if the top score is tied between multiple words, pick the one with the fewest letters
   // If the top score is tied between multiple words and one used all seven letters, choose the one with seven letters over the one with fewer tiles
@@ -62,3 +81,6 @@ module.exports = Scrabble;
 
 var scrabble = new Scrabble();
 scrabble.score("ooooooo");
+
+var words = ["aaaa", "bbbbb", "eeeeeee"];
+scrabble.highestScoreFrom(words);
