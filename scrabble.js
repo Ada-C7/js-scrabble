@@ -38,15 +38,17 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
       winningWordLength = word.length;
     }
 
-    console.log("++++++++");
-    console.log(word);
-    console.log("score: " + score);
-    console.log("high score: " + highScore);
-    console.log("winning word: " + highScoreWord);
-    console.log("winning word length: " + winningWordLength);
+    // console.log("++++++++");
+    // console.log(word);
+    // console.log("score: " + score);
+    // console.log("high score: " + highScore);
+    // console.log("winning word: " + highScoreWord);
+    // console.log("winning word length: " + winningWordLength);
   }
+  return highScoreWord;
 };
 
-Scrabble.highestScoreFrom(["applex", "soup", "opplex", "qkd"]);
+// var highWord = Scrabble.highestScoreFrom(["aaa", "sss"]);
+// console.log(highWord);
 
 module.exports = Scrabble;
