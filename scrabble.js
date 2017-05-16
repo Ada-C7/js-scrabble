@@ -1,14 +1,14 @@
 var Scrabble = function() {};
 
 // Scrabble.score = function(word) {
-  score = function(word) {
+score = function(word) {
 
-  if ( typeof(word) !== 'string' || word.length > 7 ){
-    return "Invalid word" };
+  // TO DO:
+  // - error for invalid characters
 
-  // raise ArgumentError.new("That is not String.") if word.class != String
-  // raise ArgumentError.new("That word includes invalid characters!") if !word.match(/^[a-zA-Z]+$/)
-  // raise ArgumentError.new("That word is too long! Must be 7 characters or less.") if word.length > 7
+  if ( typeof(word) !== 'string' || word.length > 7 ) {
+    return "Invalid word";
+  }
 
   var wordScore = word.length == 7 ? 50 : 0,
       letterValues = {
@@ -31,6 +31,10 @@ var Scrabble = function() {};
 
 // Scrabble.highestScoreFrom = function(arrayOfWords) {
 highestScoreFrom = function(arrayOfWords) {
+
+  if ( typeof(arrayOfWords) !== 'array' ) {
+    return "Send me an array and we can try this again...";
+  }
 
   // TO DO -- Error Handling:
   // make sure input is actually an array
@@ -67,7 +71,7 @@ console.log(score("hotdog"));
 
 var myWordsList = ["ostrich", "cat", "whale", "tiger", "flamingo", "zzzzzzzzzzzz"];
 // console.log(myGame.highestScoreFrom(myWordsList));
-console.log(highestScoreFrom(myWordsList));
+console.log(highestScoreFrom("heres's some words"));
 
 
 // ===============================================================
