@@ -1,26 +1,62 @@
 var Scrabble = function() {
   var letter_values = {
-    one: ["A", "E", "I", "L", "N", "O", "R", "S", "T", "U"],
-    two: ["D", "G"],
-    three: ["B", "C", "M", "P"],
-    four: ["F", "H", "V", "W", "Y"],
-    five: ["K"],
-    eight: ["J", "X"],
-    ten: ["Q", "Z"]
+    a: 1,
+    b: 3,
+    c: 3,
+    d: 2,
+    e: 1,
+    f: 4,
+    g: 2,
+    h: 4,
+    i: 1,
+    j: 8,
+    k: 5,
+    l: 1,
+    m: 3,
+    n: 1,
+    o: 1,
+    p: 3,
+    q: 10,
+    r: 1,
+    s: 1,
+    t: 1,
+    u: 1,
+    v: 4,
+    w: 4,
+    x: 8,
+    y: 4,
+    z: 10
   };
 };
 
-Scrabble.prototype.score = function(word) {
-  // score(word): returns the total score value for the given word. The word is input as a string (case insensitive).
-  // isolate letters
-  for (var i = 0; i < word.length; i++) {
-    charAt(i);
-  }
-  // assign scores to letters
-  // add scores together
-  // return total score
+Scrabble.prototype.score = function(input_word) {
+  // regex, raise errors
+  if (/^[a-zA-Z]+$/.test(input_word)) {
 
+    // case insensitive
+    var word = input_word.toLowerCase();
+
+    // 7 letter word bonus
+    var word_score = (word.length == 7) ? 50 : 0;
+
+    // isolate letters
+    for (var i = 0; i < word.length; i++) {
+      // assign scores to letters
+      var letter_score = this.letter_values[word.charAt(i)];
+      word_score += letter_score;
+    }
+
+    // return total score
+    return word_score;
+
+  } else {
+    throw "Sorry, invalid input!";
+  }
 };
+
+var myScrabble = new Scrabble();
+// console.log(myScrabble.score(456));
+console.log(myScrabble.score("niiice"));
 
 
 // highestScoreFrom(arrayOfWords): returns the word in the array with the highest score.
