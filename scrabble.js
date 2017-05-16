@@ -24,7 +24,8 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
     var word = arrayOfWords[i];
     var score = this.score(word);
     var sevenBonus = (winningWordLength == 7);
-    var tieWinner = (!sevenBonus && (word.length == 7 || word.length < winningWordLength));
+    var tie = (score == highScore);
+    var tieWinner = (!sevenBonus && tie && (word.length == 7 || word.length < winningWordLength));
 
     if (score > highScore || tieWinner) {
       highScore = score;
@@ -42,8 +43,8 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
   return highScoreWord;
 };
 
-var highWord = Scrabble.highestScoreFrom(["aaa", "sss", "xxx", "qqaaaa", "qqqqqj", "aaaaaag"]);
-console.log(highWord);
+// var highWord = Scrabble.highestScoreFrom(["aaa", "sss", "xxx", "qqaaaa", "xxxf", "jjjf", "qqj", "a", "zzzzzj", "aaaaaad"]);
+// console.log(highWord);
 
 var Player = function(name) {
   this.name = name;
