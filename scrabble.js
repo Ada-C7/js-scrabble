@@ -10,6 +10,30 @@ function breakTie(words) {
 
 }
 
+function findHighestScoring(words) {
+  var wordsWithScores = {};
+  var highestScore = 0;
+
+  // add word with its score into wordsWithScores obj will also find the highest score
+  words.forEach(function (word) {
+    var score = Scrabble.prototype.score(word);
+    wordsWithScores[word] = score;
+
+    if (score > highestScore){
+      highestScore = score;
+    }
+  });
+
+  //find any tie words - or singular words with the highest score
+  var highestScoring = Object.keys(wordsWithScores).filter( function(word) {
+    if ( wordsWithScores[word] == highestScore ) {
+      return word;
+    }
+  });
+
+  return highestScoring;
+}
+
 Scrabble.prototype.score = function(word) {
   var total = 0;
   var letters = word.toUpperCase().split('');
@@ -23,35 +47,15 @@ Scrabble.prototype.score = function(word) {
 };
 
 Scrabble.prototype.highestScoreFrom = function(words){
-  var wordsWithScores = {};
-  var highestScore = 0;
+  var highestScoringWords = findHighestScoring(words);
+  var highestWord = undefined
 
-  words.forEach(function (word) {
-    var score = Scrabble.prototype.score(word);
-    wordsWithScores[word] = score;
+  if (highestScoringWords.length == 1) {
+    highestWord = highestScoringWords[0];
+  }
 
-    if (score > highestScore){
-      highestScore = score;
-    }
-  });
-
-  // var highestScoring = [];
-  // below gets you an array of all the keys or values
-  // Object.keys(wordsWithScores).forEach(function (word){
-  //   if ( wordsWithScores[word] == highestScore ) {
-  //     highestScoring.push(word);
-  //   }
-  // });
-
-  // samething as above - using filter
-  var highestScoring = Object.keys(wordsWithScores).filter( function(word) {
-    if ( wordsWithScores[word] == highestScore ) {
-      return word;
-    }
-  });
-
-
-  return highestScoring;
+  // var highestWord = handleTie(highestScoringWords);
+  return highestWord
 };
 
 module.exports = Scrabble;
@@ -59,6 +63,6 @@ module.exports = Scrabble;
 // this works
 // console.log(Scrabble.prototype.score("HELLO"));
 // points 8, 5, 12
-words = ["hello", "cateee", "hi", "dog", "aaaaaaaa"];
+words = ["hello", "cateee", "hi", "dog", "aaaaaaaa", "zooz"];
 // working - returning zoo
 console.log(Scrabble.prototype.highestScoreFrom(words));
