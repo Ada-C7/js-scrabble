@@ -23,15 +23,27 @@ Scrabble.prototype.score = function(word) {
 };
 
 Scrabble.prototype.highestScoreFrom = function(words){
-  // var highestScoringWord = "";
-  // var highestScore = 0;
   var wordsWithScores = {};
+  var highestScore = 0
 
   words.forEach(function (word) {
     var score = Scrabble.prototype.score(word);
     wordsWithScores[word] = score;
+
+    if (score > highestScore){
+      highestScore = score;
+    }
   });
-  return wordsWithScores;
+
+  var highestScoring = [];
+  // below gets you an array of all the keys or values
+  Object.keys(wordsWithScores).forEach(function (word){
+    if ( wordsWithScores[word] == highestScore ) {
+      highestScoring.push(word);
+    }
+  });
+
+  return highestScoring;
 };
 
 module.exports = Scrabble;
@@ -39,6 +51,6 @@ module.exports = Scrabble;
 // this works
 // console.log(Scrabble.prototype.score("HELLO"));
 // points 8, 5, 12
-words = ["hello", "cat", "zoo"];
+words = ["hello", "cateee", "hi", "dog", "zoo"];
 // working - returning zoo
 console.log(Scrabble.prototype.highestScoreFrom(words));
