@@ -29,7 +29,23 @@ Scrabble.prototype = {
       // if else statments to assign each character a point value
       if (one.includes(upcaseWord.charAt(i))) {
         wordScore += 1;
+      } else if (two.includes(upcaseWord.charAt(i))){
+        wordScore += 2;
+      } else if (three.includes(upcaseWord.charAt(i))){
+        wordScore += 3;
+      } else if (four.includes(upcaseWord.charAt(i))){
+        wordScore += 4;
+      } else if (five.includes(upcaseWord.charAt(i))){
+        wordScore += 5;
+      } else if (eight.includes(upcaseWord.charAt(i))){
+        wordScore += 8;
+      } else if (ten.includes(upcaseWord.charAt(i))){
+        wordScore += 10;
+      } else {
+        // case where there is a non character value in word
+        // Add some sort of response or validations..
       }
+
     }
     return wordScore;
   },
@@ -42,7 +58,7 @@ Scrabble.prototype = {
 
 
 var game  = new Scrabble();
-console.log(game.score("test"));
+console.log(game.score("adbfkjq"));
 // test should = 4
 module.exports = Scrabble;
 
