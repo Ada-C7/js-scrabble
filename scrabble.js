@@ -51,6 +51,27 @@ Scrabble.prototype = {
       }
     }
     return arrayOfWords[index];
+  },
+  highestWordScore: function(arrayOfWords) {
+    var index = 0;
+    var highestScore = this.score(arrayOfWords[0]);
+    for(var i = 1; i < arrayOfWords.length; i++) {
+      if (highestScore < this.score(arrayOfWords[i])) {
+        highestScore = this.score(arrayOfWords[i]);
+        index = i;
+      } else if (highestScore == this.score(arrayOfWords[i])) {
+          if (arrayOfWords[i-1].length < arrayOfWords[i].length) {
+            highestScore = highestScore;
+          } else if (arrayOfWords[i-1].length == arrayOfWords[i].length) {
+            highestScore = highestScore;
+          }
+          else {highestScore = this.score(arrayOfWords[i]);
+          index = i; }
+      } else {
+        highestScore = highestScore;
+      }
+    }
+    return highestScore;
   }
 };
 
@@ -81,9 +102,53 @@ Scrabble.prototype.helloWorld = function() {
 
 var Player = function(name) {
   this.name = name;
-  this.plays = []
+  this.plays = [];
 };
 
 Player.prototype = {
-  plays:
-}
+  play: function(word) {
+    if (this.hasWon() != true) {
+    this.plays[this.plays.length] = word;
+  } else {
+      return console.log("you've already won");
+  }
+
+  },
+  totalScore: function() {
+    var game = new Scrabble;
+    var score = 0;
+    for(var i = 0; i < this.plays.length; i++) {
+      score = score + game.score(this.plays[i]);
+    }
+    return score;
+  },
+  hasWon: function() {
+    if (this.totalScore() > 100) {
+      return true;
+    }
+  },
+  highestScoringWord: function() {
+    var game = new Scrabble;
+    return game.highestScoreFrom(this.plays);
+  },
+  highestWordScore: function() {
+    var game = new Scrabble;
+    return game.highestWordScore(this.plays);
+  }
+
+};
+
+player = new Player("Ann");
+player.play("ZZZ");
+console.log(player.plays);
+player.play("ZZZ");
+console.log(player.plays);
+console.log(player.totalScore());
+console.log(player.highestScoringWord());
+console.log(player.highestWordScore());
+player.play("ZZZ");
+console.log(player.plays);
+player.play("ZZZ");
+console.log(player.plays);
+player.play("ZZZ");
+console.log(player.plays);
