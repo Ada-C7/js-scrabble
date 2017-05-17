@@ -100,11 +100,13 @@ return winningWord;
 
 var Player = function(name, plays) {
   this.name = name;
-  this.plays = plays;
+  this.plays = [];
 
 };
 
+ // Function which adds the input word to the plays Array, false if player has won
 Player.prototype.play = function(word) {
+this.plays.push(word);
 
 };
 
