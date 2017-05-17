@@ -45,8 +45,24 @@ Scrabble.prototype.score = function(word) {
   return scoreTotal;
 };
 
+Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
+  var highScore = 0;
+  var wordScores = [];
+  //return the word in the array with the highest score
+  arrayOfWords.forEach(function (word) {
+    var score = Scrabble.prototype.score(word);
+    if (score > highScore ) {
+      highScore = score;
+      wordScores.push(word);
+    }
+  });
+  return wordScores;
+};
+
 
 var game = new Scrabble();
 play = game.score("apple");
+topScore = game.highestScoreFrom(["aei", "zq"]);
 console.log(play);
+console.log(topScore);
 module.exports = Scrabble;
