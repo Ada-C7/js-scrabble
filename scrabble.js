@@ -67,7 +67,7 @@ Scrabble.prototype = {
           highestScore = wordScore;
           winner = word;
         } else if (wordScore == highestScore) {
-          winner = this.tiebreaker(word, winner);
+          winner = this.tieBreaker(word, winner);
         }
       }, this);
 
@@ -85,17 +85,24 @@ Scrabble.prototype = {
     } else {
       tieWinner = word.length <= winner.length ? winner : word;
     }
+    return winner;
   }
   // if multiple ties of same length, winner is first word
 };
 
 var myScrabble = new Scrabble();
 
+// tests
+
 console.log(myScrabble.score("ZZzzZZ")); // 60
 console.log(myScrabble.score("niiice")); // 8
+console.log(myScrabble.score("aaaAaaa")); // 57
 // console.log(myScrabble.score(456)); // throw exception
 
 console.log(myScrabble.highestScoreFrom(["ZZzzZZ", "niiice", "cute"])); // "ZZzzZZ"
+console.log(myScrabble.highestScoreFrom(["gg", "aaaa", "b"])); // "gg"
+console.log(myScrabble.highestScoreFrom(["b", "c", "m", "da"])); // "b"
+console.log(myScrabble.highestScoreFrom(["daaaaaA", "zzzzzJ", "m", "da"])); // "daaaaaA"
 // console.log(myScrabble.highestScoreFrom(["niiice", ":)"])); // throw exception
 
 
