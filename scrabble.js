@@ -5,9 +5,7 @@ Scrabble.score = function(word) {
   // TO DO:
   // - error for invalid characters
 
-  if ( typeof(word) !== 'string' || word.length > 7 ) {
-    return "Invalid word";
-  }
+  if ( typeof(word) !== 'string' || word.length > 7 ) return "Invalid word";
 
   var wordScore = word.length == 7 ? 50 : 0,
       letterValues = {
@@ -21,8 +19,7 @@ Scrabble.score = function(word) {
       };
 
   for ( i = 0; i < word.length; i++ ) {
-    wordScore += letterValues[ word.toUpperCase()[i] ];
-  }
+    wordScore += letterValues[ word.toUpperCase()[i] ]; }
 
   return wordScore;
 };
@@ -98,6 +95,6 @@ console.log(myPlayer.totalScore());
 console.log(myPlayer.hasWon());
 console.log(myPlayer.highestScoringWord());
 console.log(myPlayer.highestWordScore());
-
+console.log(Scrabble.score("zzzzzzzzzzzz"));
 
 module.exports = Scrabble;
