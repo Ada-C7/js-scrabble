@@ -2,8 +2,15 @@ var Scrabble = require('./scrabble');
 
 var Player = function(name) {
   this.name = name;
-  this.plays = ["PURPLE", "PINK", "PURPLE", "PINK", "PURPLE", "PINK", "PURPLE", "PINK", "PURPLE", "PINK"];
+  this.plays = ["PURPLE", "PINK"];
   this.scrabble = new Scrabble();
+};
+
+Player.prototype.play = function(word) {
+  if (this.hasWon()) { return false };
+  // check to see if valid word?
+  this.plays.push(word);
+  // return score?
 };
 
 Player.prototype.totalScore = function() {
@@ -28,8 +35,11 @@ Player.prototype.highestWordScore = function() {
   return this.scrabble.score(topWord);
 };
 
-var my_player = new Player('Ada');
-console.log(my_player.totalScore());
-console.log(my_player.hasWon());
-console.log(my_player.highestScoringWord());
-console.log(my_player.highestWordScore());
+// var my_player = new Player('Ada');
+// console.log(my_player.totalScore());
+// console.log(my_player.hasWon());
+// console.log(my_player.highestScoringWord());
+// console.log(my_player.highestWordScore());
+// console.log(my_player.play("happy"));
+// console.log(my_player.plays);
+// console.log(my_player.highestScoringWord());
