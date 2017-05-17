@@ -84,6 +84,75 @@ Scrabble.prototype = {
   }
 };
 
+var plays = [];
+
+var Player = function(name) {
+  this.name = name;
+  this.plays = function() {
+    return name.plays;  // is this right?????????
+  };
+};
+
+
+Player.prototype = {
+  play: function(word) {  // is this right?????????
+  // if player hasWon == true, return false
+    if (word !== "" && word.length < 7) {
+      plays.append(word);
+  } else {
+      console.log("Error, please enter a word that is at least 1 character long.");
+    }
+  }
+};
+
+var playsScores = [];
+var totalPoints = 0;
+
+Player.prototype = { // do I need another prototype, or can I put it above?
+  totalScore: function() {
+    for (var index = 0; index < plays.length; index++){
+      // sum up scores of words played
+      totalPoints += word.score; // ?????
+    }
+    // returns total score
+    return total;
+  }
+};
+
+Player.prototype = { // do I need another prototype, or can I put it in the original?
+  hasWon: function() {
+    if (totalPoints >= 100) {
+      return true;
+    }
+    }
+};
+
+var playerHighestScoringWord = "";
+
+Player.prototype = { // do I need another prototype, or can I put it in the original?
+  highestScoringWord: function() {
+    for (var index = 0; index < playScores.length; index++) {
+      if (index > playerHighestScoringWord) { // haha, nope, this won't work
+        playerHighestScoringWord = index;
+      }
+      return playerHighestScoringWord;
+    }
+  }
+};
+
+var playerHighestWordScore = 0;
+
+Player.prototype = { // do I need another prototype, or can I put it in the original?
+  higestWordScore: function() {
+    for (var index = 0; index < playScores.length; index++) {
+      if (index > playerHighestWordScore) {
+        playerHighestWordScore = index;
+      }
+      return playerHighestScoringWord;
+    }
+  }
+};
+
 
 // code they gave us:
 // Scrabble.prototype.helloWorld = function() {
