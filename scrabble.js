@@ -54,30 +54,23 @@ Scrabble.prototype.highestScore = function(arrayOfWords) {
   var winningScore = 0;
 
   //MAIN//
-  // loop that will go through arrayOfWords
   for (var i = 0; i < arrayOfWords.length; i++) {
     var word = arrayOfWords[i];
     var wordScore = this.score(word);
-    // 50 pt bonus for using all seven letters
+
     if (word.length == 7) {
       score += 50;
     }
 
-    //conditionals to set highScore and bestWord
     if (wordScore > winningScore) {
       winningScore = wordScore;
       winningWord = word;
     } else if (wordScore === winningScore) {
-      // top score tied between two words? choose shortest word
       if (wordScore.length < winningScore.length) {
         winningScore = wordScore;
         winningWord = word;
       }
     }
-    // multiple words what are same score and same length? pick the first one
-    // ^ this is done automatically 
-
-  //return winning word
   }
   return winningWord;
 };
