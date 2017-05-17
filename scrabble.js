@@ -152,3 +152,101 @@ player.play("ZZZ");
 console.log(player.plays);
 player.play("ZZZ");
 console.log(player.plays);
+
+var TileBag = function() {
+  var bag = new Object;
+    bag["J"] = 1;
+    bag["K"] = 1;
+    bag["Q"] = 1;
+    bag["X"] = 1;
+    bag["Z"] = 1;
+    bag["B"] = 2;
+    bag["C"] = 2;
+    bag["F"] = 2;
+    bag["H"] = 2;
+    bag["M"] = 2;
+    bag["P"] = 2;
+    bag["V"] = 2;
+    bag["W"] = 2;
+    bag["Y"] = 2;
+    bag["G"] = 3;
+    bag["D"] = 4;
+    bag["L"] = 4;
+    bag["S"] = 4;
+    bag["U"] = 4;
+    bag["N"] = 5;
+    bag["R"] = 5;
+    bag["T"] = 5;
+    bag["O"] = 8;
+    bag["A"] = 9;
+    bag["I"] = 9;
+    bag["E"] = 12;
+    this.bag = bag;
+};
+
+
+TileBag.prototype = {
+  drawTiles: function(letter) {
+    for (var key in this.bag) {
+      if (letter === key) {
+        if (this.bag[letter] > 0) {
+          this.bag[letter] -= 1;
+        }
+        else {
+          console.log("not enough tiles for this letter")
+        }
+      }
+    }
+  }
+};
+
+var newBag = new TileBag;
+newBag.drawTiles("J");
+console.log(newBag.bag);
+newBag.drawTiles("J");
+console.log(newBag.bag);
+
+
+function Dictionary() {
+  this.words = ["cat", "mouse", "human"];
+}
+
+Dictionary.prototype.search = function(guess) {
+  for(var i = 0; i < this.words.length; i++) {
+    if (guess === this.words[i]) {
+      return true;
+    }
+  }
+  return false;
+};
+
+myDic = new Dictionary;
+console.log(myDic.search("mouse"));
+console.log(myDic.search("baby"));
+
+
+var Board = function() {
+  this.board =
+  [
+    [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+    [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+    [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+    [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+    [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+    [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+    [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+    [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+    [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+    [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+    [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+    [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+    [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+    [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+    [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  ];
+};
+
+// position is x and then y
+Board.prototype.play = function(word, position, direction) {
+
+}
