@@ -51,7 +51,7 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
   return highestScore;
 };
 
-Scrabble.highestScoringWord = function() {
+Scrabble.highestScoringWord = function(arrayOfWords) {
   if ( !Array.isArray(arrayOfWords) ) {
     return "Send me an array and we can try this again...";
   }
@@ -126,9 +126,10 @@ console.log(myPlayer.play("zzzzzz") + " : " + Scrabble.score("zzzzzz"));
 console.log(myPlayer.play("unicorn") + " : " + Scrabble.score("unicorn"));
 
 
-console.log(myPlayer.totalScore());
 console.log(myPlayer.plays);
+console.log(myPlayer.totalScore());
 console.log(myPlayer.hasWon());
+console.log(myPlayer.highestScoringWord());
 console.log(myPlayer.highestWordScore());
 
 
