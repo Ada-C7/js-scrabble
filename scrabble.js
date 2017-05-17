@@ -1,5 +1,5 @@
 var Scrabble = function() {
-  this._scoreChart = {
+  this.scoreChart = {
     "a": 1,
     "b": 3,
     "c": 3,
@@ -34,7 +34,7 @@ Scrabble.prototype = {
     var letters = word.toLowerCase().split(''),
         wordScore = 0;
     letters.forEach(function(letter) {
-      wordScore += this._scoreChart[letter];
+      wordScore += this.scoreChart[letter];
     }, this);
     if (word.length == 7) {
       wordScore += 50;
@@ -50,21 +50,21 @@ Scrabble.prototype = {
 
     // remove all non-max words from the arrayOfWords
     var max = Math.max.apply(null, arrayOfScores),
+        winningWords = [],
         index = 0;
     arrayOfScores.forEach(function(score) {
-      if (score < max) {
-        arrayOfWords.splice(index, 1);
-      } else {
-        index++;
+      if (score == max) {
+        winningWords.push(arrayOfWords[index]);
       }
+      index++;
     });
 
-    // arrayOfWords now only contains one or more words with max score
-    var maxScoreWord = arrayOfWords[0];
-    if (arrayOfWords.length == 1) {
+    // winningWords now only contains one or more words with max score
+    var maxScoreWord = winningWords[0];
+    if (winningWords.length == 1) {
       return maxScoreWord;
     } else {
-      arrayOfWords.forEach(function(word) {
+      winningWords.forEach(function(word) {
         if (word.legnth == 7) {
           return word;
         } else if (maxScoreWord.legnth > word){
@@ -76,52 +76,53 @@ Scrabble.prototype = {
   }
 };
 
-var gameOne = new Scrabble();
-console.log(gameOne.score("testing"));
-console.log(gameOne.score("queting"));
-console.log(gameOne.score("iiiiiii"));
-console.log(gameOne.highestScoreFrom(["melons", "clammy", "quest"]));
-console.log(gameOne.highestScoreFrom(["jam", "uzi", "zimmq"]));
-console.log(gameOne.highestScoreFrom(["quested", "uzi", "iiiiiii"]));
-
 var Player = function(name) {
-  this._name = name;
-  this._plays = [];
-  this._game = new Scrabble();
+  this.name = name;
+  this.plays = [];
+  this.game = new Scrabble();
 };
 
 Player.prototype = {
   play: function(word) {
-    if (this.hasWon) {
+    if (this.hasWon()) {
       return false;
     } else {
-      this._plays.push(word);
+      this.plays.push(word);
     }
   },
   totalScore: function() {
     var total = 0;
-    this._plays.forEach(function(word) {
-      total += this._game.score(word);
+    this.plays.forEach(function(word) {
+      total += this.game.score(word);
     }, this);
     return total;
   },
   hasWon: function() {
-    if (this.totalScore > 100) {
+    if (this.totalScore() > 100) {
       return true;
     } else {
       return false;
     }
   },
   highestScoringWord: function() {
-    return this._game.highestScoreFrom(this._plays);
+    return this.game.highestScoreFrom(this.plays);
   },
   highestWordScore: function() {
-    return this._game.score(this.highestScoringWord);
+    return this.game.score(this.highestScoringWord());
   }
 };
 
-
-
+var playerOne = new Player("InfectedSnarling");
+playerOne.play("hi");
+playerOne.play("potato");
+playerOne.play("radish");
+playerOne.play("queen");
+playerOne.play("bye");
+console.log(playerOne.totalScore());
+console.log(playerOne.hasWon());
+console.log(playerOne.highestScoringWord());
+console.log(playerOne.highestWordScore());
+console.log(playerOne.plays);
 
 
 
