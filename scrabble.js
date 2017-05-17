@@ -116,15 +116,15 @@ Player.prototype.totalScore = function() {
 };
 
 Player.prototype.hasWon = function() {
-  if (this.totalScore() >= 100) {
-    return true;
-  }
-
-  return false;
+  return (this.totalScore() >= 100) ? true : false ;
 };
 
 Player.prototype.highestScoringWord = function() {
   return Scrabble.highestScoreFrom(this.plays);
+};
+
+Player.prototype.highestWordScore = function() {
+  return Scrabble.score(this.highestScoringWord());
 };
 
 var player = new Player("bob");
@@ -142,4 +142,5 @@ console.log(player.hasWon());
 console.log(player.plays);
 console.log(player.totalScore());
 console.log(player.highestScoringWord());
+console.log(player.highestWordScore());
 module.exports = Scrabble;
