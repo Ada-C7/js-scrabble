@@ -39,15 +39,19 @@ Scrabble.prototype = {
     var self = this;
 
     arrayOfWords.forEach(function(word) {
-      // wordInfo[word] = self.score(word);
       wordInfo.push([word, self.score(word)]);
-      // return console.log(wordInfo);
     });
 
     sortedWords = wordInfo.sort(function(scoreOne, scoreTwo) {
       return scoreOne[1] - scoreTwo[1];
     });
-    console.log(sortedWords);
+    // console.log(sortedWords);
+
+    var size = sortedWords.length;
+
+    if (sortedWords[size - 1] > sortedWords[size - 2]){
+      return sortedWords[size - 1][0];
+    }
   }
 };
 
