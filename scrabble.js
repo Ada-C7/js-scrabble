@@ -55,22 +55,24 @@ Scrabble.prototype = {
     var highest_scored_word = 0
     var highest_scored_word_length = highest_scored_word.length
     var self = this
-     arrayOfWords.forEach(function(word) {
-
-       // if (this.scoreWord(word) > highest_scored_word.this.scoreWord(word))
-       if (self.scoreWord(word) == self.scoreWord(highest_scored_word)) {
-         var current_word_length = word.length
-         if (highest_scored_word_length > current_word_length) {
-           highest_scored_word = word
-         }
-
-       }
-       else if (self.scoreWord(word) >= self.scoreWord(highest_scored_word)) {
-         highest_scored_word = word;
-       }
-     })
-     console.log(highest_scored_word)
-   }
+    arrayOfWords.forEach(function(word) {
+      if (self.scoreWord(word) == self.scoreWord(highest_scored_word)) {
+        var current_word_length = word.length
+        if (highest_scored_word_length == current_word_length) {
+          highest_scored_word = highest_scored_word
+        } else if (highest_scored_word_length > current_word_length) {
+          highest_scored_word = word
+        } else if (highest_scored_word_length == 7) {
+          highest_scored_word = highest_scored_word
+        }
+      }
+      else if (self.scoreWord(word) >= self.scoreWord(highest_scored_word)) {
+        highest_scored_word = word;
+      }
+    })
+    console.log(highest_scored_word)
+    return highest_scored_word
+  }
 
 
 
@@ -91,8 +93,8 @@ Scrabble.prototype = {
 
 
 var gameOne = new Scrabble
-// gameOne.scoreWord("yes")
-gameOne.highestScoreFrom(["yes", "no", "zo", "xaaa"])
+gameOne.scoreWord("yes")
+gameOne.highestScoreFrom(["yes", "no", "qqqqqqq", "zzzzzzz" ])
 // console.log(gameOne)
 
 module.exports = Scrabble;
