@@ -48,13 +48,13 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
         winner = word.length <= winner.length ? winner : word; }
   });
 
-  return "The winner was: " + winner + " for " + highestScore + " points";
+  return highestScore;
 };
 
 
-console.log(Scrabble.score("hotdog"));
-//
 var myWordsList = ["ostrich", "cat", "whale", "tiger", "flamingo", "zzzzzzzzzzzz"];
+
+console.log(Scrabble.score("hotdog"));
 console.log(Scrabble.highestScoreFrom(myWordsList));
 
 
