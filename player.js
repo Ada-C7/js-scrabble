@@ -48,7 +48,10 @@ Player.prototype = {
   },
 
   highestScoringWord: function() {
-
+    var self = this
+    var highest_score = self.game.highestScoreFrom(this.plays)
+    console.log("the highest scoring word is " + highest_score)
+    // return highest_score
   },
 
   highestScoringWordScore: function () {
@@ -60,7 +63,9 @@ Player.prototype = {
 var Scrabble = require('./scrabble') // do this here to pass in an instance of scrabble every time a player is created
 var gameOne = new Player("fido", new Scrabble())
 gameOne.play("yep");
+gameOne.play("jazzily");
 gameOne.totalScore();
+gameOne.highestScoringWord();
 gameOne.hasWon();
 console.log(gameOne)
 
