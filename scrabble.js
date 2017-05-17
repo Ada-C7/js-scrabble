@@ -1,7 +1,6 @@
 var Scrabble = function() {};
 
-// Scrabble.score = function(word) {
-score = function(word) {
+Scrabble.score = function(word) {
 
   // TO DO:
   // - error for invalid characters
@@ -29,10 +28,9 @@ score = function(word) {
   return wordScore;
 };
 
-// Scrabble.highestScoreFrom = function(arrayOfWords) {
-highestScoreFrom = function(arrayOfWords) {
+Scrabble.highestScoreFrom = function(arrayOfWords) {
 
-  if ( typeof(arrayOfWords) !== "array" ) {
+  if ( !Array.isArray(arrayOfWords) ) {
     return "Send me an array and we can try this again...";
   }
 
@@ -40,10 +38,10 @@ highestScoreFrom = function(arrayOfWords) {
   var winner = undefined;
 
   arrayOfWords.forEach(function(word) {
-    if ( score(word) > highestScore ){
-      highestScore = score(word);
+    if ( Scrabble.score(word) > highestScore ){
+      highestScore = Scrabble.score(word);
       winner = word; }
-    else if ( score(word) == hightestScore)
+    else if ( Scrabble.score(word) == highestScore)
       if ( winner.length == 7 || word.length == 7) {
           winner = winner.length <= word.length ? word : winner; }
       else {
@@ -53,43 +51,58 @@ highestScoreFrom = function(arrayOfWords) {
   return "The winner was: " + winner + " for " + highestScore + " points";
 };
 
-//   winner.length <= word.length ? tie_winner = word : tie_winner = winner
-// else
-//   word.length <= winner.length ? tie_winner = winner : tie_winner = word
-// end
-// };
 
-myGame = new Scrabble();
-
-// console.log(myGame.score("zzzzzz"));
-console.log(score("hotdog"));
-
-
+console.log(Scrabble.score("hotdog"));
+//
 var myWordsList = ["ostrich", "cat", "whale", "tiger", "flamingo", "zzzzzzzzzzzz"];
-// console.log(myGame.highestScoreFrom(myWordsList));
-console.log(typeof(myWordsList));
-console.log(highestScoreFrom(myWordsList));
+console.log(Scrabble.highestScoreFrom(myWordsList));
 
 
 // ===============================================================
-
 // WAVE 2
 
-// Create a new Player object. The object should have the following functions:
-//
-// Constructor: Called when you use new Player(name),
-// sets up an instance with the instance variable name assigned
-// name: property which returns the value of the player's name
-// plays: property which returns an Array of the words played by the player
-// play(word): Function which adds the input word to the plays Array
-// Returns false if player has already won
-// totalScore(): Function which sums up and returns the score of the players words
-// hasWon(): Function which returns true if the player has over 100 points, otherwise returns false
-// highestScoringWord(): Function which returns the highest scoring word the user has played
-// highestWordScore(): Function which returns the highestScoringWord score
+var Player = function(name){
+    this.name = name;
+    this.words = [];
+    this.score = 0;
+};
 
-// var Player = function(name){
-//     this.name = name;
-// };
+Player.prototype.plays = function() {
+  // plays: property which returns an Array of the words played by the player
+};
+
+Player.prototype.play = function(word) {
+  if ( this.score < 100 ) {
+    this.score += Scrabble.score(word); }
+  else if ( this.score > 100 ) {
+    return false; }
+  return this.score
+  // play(word): Function which adds the input word to the plays Array
+  // Returns false if player has already won
+};
+
+Player.prototype.totalScore = function() {
+  // totalScore(): Function which sums up and returns the score of the players words
+};
+
+Player.prototype.hasWon = function() {
+  // hasWon(): Function which returns true if the player has over 100 points, otherwise returns false
+};
+
+Player.prototype.highestScoringWord = function() {
+  // highestScoringWord(): Function which returns the highest scoring word the user has played
+};
+
+Player.prototype.highestWordScore = function() {
+  // highestWordScore(): Function which returns the highestScoringWord score
+};
+
+
+var myPlayer = new Player;
+console.log(myPlayer.score);
+console.log(myPlayer.play("hippie"));
+console.log(myPlayer.play("hotdog"));
+console.log(myPlayer.play("cat"));
+
 
 module.exports = Scrabble;
