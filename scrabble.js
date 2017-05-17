@@ -76,16 +76,16 @@ Scrabble.prototype = {
       throw "Sorry, invalid input! Please enter an array of words.";
     }
   },
-  tieBreaker: function(word, winner) {
+  tieBreaker: function(contender, champ) {
     // seven letter words get 50 points, if tied for top score, winner is 7 letter word (over shorter)
-    if (winner.length == 7 || word.length == 7) {
-      tieWinner = winner.length <= word.length ? word : winner;
+    if (champ.length == 7 || contender.length == 7) {
+      tieWinner = champ.length <= contender.length ? contender : champ;
 
-      // if tied for top score, winner is shortest length
+      // if tied for top score, champ is shortest length
     } else {
-      tieWinner = word.length <= winner.length ? winner : word;
+      tieWinner = champ.length <= contender.length ? champ : contender;
     }
-    return winner;
+    return tieWinner;
   }
   // if multiple ties of same length, winner is first word
 };
@@ -97,21 +97,27 @@ var Player = function(name) {
 };
 
 Player.prototype = {
-  play = function(word) {
-    // Function which adds the input word to the plays Array
+  play: function(word) {
     // Returns false if player has already won
+    if (this.hasWon === true) {
+      return false;
+
+      // Function which adds the input word to the plays Array
+    } else {
+      this.plays.push(word);
+    }
   },
-  totalScore = function() {
+  totalScore: function() {
     // Function which sums up and returns the score of the players words
   },
-  hasScore = function() {
+  hasWon: function() {
     // Function which returns true if the player has over 100 points, otherwise returns false
 
   },
-  highestScoringWord = function() {
+  highestScoringWord: function() {
     // Function which returns the highest scoring word the user has played
   },
-  highestWordScore = function() {
+  highestWordScore: function() {
     // Function which returns the highestScoringWord score
   }
 };
@@ -142,8 +148,8 @@ console.log(myScrabble.score("aaaAaaa")); // 57
 
 console.log(myScrabble.highestScoreFrom(["ZZzzZZ", "niiice", "cute"])); // "ZZzzZZ"
 console.log(myScrabble.highestScoreFrom(["gg", "aaaa", "b"])); // "gg"
-console.log(myScrabble.highestScoreFrom(["b", "c", "m", "da"])); // "b"
-console.log(myScrabble.highestScoreFrom(["daaaaaA", "zzzzzJ", "m", "da"])); // "daaaaaA"
+console.log(myScrabble.highestScoreFrom(["c", "m", "da", "b"])); // "c"
+console.log(myScrabble.highestScoreFrom(["zzzzzJ", "m", "da", "daaaaaA"])); // "daaaaaA"
 // console.log(myScrabble.highestScoreFrom(["niiice", ":)"])); // throw exception
 
 module.exports = Scrabble;
