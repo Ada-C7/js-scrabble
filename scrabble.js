@@ -47,7 +47,6 @@ Scrabble.score = function(word) {
     for (var i = 0; i < word.length; i++) {
       score += _tiles[word[i]];
     }
-    console.log(score);
     return score;
 };
 
@@ -77,9 +76,9 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
 
   }
 
-  console.log(scoringOfWords);
-  console.log(maxValue);
-  console.log(winningWords);
+  // console.log(scoringOfWords);
+  // console.log(maxValue);
+  // console.log(winningWords);
 
   // if the top score is tied between multiple words, pick the one with the fewest letters
   // If the top score is tied between multiple words and one used all seven letters, choose the one with seven letters over the one with fewer tiles
@@ -87,7 +86,7 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
 };
 
 //
-var scrabble = new Scrabble();
+// var scrabble = new Scrabble();
 // console.log(scrabble.score("eeeee"));
 //
 // var words = ["aaaa", "bbbbb", "eeeeeee"];
@@ -100,9 +99,9 @@ var Player = function(name) {
 };
 
 Player.prototype.play = function(word) {
-  // if (this.hasWon()) {
-  //   return false;
-  // }
+  if (this.hasWon()) {
+    return false;
+  }
 
   this.plays.push(word);
 };
@@ -111,10 +110,17 @@ Player.prototype.totalScore = function() {
   var total = 0;
 
   for (var i = 0; i < this.plays.length; i++) {
-    console.log(this.plays[i]);
     total += Scrabble.score(this.plays[i]);
   }
   return total;
+};
+
+Player.prototype.hasWon = function() {
+  if (this.totalScore() >= 100) {
+    return true;
+  }
+
+  return false;
 };
 
 var player = new Player("bob");
@@ -122,6 +128,13 @@ player.play("a");
 console.log(player.plays);
 console.log(player.totalScore());
 player.play("w");
+console.log(player.plays);
+console.log(player.totalScore());
+player.play("zzzzzzz");
+console.log(player.plays);
+console.log(player.totalScore());
+player.play("a");
+console.log(player.hasWon());
 console.log(player.plays);
 console.log(player.totalScore());
 
