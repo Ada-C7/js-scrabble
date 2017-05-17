@@ -31,6 +31,7 @@ var pointValue = {
 };
 
 //my initializer
+//the constructor initializes and instance of of the "class", constructor is called with new ScrabbleGame, but without 'instance vars'
 var ScrabbleGame = function() {
 };
 // setting up the structure of scoring on any word
