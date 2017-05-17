@@ -31,6 +31,10 @@ Scrabble.prototype = {
         return console.log("Invalid word.");
       }
     }
+
+    if (word.length === 7) {
+      total += 50;
+    }
     return total;
   },
 
@@ -45,12 +49,30 @@ Scrabble.prototype = {
     sortedWords = wordInfo.sort(function(scoreOne, scoreTwo) {
       return scoreOne[1] - scoreTwo[1];
     });
-    // console.log(sortedWords);
+
 
     var size = sortedWords.length;
+    var lastPair = sortedWords[size - 1];
 
-    if (sortedWords[size - 1] > sortedWords[size - 2]){
-      return sortedWords[size - 1][0];
+    if (lastPair[1] > sortedWords[size - 2]){
+      return lastPair[0];
+    } else {
+
+      var highestWords = [];
+
+      sortedWords.forEach(function(element) {
+        if (lastPair[1] === element[1]) {
+          highestWords.push(element[0]);
+        }
+      });
+
+      highestWords.forEach(function(element) {
+        // var smallestWordPosition = null;
+
+        if (element.length === 7) {
+          return element;
+        }
+      });
     }
   }
 };
@@ -64,6 +86,7 @@ module.exports = Scrabble;
 var newWord = new Scrabble();
 // console.log(newWord.score('zebra'))
 
-array = ["test", "zebra", "a", "big"];
+// array = ["test", "zebra", "a", "big"];
+array = ["a", "b", "c"];
 
 newWord.highestScoreFrom(array);
