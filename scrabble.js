@@ -1,41 +1,5 @@
-var Scrabble = function() {};
 
-// YOUR CODE HERE
-Scrabble.prototype.helloWorld = function() {
-  return 'hello world!';
-};
-
-module.exports = Scrabble;
-
-
-
-var score = function(word){
-  total_score = 0;
-  for(var i = 0; i < word.length; i++){
-    total_score += scoringChart[word[i]];
-  }
-  if (word.length == 7){
-    total_score +=50;
-    }
-  return total_score;
-};
-
-
-var highestScoreFrom = function(arrayOfWords){
-  return arrayOfWords.reduce(function(winner, element){
-      if (score(element)> score(winner)){
-        return element;
-      }else if ((score(element) == score(winner)) &&  (element.length == 7) && (winner.length != 7)){
-        return element;
-      }else if ((score(element) == score(winner)) &&  (element.length < winner.length) && (winner.length != 7)){
-      return element;
-      }else{
-        return winner;
-      }
-    }, "");
-  };
-
-var scoringChart = {
+const SCORECHART = {
   "a" : 1,
   "b" : 3,
   "c" : 3,
@@ -64,17 +28,60 @@ var scoringChart = {
   "z" : 10,
 };
 
-console.log(score('pizza'));
-console.log(score('coffee'));
-console.log(score('pikkkka'));
 
-console.log(highestScoreFrom(['pizza', 'coffee', 'fizz','pikkkka', 'pizze']));
-console.log(score('qqqqqq'));
-console.log(score('aaaaaah'));
+var Scrabble = function() {};
+
+// Scrabble.prototype.helloWorld = function() {
+//   return 'hello world!';
+// };
+
+Scrabble.prototype.score = function(word){
+  total_score = 0;
+  for(var i = 0; i < word.length; i++){
+    total_score += SCORECHART[word[i]];
+  }
+  if (word.length == 7){
+    total_score +=50;
+    }
+  return total_score;
+};
 
 
-console.log(highestScoreFrom(['pizza', 'coffee', 'fizz','aaaaaah', 'qqqqqq',  'pizze',]));
+Scrabble.prototype.highestScoreFrom = function(arrayOfWords){
+  var self = this;
+  return arrayOfWords.reduce(function(winner, element){
+      if (self.score(element)> self.score(winner)){
+        return element;
+      }else if ((self.score(element) == self.score(winner)) &&  (element.length == 7) && (winner.length != 7)){
+        return element;
+      }else if ((self.score(element) == self.score(winner)) &&  (element.length < winner.length) && (winner.length != 7)){
+      return element;
+      }else{
+        return winner;
+      }
+    }, "");
+  };
 
 
 
-console.log(highestScoreFrom(['pizza', 'coffee', 'fizz', 'qqqqqq',  'aaaaaah', 'pizze',]));
+
+module.exports = Scrabble;
+
+
+
+var game = new Scrabble();
+
+console.log(game.score('pizza'));
+console.log(game.score('pizza'));
+console.log(game.score('coffee'));
+console.log(game.score('pikkkka'));
+
+console.log(game.highestScoreFrom(['pizza', 'coffee', 'fizz','pikkkka', 'pizze']));
+console.log(game.score('qqqqqq'));
+console.log(game.score('aaaaaah'));
+
+
+console.log(game.highestScoreFrom(['pizza', 'coffee', 'fizz','aaaaaah', 'qqqqqq',  'pizze',]));
+
+
+console.log(game.highestScoreFrom(['pizza', 'coffee', 'uuuuuuh', 'fizz', 'qqqqqq',  'aaaaaah', 'zzzzzz', 'uuuuuuh' ,'pizze',]));
