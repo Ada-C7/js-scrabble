@@ -72,19 +72,3 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
 };
 
 module.exports = Scrabble;
-
-// Tester code
-scrabs = new Scrabble();
-
-console.log("SPECIFIC SCORING CASES");
-// Tests that first word wins in tie when both have 7 characters
-console.log("Should return 'aaaaaaa': " + scrabs.highestScoreFrom(['aaaaaaa', 'eeeeeee']));
-// Tests that shorter word wins in tie
-console.log("Should return 'w': " + scrabs.highestScoreFrom(['aaaa', 'w']));
-// Tests that higher score with same length wins
-console.log("Should return 'q': " + scrabs.highestScoreFrom(['q', 'x']));
-
-console.log("\nNUMBER SCORE CHECK");
-console.log('The score of ham is ' + scrabs.score('ham'));
-console.log('The score of sandwich is ' + scrabs.score('sandwich'));
-console.log('The higher scoring word is ' + scrabs.highestScoreFrom(['ham', 'sandwich']));
