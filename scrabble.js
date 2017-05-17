@@ -21,56 +21,58 @@ var scoreChart = {
 
 // SCRABBLE
 // constroctor -- instance variables
-var Scrabble = function(input) {
-  this.word = input.toUpperase();
-  /* how to put in the score chart?
+var Scrabble = function() {
+  /* where to put in the score chart?
   Before I thought I put it in here as an object
-  Now I have it as a hash*/
+  Now I have it as a hash value outside*/
 };
 
-// iterators -- instance methods
-Scrabble.prototype.score = function() {
+// prototype -- instance methods
+Scrabble.prototype.score = function(input) {
+  word = input.toUpperCase();
   var sum = 0;
-  for (var i = 0; i < this.word.length; i++) {
-    sum += scoreChart[this.word[i]];
+  for (var i = 0; i < word.length; i++) {
+    sum += scoreChart[word.charAt(i)];
   }
   return sum;
 };
 
 Scrabble.prototype.highestScoreFrom = function() {
-
+  
 };
 
 // initializer
-module.exports = Scrabble;
+var myAttempt = new Scrabble();
+console.log(myAttempt.score('kaitlin'));
+//module.exports = Scrabble;
 
 
-// Player
-// constroctor -- instance variables
-var Player = function(input) {
-  this.name = input;
-};
-
-// iterators -- instance methods
-Player.prototype.play = function() {
-
-};
-
-Player.prototype.totalScore = function() {
-
-};
-
-Player.prototype.hasWon = function() {
-
-};
-
-Player.prototype.highestScoringWord = function() {
-
-};
-
-Player.prototype.highestWordScore = function() {
-
-};
-
-// initializer
-module.exports = Player;
+// // Player
+// // constroctor -- instance variables
+// var Player = function(input) {
+//   this.name = input;
+// };
+//
+// // iterators -- instance methods
+// Player.prototype.play = function() {
+//
+// };
+//
+// Player.prototype.totalScore = function() {
+//
+// };
+//
+// Player.prototype.hasWon = function() {
+//
+// };
+//
+// Player.prototype.highestScoringWord = function() {
+//
+// };
+//
+// Player.prototype.highestWordScore = function() {
+//
+// };
+//
+// // initializer
+// module.exports = Player;
