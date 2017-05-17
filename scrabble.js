@@ -26,9 +26,7 @@ Scrabble.score = function(word) {
 
 Scrabble.highestScoreFrom = function(arrayOfWords) {
 
-  if ( !Array.isArray(arrayOfWords) ) {
-    return "Send me an array and we can try this again...";
-  }
+  if ( !Array.isArray(arrayOfWords) ) return "Send me an array and we can try this again...";
 
   var highestScore = 0;
   var winner = undefined;
@@ -47,7 +45,7 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
   return winner;
 };
 
-var Player = function(name){
+var Player = function(name) {
     this.name = name;
     this.plays = [];
 };
@@ -95,6 +93,6 @@ console.log(myPlayer.totalScore());
 console.log(myPlayer.hasWon());
 console.log(myPlayer.highestScoringWord());
 console.log(myPlayer.highestWordScore());
-console.log(Scrabble.score("zzzzzzzzzzzz"));
+console.log(Scrabble.highestScoreFrom("zzzzzzzzzzzz"));
 
 module.exports = Scrabble;
