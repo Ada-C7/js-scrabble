@@ -36,7 +36,15 @@ Player.prototype = {
   },
 
   hasWon: function() {
-
+    var self = this
+    var score = self.totalScore()
+    if (score >= 100) {
+      console.log("You won with a score of " + score)
+      return score
+    } else {
+      console.log("You haven't won yet")
+      return score
+    }
   },
 
   highestScoringWord: function() {
@@ -49,10 +57,11 @@ Player.prototype = {
 
 };
 
-var Scrabble = require('./scrabble') // do this here to pass in an instance of scrabble every time a player is created 
+var Scrabble = require('./scrabble') // do this here to pass in an instance of scrabble every time a player is created
 var gameOne = new Player("fido", new Scrabble())
 gameOne.play("yep");
 gameOne.totalScore();
+gameOne.hasWon();
 console.log(gameOne)
 
 module.exports = Player;
