@@ -91,7 +91,7 @@ Player.prototype.play = function(word) {
     return false;
   }
   this.plays.push(word);
-  return this.name + " played " + word + ". Words played: " + this.plays;
+  return this.name + " played " + word + ".";
 };
 
 Player.prototype.totalScore = function() {
@@ -119,17 +119,17 @@ Player.prototype.highestWordScore = function() {
 
 
 var myPlayer = new Player("Mario");
-console.log(myPlayer.play("hippie"));
-console.log(myPlayer.play("hotdog"));
-console.log(myPlayer.play("cat"));
-console.log(myPlayer.play("zzzzzz"));
-console.log(myPlayer.play("zzz"));
+console.log(myPlayer.play("hippie") + " : " + Scrabble.score("hippie"));
+console.log(myPlayer.play("hotdog") + " : " + Scrabble.score("hotdog"));
+console.log(myPlayer.play("cat") + " : " + Scrabble.score("cat"));
+console.log(myPlayer.play("zzzzzz") + " : " + Scrabble.score("zzzzzz"));
+console.log(myPlayer.play("unicorn") + " : " + Scrabble.score("unicorn"));
 
 
 console.log(myPlayer.totalScore());
 console.log(myPlayer.plays);
 console.log(myPlayer.hasWon());
-// console.log(myPlayer.highestWordScore());
+console.log(myPlayer.highestWordScore());
 
 
 module.exports = Scrabble;
