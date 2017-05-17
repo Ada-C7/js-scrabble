@@ -45,18 +45,18 @@ console.log(player1.name);
 
 // can make plays with different words
 player1.play("hellooo");
-player1.play("cat");
+player1.play("ooolleh");
 player1.play("dog");
 player1.play("xo");
 player1.play("zoo");
 
-// words that will fail - should all out put false
-console.log(player1.play("cat1"));
-console.log(player1.play("123"));
-console.log(player1.play("cat dog"));
-console.log(player1.play(123));
-console.log(player1.play(["cat", "dog"]));
-console.log(player1.play("cat-dog"));
+// // words that will fail - should all out put false
+// console.log(player1.play("cat1"));
+// console.log(player1.play("123"));
+// console.log(player1.play("cat dog"));
+// console.log(player1.play(123));
+// console.log(player1.play(["cat", "dog"]));
+// console.log(player1.play("cat-dog"));
 
 // output list of all words played
 console.log(player1.plays);
