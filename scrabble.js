@@ -31,7 +31,8 @@ Scrabble.prototype.highestScoreFrom = function(input) {
   var arrayOfWords = input;
   var arrayOfScores = [0];
   for (var wordInArray of arrayOfWords) {
-    arrayOfScores.push(wordInArray.score);
+    var wordScore = this.score(wordInArray);
+    arrayOfScores.push(wordScore);
   }
   return arrayOfScores;
 };
