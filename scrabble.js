@@ -57,40 +57,47 @@ Scrabble.prototype.highestScore = function(arrayOfWords) {
   // loop that will go through arrayOfWords
   for (var i = 0; i < arrayOfWords.length; i++) {
     var word = arrayOfWords[i];
-    var score = this.score(word);
-
+    var wordScore = this.score(word);
     // 50 pt bonus for using all seven letters
     if (word.length == 7) {
       score += 50;
     }
 
-    //conditionals that test
-    // top score tied between two words? choose shortest word
+    //conditionals to set highScore and bestWord
+    if (wordScore > winningScore) {
+      winningScore = wordScore;
+      winningWord = word;
+    } else if (wordScore === winningScore) {
+      // top score tied between two words? choose shortest word
+      if (wordScore.length < winningScore.length) {
+        winningScore = wordScore;
+        winningWord = word;
+      }
+    }
     // multiple words what are same score and same length? pick the first one
+    // ^ this is done automatically 
 
   //return winning word
-  return score;
   }
+  return winningWord;
 };
 // TESTS
 var testGame  = new Scrabble();
 
-// var wordsArray = ["Test", "buTTerfly", "caR"];
-var wordsArray = ["aaaaaaa"];
+// var wordsArray = ["Test", "buTTer", "caR"];
+var wordsArray = ["aaa", "eee"];
+
+// var wordsArray = ["aaaaaaa"];
 // should return buTTerfly
-console.log(testGame.score("adbfkjq"));
+// console.log(testGame.score("adbfkjq"));
 // test should = 4
 console.log(testGame.highestScore(wordsArray));
+// butter should win... should return buTTer
 
-module.exports = Scrabble;
 
 // PLAYER
 
 
 
 
-
-
-// 1. start with ruby code and go from there
-// OR 2. start from scratch to see how far you have come and to see if you go about solving in a different way
-// will have to look up new syntax of course sense this is a new language
+module.exports = Scrabble;
