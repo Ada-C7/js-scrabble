@@ -47,22 +47,25 @@ Scrabble.prototype.score = function(word) {
 
 Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
   var highScore = 0;
-  var wordScores = [];
+  var winningWord = "";
   //return the word in the array with the highest score
   arrayOfWords.forEach(function (word) {
     var score = Scrabble.prototype.score(word);
-    if (score > highScore ) {
+    if (score > highScore) {
       highScore = score;
-      wordScores.push(word);
-    }
-  });
-  return wordScores;
+      winningWord = word;
+    } else if ((score == highScore) && (word.length < winningWord.length)) {
+        // if top score tied between multiple words, pick the one with the fewest letters
+        winningWord = word;
+      }
+    });
+  return winningWord;
 };
 
-
+//apple: 9, banana: 8, pof: 8
 var game = new Scrabble();
-play = game.score("apple");
-topScore = game.highestScoreFrom(["aei", "zq"]);
+play = game.score("pof");
+topScore = game.highestScoreFrom(["banana", "pof"]);
 console.log(play);
 console.log(topScore);
 module.exports = Scrabble;
