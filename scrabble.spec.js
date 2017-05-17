@@ -1,4 +1,5 @@
 var Scrabble = require('./scrabble');
+var Player = require('./player');
 
 describe('Scrabble Test Suite', function () {
   it('scores a word correctly', function () {
@@ -35,5 +36,20 @@ describe('Scrabble Test Suite', function () {
     var scrabble = new Scrabble();
 
     expect(scrabble.highestScoreFrom(['aaaaaaa', 'eeeeeee']));
+  });
+
+  it('sets up a player with a name and a game', function () {
+    var scrabble = new Scrabble();
+    var player1 = new Player('Alix', scrabble);
+
+    expect(player1.name).toEqual('Alix');
+  });
+
+  it('allows a player to play a word', function () {
+    var scrabble = new Scrabble();
+    var player1 = new Player('Alix', scrabble);
+
+    player1.play('bacon');
+    expect(player1.plays).toEqual(['bacon']);
   });
 });
