@@ -6,83 +6,79 @@ var Scrabble = {
     'T': 1, 'U': 1, 'V': 4, 'W': 4, 'X': 8, 'Y': 4, 'Z': 10
   },
 
-  score:
-    function(word) {
-      var total = 0;
-      var letters = word.toUpperCase().split('');
+  score: function(word) {
+            var total = 0;
+            var letters = word.toUpperCase().split('');
 
-      letters.forEach(function (letter) {
-        var score = this.letterScores[letter];
-        total += score;
-      });
+            letters.forEach(function (letter) {
+              var score = this.letterScores[letter];
+              total += score;
+            });
 
-      return word.length === 7 ?  total += 50.0 : total;
-    },
+            return word.length === 7 ?  total += 50.0 : total;
+          },
 
-  highestScoreFrom:
-    function (words) {
-      var highestScoringWords = this._findHighestScoring(words);
-      var highestWord = undefined;
 
-      if (highestScoringWords.length == 1) {
-        highestWord = highestScoringWords[0];
+  highestScoreFrom: function (words) {
+                      var highestScoringWords = this._findHighestScoring(words);
+                      var highestWord = undefined;
 
-      } else {
-        highestWord = this._breakTie(highestScoringWords);
-      }
+                      if (highestScoringWords.length == 1) {
+                        highestWord = highestScoringWords[0];
 
-      return highestWord
-    },
+                      } else {
+                        highestWord = this._breakTie(highestScoringWords);
+                      }
 
-  _findHighestScoring:
-    function(words) {
-      var wordsWithScores = {};
-      var highestScore = 0;
+                      return highestWord
+                    },
 
-      // add word with its score into wordsWithScores obj - will also find the highest score
-      words.forEach(function (word) {
-        var score = Scrabble.score(word);
-        wordsWithScores[word] = score;
+  _findHighestScoring: function(words) {
+                          var wordsWithScores = {};
+                          var highestScore = 0;
 
-        // will determine max score
-        if ( score > highestScore ){
-          highestScore = score;
-        }
-      });
+                          // add word with its score into wordsWithScores obj - will also find the highest score
+                          words.forEach(function (word) {
+                            var score = Scrabble.score(word);
+                            wordsWithScores[word] = score;
 
-      console.log(wordsWithScores);
-        //find any tie words - or singular words with the highest score
-      var highestScoring = Object.keys(wordsWithScores).filter( function(word) {
-        if ( wordsWithScores[word] == highestScore ) {
-          return word;
-        }
-      });
+                            // will determine max score
+                            if ( score > highestScore ){
+                              highestScore = score;
+                            }
+                            });
 
-      // returns words with the highest score (ie tie - this will have multiple words - just one highest - only one word)
-      return highestScoring;
-    },
+                            // console.log(wordsWithScores);
+                              //find any tie words - or singular words with the highest score
+                            var highestScoring = Object.keys(wordsWithScores).filter( function(word) {
+                              if ( wordsWithScores[word] == highestScore ) {
+                                return word;
+                              }
+                            });
 
-  _breakTie:
-    function(words){
-      // console.log(words);
+                            // returns words with the highest score (ie tie - this will have multiple words - just one highest - only one word)
+                            return highestScoring;
+                       },
 
-      var winner = undefined;
-      var length = 8;
+  _breakTie: function(words){
+                // console.log(words);
+                var winner = undefined;
+                var length = 8;
 
-      words.forEach(function (word){
-        if ( word.length < length ){
-          winner = word;
-          length = word.length;
-        }
-      });
+                words.forEach(function (word){
+                  if ( word.length < length ){
+                    winner = word;
+                    length = word.length;
+                  }
+                });
 
-      return winner;
-   }
+                return winner;
+             }
 }
 
 module.exports = Scrabble;
-words = ["hello", "cateee", "hi", "dog", "DAAAAA"];
+// words = ["hello", "cateee", "hi", "dog", "DAAAAA"];
 // words = ["zzzzzz", "hellooo"]
 // words = ["cat", "cat"]
-console.log(Scrabble.score("hello"));
-console.log(Scrabble.highestScoreFrom(words));
+// console.log(Scrabble.score("hello"));
+// console.log(Scrabble.highestScoreFrom(words));
