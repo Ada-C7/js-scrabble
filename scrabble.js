@@ -53,20 +53,47 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
   //return the word in the array with the highest score
   arrayOfWords.forEach(function (word) {
     var score = Scrabble.prototype.score(word);
+
     if (score > highScore) {
       highScore = score;
       winningWord = word;
-    } else if ((score == highScore) && (word.length < winningWord.length)) {
-        // if top score tied between multiple words, pick the one with the fewest letters
+      console.log("Testing " + winningWord + highScore);
+      // if top score tied between multiple words, pick the one with the fewest letters
+    } else if ((score > highScore) && (winningWord.length < word.length)) {
         winningWord = word;
-      }
+        console.log("Testing 2" + winningWord + highScore);
+        // If the top score is tied between multiple words and one used all seven letters, choose the one with seven letters over the one with fewer tiles
+    } else if ((score > highScore) && (word.length >= 7 )) {
+      winningWord = word;
+      console.log("Testing 3" + winningWord + highScore);
+    }
+        // If the there are multiple words that are the same score and same length, pick the first one in supplied list
+
+
+        // if (score > highScore) {
+        //   highScore = score;
+        //   winningWord = word;
+        //     console.log("Testing " + winningWord + highScore);
+        //   // if top score tied between multiple words, pick the one with the fewest letters
+        // } else if ((score > highScore) && (word.length < winningWord.length)) {
+        //     winningWord = word;
+        //     highScore = score;
+        //     console.log("Testing 2" + winningWord);
+        //     // If the top score is tied between multiple words and one used all seven letters, choose the one with seven letters over the one with fewer tiles
+        // // } else if ((score > highScore) && (word.length >= 7 ) && (winningWord.length < word.length)) {
+        // //   winningWord = word;
+        // //   highScore = score;
+        // }
+        //     // If the there are multiple words that are the same score and same length, pick the first one in supplied list
+
     });
   return winningWord;
 };
 
-//apple: 9, banana: 8, pof: 8
+//apple: 9, banana: 8, pof: 8, bananas: 59, zzzzzj: 58, gaaaaaa: 58
 var game = new Scrabble();
-play = game.score("bof");
+play = game.score("gaaaaaa");
+// topScore = game.highestScoreFrom(["gaaaaaa", "zzzzzj"]);
 topScore = game.highestScoreFrom(["banana", "pof"]);
 console.log(play);
 console.log(topScore);
