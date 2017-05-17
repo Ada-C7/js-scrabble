@@ -133,21 +133,46 @@ Player.prototype.play = function(word) {
   }
 };
 
+Player.prototype.highestScoringWord = function() {
+  var scrabble = new Scrabble();
+  var playWords = [];
+  for (var wordObj in this.plays) {
+    playWords.push(this.plays[wordObj].word);
+  }
+  var winningWord = scrabble.highestScoreFrom(playWords);
+  return winningWord;
+};
+
+Player.prototype.highestWordScore = function() {
+  var highWord = new Word(this.highestScoringWord());
+  var highScore = highWord.totalScore;
+  return highScore;
+};
+
+
+// highestScoringWord(): Function which returns the highest scoring word the user has played
+// highestWordScore(): Function which returns the highestScoringWord score
+
 var aurora = new Player("Aurora");
-console.log(aurora.name);
+// console.log(aurora.name);
 aurora.play("cat");
-console.log(aurora.plays);
-console.log("won? " + aurora.hasWon());
-console.log("score: " + aurora.totalScore());
+// console.log(aurora.plays);
+// console.log("won? " + aurora.hasWon());
+// console.log("score: " + aurora.totalScore());
 aurora.play("squiffy");
-console.log(aurora.plays);
-console.log("won? " + aurora.hasWon());
-console.log("score: " + aurora.totalScore());
+// console.log(aurora.plays);
+// console.log("won? " + aurora.hasWon());
+// console.log("score: " + aurora.totalScore());
 aurora.play("jiffy");
-console.log(aurora.plays);
+// console.log(aurora.plays);
 console.log("score: " + aurora.totalScore());
 
+
 console.log("won? " + aurora.hasWon());
+console.log(aurora.highestScoringWord());
+console.log(aurora.highestWordScore());
+
+// console.log(aurora.highestScoringWord());
 
 
 module.exports = Scrabble;
