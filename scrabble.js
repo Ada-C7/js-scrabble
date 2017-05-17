@@ -32,7 +32,7 @@ var Scrabble = function() {
 Scrabble.prototype = {
   score: function(word) {
     var letters = word.toLowerCase().split(''),
-        wordScore = 0;
+    wordScore = 0;
     letters.forEach(function(letter) {
       wordScore += this.scoreChart[letter];
     }, this);
@@ -50,8 +50,8 @@ Scrabble.prototype = {
 
     // remove all non-max words from the arrayOfWords
     var max = Math.max.apply(null, arrayOfScores),
-        winningWords = [],
-        index = 0;
+    winningWords = [],
+    index = 0;
     arrayOfScores.forEach(function(score) {
       if (score == max) {
         winningWords.push(arrayOfWords[index]);
@@ -123,20 +123,5 @@ console.log(playerOne.hasWon());
 console.log(playerOne.highestScoringWord());
 console.log(playerOne.highestWordScore());
 console.log(playerOne.plays);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = Scrabble;
