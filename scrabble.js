@@ -74,14 +74,20 @@ var Scrabble = {
     var winningWord = null
     console.log("after sort " , highestScoreArray);
 
-    highestScoreArray.forEach(function(word){
-      console.log("highest each : ", word);
-      if(word.length == 7){
-        winningWord = word;
-        return winningWord;
-      }
-    })
-
+    // highestScoreArray.forEach(function(word){
+    //   console.log("highest each : ", word);
+    //   if(word.length == 7){
+    //     winningWord = word;
+    //     return winningWord;
+    //   }
+    // })
+    for (var n = 0, len = highestScoreArray.length; n < len; n++) {
+        console.log("highest each : ", highestScoreArray[n]);
+        if(highestScoreArray[n].length == 7){
+          winningWord = highestScoreArray[n];
+          return winningWord;
+        }
+    }
 
     if (winningWord == null){
       winningWord = highestScoreArray[0];
