@@ -21,8 +21,7 @@ Scrabble.score = function(word) {
       };
 
   for ( i = 0; i < word.length; i++ ) {
-    letter = word.toUpperCase()[i];
-    wordScore += letterValues[letter];
+    wordScore += letterValues[ word.toUpperCase()[i] ];
   }
 
   return wordScore;
@@ -87,16 +86,14 @@ Player.prototype.highestWordScore = function() {
   return Scrabble.score( this.highestScoringWord() );
 };
 
-
 var myPlayer = new Player("Mario");
 console.log(myPlayer.play("hippie") + " : " + Scrabble.score("hippie"));
 console.log(myPlayer.play("hotdog") + " : " + Scrabble.score("hotdog"));
 console.log(myPlayer.play("cat") + " : " + Scrabble.score("cat"));
 console.log(myPlayer.play("zzzzzz") + " : " + Scrabble.score("zzzzzz"));
 console.log(myPlayer.play("unicorn") + " : " + Scrabble.score("unicorn"));
-
-
 console.log(myPlayer.plays);
+
 console.log(myPlayer.totalScore());
 console.log(myPlayer.hasWon());
 console.log(myPlayer.highestScoringWord());
