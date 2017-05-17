@@ -22,7 +22,7 @@ var scoreChart = {
 // SCRABBLE
 // constroctor -- instance variables
 var Scrabble = function(input) {
-  this.word = input;
+  this.word = input.toUpperase();
   /* how to put in the score chart?
   Before I thought I put it in here as an object
   Now I have it as a hash*/
@@ -30,7 +30,11 @@ var Scrabble = function(input) {
 
 // iterators -- instance methods
 Scrabble.prototype.score = function() {
-
+  var sum = 0;
+  for (var i = 0; i < this.word.length; i++) {
+    sum += scoreChart[this.word[i]];
+  }
+  return sum;
 };
 
 Scrabble.prototype.highestScoreFrom = function() {
