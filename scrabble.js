@@ -48,38 +48,8 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
         winner = word.length <= winner.length ? winner : word; }
   });
 
-  return highestScore;
-};
-
-Scrabble.highestScoringWord = function(arrayOfWords) {
-  if ( !Array.isArray(arrayOfWords) ) {
-    return "Send me an array and we can try this again...";
-  }
-
-  var highestScore = 0;
-  var winner = undefined;
-
-  arrayOfWords.forEach(function(word) {
-    if ( Scrabble.score(word) > highestScore ){
-      highestScore = Scrabble.score(word);
-      winner = word; }
-    else if ( Scrabble.score(word) == highestScore)
-      if ( winner.length == 7 || word.length == 7) {
-          winner = winner.length <= word.length ? word : winner; }
-      else {
-        winner = word.length <= winner.length ? winner : word; }
-  });
-
   return winner;
 };
-
-
-var myWordsList = ["ostrich", "cat", "whale", "tiger", "pig", "zzzzzzz"];
-console.log(Scrabble.highestScoreFrom(myWordsList));
-
-
-// ===============================================================
-// WAVE 2
 
 var Player = function(name){
     this.name = name;
@@ -110,11 +80,11 @@ Player.prototype.hasWon = function() {
 };
 
 Player.prototype.highestScoringWord = function() {
-  return Scrabble.highestScoringWord(this.plays);
+  return Scrabble.highestScoreFrom(this.plays);
 };
 
 Player.prototype.highestWordScore = function() {
-  return Scrabble.highestScoreFrom(this.plays);
+  return Scrabble.score( this.highestScoringWord() );
 };
 
 
