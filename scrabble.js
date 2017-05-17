@@ -1,35 +1,14 @@
 var Scrabble = function() {
-  this.letterValues = { "a": 1, "b": 3, "c": 3,
-    "d": 2,
-    "e": 1,
-    "f": 4,
-    "g": 2,
-    "h": 4,
-    "i": 1,
-    "j": 8,
-    "k": 5,
-    "l": 1,
-    "m": 3,
-    "n": 1,
-    "o": 1,
-    "p": 3,
-    "q": 10,
-    "r": 1,
-    "s": 1,
-    "t": 1,
-    "u": 1,
-    "v": 4,
-    "w": 4,
-    "x": 8,
-    "y": 4,
-    "z": 10
-  };
+  this.letterValues = { "a": 1, "b": 3, "c": 3, "d": 2, "e": 1, "f": 4, "g": 2, "h": 4, "i": 1, "j": 8, "k": 5, "l": 1, "m": 3, "n": 1, "o": 1, "p": 3, "q": 10, "r": 1, "s": 1, "t": 1, "u": 1, "v": 4, "w": 4, "x": 8, "y": 4, "z": 10
+};
+this.tilebag = new Tilebag();
 };
 
-// or Scrabble.score, Scrabble.
+// also works: define Scrabble.score, etc
 // then call Scrabble.score in Player
 
-Scrabble.score = function(word) {
+Scrabble.prototype = {
+  score: function(word) {
     // regex, raise errors
     if (/^[a-zA-Z]+$/.test(word)) {
 
@@ -51,7 +30,7 @@ Scrabble.score = function(word) {
     } else {
       throw "Sorry, invalid input!";
     }
-  };
+  },
 
   // highestScoreFrom(arrayOfWords): returns the word in the array with the highest score.
   highestScoreFrom: function(arrayOfWords) {
@@ -90,9 +69,10 @@ Scrabble.score = function(word) {
 };
 
 
-var Player = function(name) {
+var Player = function(name, game) {
   this.name = name;
   this.plays = [];
+  this.game = game;
 };
 
 Player.prototype = {
@@ -113,7 +93,7 @@ Player.prototype = {
     this.plays.forEach (function(word) {
 
       // score each word and add to total
-      total += word.score;
+      total += this.game.score(word);
     }, this);
 
     // return total score
@@ -121,27 +101,35 @@ Player.prototype = {
   },
   hasWon: function() {
     // Function which returns true if the player has over 100 points, otherwise returns false
-
+    var won = (this.totalScore() > 100) ? true : false;
+    return won;
   },
   highestScoringWord: function() {
     // Function which returns the highest scoring word the user has played
+    return this.game.highestScoreFrom(this.plays);
   },
   highestWordScore: function() {
     // Function which returns the highestScoringWord score
+    var winner = this.highestScoringWord();
+    return this.game.score(winner);
   }
 };
 
 // optional
-// var tilebag = {
-//   one: ["J", "K", "Q", "X", "Z"],
-//   two: ["B", "C", "F", "H", "M", "P", "V", "W", "Y"],
-//   three: ["G"],
-//   four: ["D", "L", "S", "U"],
-//   six: ["N", "R", "T"],
-//   eight: ["O"],
-//   nine: ["A", "I"],
-//   twelve: ["E"]
-// }
+var Tilebag = function() {
+  this.bag = this.fillBag();
+  this.fillBag = function() {
+    var letterQuantities = { "a": 9, "b": 2, "c": 2, "d": 4, "e": 12, "f": 2, "g": 3, "h": 2, "i": 9, "j": 1, "k": 1, "l": 4, "m": 2, "n": 6, "o": 8, "p": 2, "q": 1, "r": 6, "s": 4, "t": 6, "u": 4, "v": 2, "w": 2, "x": 1, "y": 2, "z": 1
+  },
+  bag = [];
+  letterQuantities.forEach (function(letter) {
+    bag.push(letterQuantities[letter]);
+  });
+};
+
+};
+
+
 
 // Scrabble.prototype.helloWorld = function() {
 //   return 'hello world!';
@@ -163,11 +151,19 @@ console.log(myScrabble.highestScoreFrom(["c", "m", "da", "b"])); // "c"
 console.log(myScrabble.highestScoreFrom(["zzzzzJ", "m", "da", "daaaaaA"])); // "daaaaaA"
 // console.log(myScrabble.highestScoreFrom(["niiice", ":)"])); // throw exception
 
-var me = new Player("brenna");
+var me = new Player("brenna", myScrabble);
 
 console.log("Player test results");
 console.log("~~~~~~~~~~~~~~~~~~~~~~");
-console.log(me.play("rad"));
+me.play("rad");
+console.log(me.hasWon()); // false
 console.log(me.totalScore()); // 4
+me.play("qqqqqqqqq");
+console.log(me.totalScore()); // 94
+me.play("QT");
+console.log(me.totalScore()); // 105
+console.log(me.hasWon()); // true
+console.log(me.highestScoringWord()); // "qqqqqqqqq"
+console.log(me.highestWordScore()); // 90
 
 module.exports = Scrabble;
