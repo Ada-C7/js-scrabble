@@ -112,8 +112,55 @@ Player.prototype.highestWordScore = function() {
 // console.log(addie.totalScore());
 
 var TileBag = function() {
-  this.tiles = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "b", "b", "c", "c", "d", "d", "d", "d", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "f", "f", "g", "g", "g", "h", "h", "i", "i", "i", "i", "i", "i", "i", "i", "i", "j", "k", "l", "l", "l", "l", "m", "m", "n", "n", "n", "n", "n", "n", "o", "o", "o", "o", "o", "o", "o", "o", "p", "p", "q", "r", "r", "r", "r", "r", "r", "s", "s", "s", "s", "t", "t", "t", "t", "t", "t", "u", "u", "u", "u", "v", "v", "w", "w", "x", "y", "y", "z"];
+  var bag = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "b", "b", "c", "c", "d", "d", "d", "d", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "f", "f", "g", "g", "g", "h", "h", "i", "i", "i", "i", "i", "i", "i", "i", "i", "j", "k", "l", "l", "l", "l", "m", "m", "n", "n", "n", "n", "n", "n", "o", "o", "o", "o", "o", "o", "o", "o", "p", "p", "q", "r", "r", "r", "r", "r", "r", "s", "s", "s", "s", "t", "t", "t", "t", "t", "t", "u", "u", "u", "u", "v", "v", "w", "w", "x", "y", "y", "z"];
+  this.tiles = TileBag.shuffle(bag);
 };
 
-// bag = new TileBag();
-// console.log(bag.tiles);
+TileBag.shuffle = function(tiles) {
+  for (var i = 0; i < tiles.length; i++) {
+    var j = Math.floor(Math.random() * tiles.length);
+    var temp = tiles[i];
+    tiles[i] = tiles[j];
+    tiles[j] = temp;
+  }
+  return tiles;
+};
+
+TileBag.prototype.drawTiles = function(num) {
+  var tilesDrawn = [];
+
+  if (num > 7 || num > this.tilesRemaining() || num < 0) {
+    return false;
+  }
+
+  for (var i = 0; i < num; i++) {
+    tilesDrawn.push(this.tiles.pop());
+  }
+
+  return tilesDrawn;
+};
+
+TileBag.prototype.tilesRemaining = function(num) {
+  return this.tiles.length;
+};
+
+bag = new TileBag();
+console.log(bag.tilesRemaining());
+console.log(bag.drawTiles(-1));
+console.log(bag.drawTiles(7));
+console.log(bag.tilesRemaining());
+console.log(bag.drawTiles(7));
+console.log(bag.drawTiles(7));
+console.log(bag.drawTiles(7));
+console.log(bag.drawTiles(7));
+console.log(bag.drawTiles(7));
+console.log(bag.drawTiles(7));
+console.log(bag.drawTiles(7));
+console.log(bag.drawTiles(7));
+console.log(bag.drawTiles(7));
+console.log(bag.drawTiles(7));
+console.log(bag.drawTiles(7));
+console.log(bag.drawTiles(7));
+console.log(bag.drawTiles(7));
+console.log(bag.drawTiles(7));
+console.log(bag.drawTiles(7));
