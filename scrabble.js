@@ -41,6 +41,52 @@ Scrabble.prototype = {
   }
 };
 
+var Player = function(name) {
+  this.name = name;
+};
+
+Player.prototype = {
+  name: function() {
+    return this.name;
+  },
+
+  plays: function() {
+    return this.plays;
+  },
+
+  play: function(word) {
+    if(this.hasWon) {
+      return false;
+    }
+    var plays = [];
+    plays.push(word);
+  },
+
+  totalScore: function() {
+    var sum = 0;
+    var scrabble = new Scrabble();
+    for(var i = 0; i < this.plays.length; i++) {
+      sum += scrabble.score(this.plays[i]);
+    }
+    return sum;
+  },
+
+  hasWon: function() {
+    if(this.totalScore > 100) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+
+  highestScoringWord: function() {
+    var scrabble = new Scrabble();
+    scrabble.highestScoreFrom(this.plays);
+  },
+
+  highestWordScore: function() {},
+};
+
 module.exports = Scrabble;
 
 // var testing = new Scrabble;
