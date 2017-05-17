@@ -68,19 +68,6 @@ Scrabble.prototype = {
   }
 };
 
-// testing Scrabble
-var test = new Scrabble();
-console.log(test.score("zox"));
-console.log(test.score("exlax"));
-console.log(test.score("Boooooo"));
-console.log(test.score("Buuuuuu"));
-
-// should return shortest highest word - zooz
-console.log(test.highestScoreFrom(["exlax", "zooz"]));
-
-// if highest word is tie and both have 7 letters, return first booooo.
-console.log(test.highestScoreFrom(["Boooooo", "Buuuuuu"]));
-
 var Player = function(name) {
   this.name = name;
   this.plays = [];
@@ -125,6 +112,45 @@ Player.prototype = {
   }
 };
 
+var TileBag = function() {
+  this.startingTiles = ["J", "K", "Q", "X", "Z", "B", "B", "C", "C", "F", "F", "H", "H", "M", "M", "P", "P", "V", "V", "W", "W", "Y", "Y", "G", "G", "G", "D", "D", "D", "D", "L", "L", "L", "L", "S", "S", "S", "S", "U", "U", "U", "U", "N", "N", "N", "N", "N", "N", "R", "R", "R", "R", "R", "R", "T", "T", "T", "T", "T", "T", "O", "O", "O", "O", "O", "O", "O", "O", "A", "A", "A", "A", "A", "A", "A", "A", "A", "I", "I", "I", "I", "I", "I", "I", "I", "I", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E"];
+  this.availableTiles = [];
+};
+
+TileBag.prototype = {
+  startGame: function() {
+    var array = this.startingTiles;
+    var counter = array.length;
+    // While there are elements in the array
+    while (counter > 0) {
+        // Pick a random index
+        var index = Math.floor(Math.random() * counter);
+
+        // Decrease counter by 1
+        counter--;
+
+        // And swap the last element with it
+        var temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+    }
+    this.availableTiles = array;
+  }
+};
+
+// testing Scrabble
+var test = new Scrabble();
+console.log(test.score("zox"));
+console.log(test.score("exlax"));
+console.log(test.score("Boooooo"));
+console.log(test.score("Buuuuuu"));
+
+// should return shortest highest word - zooz
+console.log(test.highestScoreFrom(["exlax", "zooz"]));
+
+// if highest word is tie and both have 7 letters, return first booooo.
+console.log(test.highestScoreFrom(["Boooooo", "Buuuuuu"]));
+
 // testing Player
 var lynn = new Player("Lynn");
 console.log(lynn.name);
@@ -156,12 +182,18 @@ console.log("HIGHEST SCORING WORD SCORE: " + lynn.highestWordScore());
 
 // test has won?
 console.log(lynn.hasWon());
-
-Player.prototype.totalScore = 120;
-
 // test has won when score is over 100
+Player.prototype.totalScore = 120;
 console.log(lynn.hasWon());
 // shouldn't be allowed to play a word now
 console.log(lynn.play("zoo"));
+
+// testing TileBag
+var myBag = new TileBag();
+console.log(myBag.availableTiles);
+
+// Should shuffle tiles and put them in availableTiles
+myBag.startGame();
+console.log(myBag.availableTiles);
 
 module.exports = Scrabble;
