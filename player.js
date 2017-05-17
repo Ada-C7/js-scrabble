@@ -9,18 +9,51 @@
 // hasWon(): Function which returns true if the player has over 100 points, otherwise returns false
 // highestScoringWord(): Function which returns the highest scoring word the user has played
 // highestWordScore(): Function which returns the highestScoringWord score
-var Player = function(name) {
+// var Scrabble = require('./scrabble');
+
+
+var Player = function(name, game) {
   this.name = name ;
+  this.game = game
   this.plays = [];
 };
 
 Player.prototype = {
   play: function(word) {
     this.plays.push(word)
+    //need to return false if already won
   },
+
+  totalScore: function() {
+    var self = this
+    var score = 0
+    // Function which sums up and returns the score of the players words
+    this.plays.forEach(function(word) {
+      score += self.game.scoreWord(word)
+    })
+    console.log(score)
+    return score
+  },
+
+  hasWon: function() {
+
+  },
+
+  highestScoringWord: function() {
+
+  },
+
+  highestScoringWordScore: function () {
+
+  }
 
 };
 
-var gameOne = new Player("fido")
-gameOne.play("yep")
+var Scrabble = require('./scrabble') // do this here to pass in an instance of scrabble every time a player is created 
+var gameOne = new Player("fido", new Scrabble())
+gameOne.play("yep");
+gameOne.totalScore();
 console.log(gameOne)
+
+module.exports = Player;
+//telling it to send the player to the scrabble (whereever it's required)

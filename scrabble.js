@@ -31,7 +31,8 @@ var Scrabble = function() {
 
 // could also do Scrabble.prototype.scoreWord = function(word) {
 Scrabble.prototype = {
-  scoreWord: function(word) { var score = 0,
+  scoreWord: function(word) {
+    var score = 0,
     word_length = word.length
 
     for(var i = 0; i < word_length; i++)
