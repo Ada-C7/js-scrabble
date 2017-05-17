@@ -117,23 +117,32 @@ Player.prototype = {
 
 // optional
 var Tilebag = function() {
-  this.bag = this.fillBag();
   this.fillBag = function() {
     var letterQuantities = { "a": 9, "b": 2, "c": 2, "d": 4, "e": 12, "f": 2, "g": 3, "h": 2, "i": 9, "j": 1, "k": 1, "l": 4, "m": 2, "n": 6, "o": 8, "p": 2, "q": 1, "r": 6, "s": 4, "t": 6, "u": 4, "v": 2, "w": 2, "x": 1, "y": 2, "z": 1
-  },
-  bag = [];
-  letterQuantities.forEach (function(letter) {
-    bag.push(letterQuantities[letter]);
-  });
+    },
+    bag = [];
+    for (var letter in letterQuantities) {
+      for (var i = 0; i < letterQuantities[letter]; i++) {
+        bag.push(letter);
+      }
+    }
+  return bag;
+  };
+  this.bag = this.fillBag();
 };
 
+Tilebag.prototype = {
+  drawTile: function(num) {
+    hand = [];
+    for (var i = 0; i < num; i++) {
+      rand = Math.floor(Math.random() * this.bag.length);
+      hand.push(this.bag[rand]);
+      this.bag.splice(rand, 1);
+    }
+    return hand;
+  }
 };
 
-
-
-// Scrabble.prototype.helloWorld = function() {
-//   return 'hello world!';
-// };
 
 // tests
 var myScrabble = new Scrabble();
@@ -149,6 +158,9 @@ console.log(myScrabble.highestScoreFrom(["ZZzzZZ", "niiice", "cute"])); // "ZZzz
 console.log(myScrabble.highestScoreFrom(["gg", "aaaa", "b"])); // "gg"
 console.log(myScrabble.highestScoreFrom(["c", "m", "da", "b"])); // "c"
 console.log(myScrabble.highestScoreFrom(["zzzzzJ", "m", "da", "daaaaaA"])); // "daaaaaA"
+// console.log(myScrabble.tilebag.bag); // array of letters
+console.log(myScrabble.tilebag.drawTile(10)); // 10 random letters
+// console.log(myScrabble.tilebag.bag); // returns array w 10 fewer letters
 // console.log(myScrabble.highestScoreFrom(["niiice", ":)"])); // throw exception
 
 var me = new Player("brenna", myScrabble);
