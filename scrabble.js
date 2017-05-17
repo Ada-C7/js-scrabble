@@ -42,7 +42,7 @@ Scrabble.score = function(word) {
     return wordScore;
 },
 
-Scrabble.highestScore = function(arrayOfWords) {
+Scrabble.highestScoreFrom = function(arrayOfWords) {
     var highest = arrayOfWords[0];
 
     for (var i = 1; i < arrayOfWords.length; i++) {
@@ -57,13 +57,6 @@ Scrabble.highestScore = function(arrayOfWords) {
             highest = arrayOfWords[i];
         }
 
-        // for (var i = 0; i < arrayOfWords.length; i++) {
-        //     var currentScore = this.score(arrayOfWords[i]);
-        //     words.push(currentScore);
-        //
-        //     playedWords[(arrayOfWords[i])] = currentScore;
-        // };
-
     }
     return highest;
 }
@@ -71,22 +64,55 @@ Scrabble.highestScore = function(arrayOfWords) {
 Scrabble.prototype = {
 };
 
-// Scrabble.score('CAT');
-// Scrabble.score('puppet');
+
+var Player = function(name) {
+    this.name = name;
+    // plays returns an array of all the words this player has played
+    this.plays = [];
+
+    // highest scoring word returns highest scoring word that the player has played
+    highestScoringWord = '';
+
+    // hasWon returns true if the player has over 100 points
+    hasWon = false;
+};
+
+Player.prototype = {
+    // play(word) adds the input word to the plays array
+     play: function(word){
+        this.plays.push(word)
+    },
+
+    // totalScore() adds the input words
+    totalScore: function(plays){
+        var total = 0;
+        for(var i = 0; i < this.plays.length; i++) {
+            var score = Scrabble.score(this.plays[i]);
+            // add word and score to wordScoreHash
+            total +=score
+        }
+        if (total >= 100){
+            this.hasWon = true;
+        }
+        return total;
+    },
+    // highestWordScore  returns the highest scoring word score
+    highestWordScore: function() {
+        return Scrabble.highestScoreFrom(this.plays)
+    }
+}
+
+var my_game = new Player('alison');
+// console.log(my_game.name);
+my_game.play('zen');
+my_game.play('cat');
+
+console.log(my_game.totalScore());
+console.log(my_game.hasWon);
+my_game.highestWordScore();
+my_game.
 
 
-var wordArray = ['cat', 'dog', 'zen', 'xi'];
-var testArray = ['qqqqqqq', 'qqqqqqkk' ];
-var testArrayTwo = ['qqqq', 'zzzz'];
-console.log(Scrabble.highestScore(testArrayTwo));
 
-// console.log(Scrabble.highestScore(testArray));
-
-// console.log(Scrabble.highestScore(wordArray));
-
-// console.log(Scrabble.myNums.length);
-
-
-
-// module.exports = Scrabble;
+module.exports = Scrabble;
 //
