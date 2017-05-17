@@ -79,6 +79,16 @@ Player.prototype = {
     if (this.hasWon()) {
       return false;
     } else {
+      // For each index (letter) in playing word, try to find the index of that letter in hand.  If this.hand.indexOf(letter) == -1 it means it was not found.  otherwise, hand.splice(index, 1)
+      for (var i = 0; i < word.length; i++) {
+        var letter = word[i].toLowerCase();
+        var letterIndex = this.hand.indexOf(letter);
+        if (letterIndex === (-1)) {
+          return ("You do not have a'" + letter + "' in your hand to play.");
+        } else {
+          this.hand.splice(letterIndex, 1);
+        }
+      }
       this.plays.push(word);
     }
   },
@@ -131,8 +141,8 @@ TileBag.prototype = {
         counter--;
 
         // And swap the last element with it
-        var temp = array[counter];
-        array[counter] = array[index];
+        var temp = array[counter].toLowerCase();
+        array[counter] = array[index].toLowerCase();
         array[index] = temp;
     }
     this.availableTiles = array;
@@ -171,15 +181,21 @@ console.log(test.highestScoreFrom(["Boooooo", "Buuuuuu"]));
 var lynn = new Player("Lynn");
 console.log(lynn.name);
 
+lynn.hand = ["d", "o", "g", "z", "o", "o"];
+console.log(lynn.hand);
+
 // test plays & total score
 console.log(lynn.plays);
 console.log(lynn.totalScore());
 lynn.play("dog");
+console.log(lynn.hand);
 console.log(lynn.plays);
 console.log(lynn.totalScore());
-lynn.play("zoo");
+lynn.play("ZOO");
 console.log(lynn.plays);
 console.log(lynn.totalScore());
+
+lynn.hand = ["z", "a", "a", "a", "a", "a"];
 lynn.play("zaaaaaa");
 console.log(lynn.plays);
 console.log(lynn.totalScore());
@@ -188,6 +204,7 @@ console.log(lynn.totalScore());
 console.log("HIGHEST SCORING WORD: " + lynn.highestScoringWord());
 console.log("HIGHEST SCORING WORD SCORE: " + lynn.highestWordScore());
 
+lynn.hand = ["z", "o", "o", "o", "o", "o"];
 lynn.play("zoooooo");
 console.log(lynn.plays);
 console.log(lynn.totalScore());
@@ -198,6 +215,10 @@ console.log("HIGHEST SCORING WORD SCORE: " + lynn.highestWordScore());
 
 // test has won?
 console.log(lynn.hasWon());
+
+// Should not allow me to play this b/c don't have tiles.
+console.log(lynn.play("Pretty"));
+
 // test has won when score is over 100
 Player.prototype.totalScore = 120;
 console.log(lynn.hasWon());
@@ -212,11 +233,17 @@ console.log(myBag.availableTiles);
 myBag.startGame();
 console.log(myBag.availableTiles.length);
 
-console.log(myBag.drawTiles(7, lynn));
+console.log(myBag.drawTiles(3, lynn));
 console.log(myBag.availableTiles.length);
+
+// should not allow me to draw b/c 3 + 5 > 7.
+console.log(myBag.drawTiles(5, lynn));
 
 console.log(lynn.hand);
 
+// should work ok.
+console.log(myBag.drawTiles(4, lynn));
+// should not allow me to draw b/c I already have 7 tiles.
 console.log(myBag.drawTiles(1, lynn));
 
 module.exports = Scrabble;
