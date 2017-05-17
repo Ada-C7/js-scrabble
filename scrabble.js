@@ -70,8 +70,6 @@ var Player = function(name) {
     // plays returns an array of all the words this player has played
     this.plays = [];
 
-    // highest scoring word returns highest scoring word that the player has played
-    highestScoringWord = '';
 
     // hasWon returns true if the player has over 100 points
     hasWon = false;
@@ -98,21 +96,29 @@ Player.prototype = {
     },
     // highestWordScore  returns the highest scoring word score
     highestWordScore: function() {
-        return Scrabble.highestScoreFrom(this.plays)
+        var word = Scrabble.highestScoreFrom(this.plays);
+        return Scrabble.score(word)
+    },
+    // highest scoring word returns highest scoring word that the player has played
+    highestScoringWord: function(){
+        var top_word = Scrabble.highestScoreFrom(this.plays);
+        return top_word
     }
 }
 
 var my_game = new Player('alison');
-// console.log(my_game.name);
-my_game.play('zen');
-my_game.play('cat');
-
-console.log(my_game.totalScore());
-console.log(my_game.hasWon);
-my_game.highestWordScore();
-my_game.
+console.log(my_game.name);
+// my_game.play('zen');
+// my_game.play('cat');
+// my_game.play('qqqqqqqqqqqq');
 
 
+console.log('This is the total score: ' + my_game.totalScore());
+// console.log(my_game.hasWon);
+console.log('This is the top word: ' + my_game.highestScoringWord());
+console.log('This is the high score: ' + my_game.highestWordScore());
 
-module.exports = Scrabble;
+
+
+// module.exports = Scrabble;
 //
