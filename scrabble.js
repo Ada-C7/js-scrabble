@@ -1,8 +1,5 @@
 var Scrabble = function() {
-  this.letterValues = {
-    "a": 1,
-    "b": 3,
-    "c": 3,
+  this.letterValues = { "a": 1, "b": 3, "c": 3,
     "d": 2,
     "e": 1,
     "f": 4,
@@ -29,8 +26,10 @@ var Scrabble = function() {
   };
 };
 
-Scrabble.prototype = {
-  score: function(word) {
+// or Scrabble.score, Scrabble.
+// then call Scrabble.score in Player
+
+Scrabble.score = function(word) {
     // regex, raise errors
     if (/^[a-zA-Z]+$/.test(word)) {
 
@@ -52,7 +51,7 @@ Scrabble.prototype = {
     } else {
       throw "Sorry, invalid input!";
     }
-  },
+  };
 
   // highestScoreFrom(arrayOfWords): returns the word in the array with the highest score.
   highestScoreFrom: function(arrayOfWords) {
@@ -109,6 +108,16 @@ Player.prototype = {
   },
   totalScore: function() {
     // Function which sums up and returns the score of the players words
+    // iterate through plays
+    var total = 0;
+    this.plays.forEach (function(word) {
+
+      // score each word and add to total
+      total += word.score;
+    }, this);
+
+    // return total score
+    return total;
   },
   hasWon: function() {
     // Function which returns true if the player has over 100 points, otherwise returns false
@@ -141,6 +150,8 @@ Player.prototype = {
 // tests
 var myScrabble = new Scrabble();
 
+console.log("Scrabble test results");
+console.log("~~~~~~~~~~~~~~~~~~~~~~");
 console.log(myScrabble.score("ZZzzZZ")); // 60
 console.log(myScrabble.score("niiice")); // 8
 console.log(myScrabble.score("aaaAaaa")); // 57
@@ -151,5 +162,12 @@ console.log(myScrabble.highestScoreFrom(["gg", "aaaa", "b"])); // "gg"
 console.log(myScrabble.highestScoreFrom(["c", "m", "da", "b"])); // "c"
 console.log(myScrabble.highestScoreFrom(["zzzzzJ", "m", "da", "daaaaaA"])); // "daaaaaA"
 // console.log(myScrabble.highestScoreFrom(["niiice", ":)"])); // throw exception
+
+var me = new Player("brenna");
+
+console.log("Player test results");
+console.log("~~~~~~~~~~~~~~~~~~~~~~");
+console.log(me.play("rad"));
+console.log(me.totalScore()); // 4
 
 module.exports = Scrabble;
