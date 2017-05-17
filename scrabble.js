@@ -16,10 +16,40 @@ Scrabble.prototype.helloWorld = function() {
 
 Scrabble.prototype.score = function(word) {
   score = 0;
+
   for (i = 0; i < word.length; i++) {
     score += this.letterScores[word[i].toUpperCase()];
   }
+
+  if (word.length === 7) {
+    score += 50;
+  }
+
   return score;
+};
+
+Scrabble.prototype.higherScoreFrom = function(word1, word2) {
+  var score1 = this.score(word1);
+  var score2 = this.score(word2);
+
+  // In case of tie
+  if (score1 === score2) {
+
+    // case where one of the words has a length of 7
+    // (first word is chosen if both have a length of 7)
+    if (word1.length === 7 || word2.length === 7) {
+      return (word1.length === 7) ? word1 : word2;
+
+    // case where neither has a length of 7
+    } else {
+      minLength = Math.min(word1.length, word2.length);
+      return (word1.length === minLength) ? word1 : word2;
+    }
+
+  // In the case that there is not a tie
+  } else {
+    return (score1 > score2) ? word1 : word2;
+  }
 };
 
 Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
@@ -29,11 +59,15 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
   for (i = 1; i < arrayOfWords.length; i++) {
     currentWord = arrayOfWords[i];
     currentScore = this.score(currentWord);
+    higherScoringWord = this.higherScoreFrom(highestScoringWord, currentWord);
 
-    if (currentScore > highestScore) {
-      highestScoringWord = currentWord;
-    }
+    if (currentWord === higherScoringWord) {
+        highestScoringWord = currentWord;
+        highestScore = currentScore;
+      }
   }
+
+  // Select the highest scoring word from the collection
   return highestScoringWord;
 };
 
@@ -41,6 +75,16 @@ module.exports = Scrabble;
 
 // Tester code
 scrabs = new Scrabble();
+
+console.log("SPECIFIC SCORING CASES");
+// Tests that first word wins in tie when both have 7 characters
+console.log("Should return 'aaaaaaa': " + scrabs.highestScoreFrom(['aaaaaaa', 'eeeeeee']));
+// Tests that shorter word wins in tie
+console.log("Should return 'w': " + scrabs.highestScoreFrom(['aaaa', 'w']));
+// Tests that higher score with same length wins
+console.log("Should return 'q': " + scrabs.highestScoreFrom(['q', 'x']));
+
+console.log("\nNUMBER SCORE CHECK");
 console.log('The score of ham is ' + scrabs.score('ham'));
 console.log('The score of sandwich is ' + scrabs.score('sandwich'));
 console.log('The higher scoring word is ' + scrabs.highestScoreFrom(['ham', 'sandwich']));
