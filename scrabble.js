@@ -1,5 +1,15 @@
 var Scrabble = function() {
-  this._tiles = {
+
+};
+
+// YOUR CODE HERE
+Scrabble.prototype.helloWorld = function() {
+  return 'hello world!';
+};
+
+// work should be case insensitive
+Scrabble.score = function(word) {
+  var _tiles = {
     "A": 1,
     "B": 3,
     "C": 3,
@@ -27,15 +37,6 @@ var Scrabble = function() {
     "Y": 4,
     "Z": 10
   };
-};
-
-// YOUR CODE HERE
-Scrabble.prototype.helloWorld = function() {
-  return 'hello world!';
-};
-
-// work should be case insensitive
-Scrabble.prototype.score = function(word) {
     word = word.toUpperCase();
     var score = 0;
 
@@ -43,13 +44,14 @@ Scrabble.prototype.score = function(word) {
       score =+ 50;
     }
 
-    for (i = 0; i < word.length; i++) {
-      score += this._tiles[word[i]];
+    for (var i = 0; i < word.length; i++) {
+      score += _tiles[word[i]];
     }
+    console.log(score);
     return score;
 };
 
-Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
+Scrabble.highestScoreFrom = function(arrayOfWords) {
 
   var scoringOfWords = arrayOfWords.map(function(scoredWord) {
     var word = {};
@@ -83,9 +85,9 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
   // If the top score is tied between multiple words and one used all seven letters, choose the one with seven letters over the one with fewer tiles
   // If the there are multiple words that are the same score and same length, pick the first one in supplied list.
 };
-module.exports = Scrabble;
+
 //
-// var scrabble = new Scrabble();
+var scrabble = new Scrabble();
 // console.log(scrabble.score("eeeee"));
 //
 // var words = ["aaaa", "bbbbb", "eeeeeee"];
@@ -98,9 +100,29 @@ var Player = function(name) {
 };
 
 Player.prototype.play = function(word) {
-  if (this.hasWon === true) {
-    return false;
-  } else {
-    this.plays.push(word);
-  }
+  // if (this.hasWon()) {
+  //   return false;
+  // }
+
+  this.plays.push(word);
 };
+
+Player.prototype.totalScore = function() {
+  var total = 0;
+
+  for (var i = 0; i < this.plays.length; i++) {
+    console.log(this.plays[i]);
+    total += Scrabble.score(this.plays[i]);
+  }
+  return total;
+};
+
+var player = new Player("bob");
+player.play("a");
+console.log(player.plays);
+console.log(player.totalScore());
+player.play("w");
+console.log(player.plays);
+console.log(player.totalScore());
+
+module.exports = Scrabble;
