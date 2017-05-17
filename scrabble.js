@@ -18,14 +18,18 @@ var score = function(word){
 }
 
 var highestScoreFrom = function(arrayOfWords){
-  var scoresForArray = [];
+  var scoresFromArray = {};
   arrayOfWords.forEach(function(word){
-    scoresForArray.push(score(word))
+    // scoresFromArray[word].push(score(word))
     scoreOfWord = 0
+    scoresFromArray[word] = score(word)
   });
-  var max_of_array = Math.max.apply(Math, scoresForArray);
+  var arrayValues = Object.values(scoresFromArray)
+  var max_of_array = Math.max.apply(Math, arrayValues);
   return max_of_array
 }
+
+
 
 // if two words scores tie return score for word with fewer letters
 // if word.length == 7 that words score +50
@@ -39,5 +43,5 @@ var highestScoreFrom = function(arrayOfWords){
 //
 // module.exports = Scrabble;
 
-score("MaRiSol")
-// console.log(highestScoreFrom(["zzz", "zzz", "man"]))
+// score("MaRiSol")
+console.log(highestScoreFrom(["zzz", "apple", "aaaaaaa"]))
