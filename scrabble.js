@@ -1,4 +1,4 @@
-scoreChart = {
+const SCORECHART = {
   "a": 1,
   "b": 3,
   "c": 3,
@@ -27,11 +27,12 @@ scoreChart = {
   "z": 10,
 }
 
+var Scrabble = function() {};
 
-var score = function(word){
+Scrabble.prototype.score = function(word){
   var total = 0;
   for (var i = 0, len = word.length; i < len; i++) {
-    var letterScore = scoreChart[word[i]];
+    var letterScore = SCORECHART[word[i]];
     total += letterScore;
   };
   if (word.length == 7){
@@ -41,12 +42,13 @@ var score = function(word){
   }
 };
 
-var highestScoreFrom = function(arrayOfWords){
+Scrabble.prototype.highestScoreFrom = function(arrayOfWords){
   var highestScore = 0;
   var scoreArray = []
   var highestScoreArray = [];
+  var self = this
   arrayOfWords.forEach(function(word){
-    wordScore = score(word);
+    wordScore = self.score(word);
     scoreArray.push(wordScore);
 
     if (wordScore > highestScore) {
@@ -77,16 +79,22 @@ var highestScoreFrom = function(arrayOfWords){
 }
 
 var array = ["dog", "zawn", "gdog", "zzzzzz", "cat", "dogdo", "catca", "vaaaaaa"];
-var high = highestScoreFrom(array)
-console.log("word is " + high);
+// var high = highestScoreFrom(array)
+// console.log("word is " + high);
+        // var myDog = new Dog("fido", "lab");
+        // console.log(myDog.name);
+        // myDog.speak();
 
+var myScrabble = new Scrabble();
+var score  = myScrabble.highestScoreFrom(array)
+console.log(score);
 
 // YOUR CODE HERE
 // Scrabble.prototype.helloWorld = function() {
 //   return 'hello world!';
 // };
 //
-// module.exports = Scrabble;
+module.exports = Scrabble;
 //
 //
 //         module.exports = {
