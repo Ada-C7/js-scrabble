@@ -36,27 +36,25 @@ Scrabble.prototype.helloWorld = function() {
 
 // work should be case insensitive
 Scrabble.prototype.score = function(word) {
-    var upcaseWord = word.toUpperCase();
-    var letters = upcaseWord.split("");
+    word = word.toUpperCase();
     var score = 0;
 
     if (word.length == 7) {
       score =+ 50;
     }
 
-    // maybe look into using find and map?
-    letters.forEach (function(letter) {
-      score += Number(this._tiles[letter]);
-    }, this);
+    for (i = 0; i < word.length; i++) {
+      score += this._tiles[word[i]];
+    }
     return score;
 };
 
 Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
-  
+
   var scoringOfWords = arrayOfWords.map(function(scoredWord) {
     var word = {};
-    word["word"] = scoredWord;
-    word["score"] = this.score(scoredWord);
+    word.word = scoredWord;
+    word.score = this.score(scoredWord);
     return word;
   }, this);
 
@@ -64,21 +62,26 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
       return o.score;
   }));
 
-  var findHighestScoringWords = function(scoringOfWords) {
-    var winningWords = [];
-    scoringOfWords.forEach (function(word) {
-      if (word.score == this.maxValue) {
-        winningWords.push(word.word);
-      }
-    }, this);
-    return winningWords;
-  };
+  var winningWords = [];
+  scoringOfWords.forEach (function(word) {
+    if (word.score == maxValue) {
+      winningWords.push(word.word);
+    }
+  });
+
+  if (winningWords.length == 1) {
+    return winningWords[0];
+  } else {
+
+  }
+
+
+
+
 
   console.log(scoringOfWords);
   console.log(maxValue);
   console.log(winningWords);
-
-
 
   // if the top score is tied between multiple words, pick the one with the fewest letters
   // If the top score is tied between multiple words and one used all seven letters, choose the one with seven letters over the one with fewer tiles
@@ -87,7 +90,7 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
 module.exports = Scrabble;
 
 var scrabble = new Scrabble();
-scrabble.score("ooooooo");
+console.log(scrabble.score("eeeee"));
 
 var words = ["aaaa", "bbbbb", "eeeeeee"];
 scrabble.highestScoreFrom(words);
