@@ -71,6 +71,7 @@ Scrabble.prototype = {
 var Player = function(name) {
   this.name = name;
   this.plays = [];
+  this.hand = [];
 };
 
 Player.prototype = {
@@ -136,16 +137,17 @@ TileBag.prototype = {
     }
     this.availableTiles = array;
   },
-  drawTiles: function(number) {
+  drawTiles: function(number, player) {
     var selectedTiles = [];
-    if (number > 7) {
+    if (number > 7 || (player.hand.length + number > 7)) {
       return "You may only have seven tiles in your hand";
     } else if (this.availableTiles.length === 0) {
       return "There are no more tiles";
     } else {
-      for (i = 0; i < number; i++) {
+      for (var i = 0; i < number; i++) {
         var tile = this.availableTiles.pop();
         selectedTiles.push(tile);
+        player.hand.push(tile);
       }
     }
     return selectedTiles;
@@ -210,7 +212,11 @@ console.log(myBag.availableTiles);
 myBag.startGame();
 console.log(myBag.availableTiles.length);
 
-console.log(myBag.drawTiles(3));
+console.log(myBag.drawTiles(7, lynn));
 console.log(myBag.availableTiles.length);
+
+console.log(lynn.hand);
+
+console.log(myBag.drawTiles(1, lynn));
 
 module.exports = Scrabble;
