@@ -1,3 +1,39 @@
+var shuffle = function(array) {
+  var m = array.length, t, i;
+
+  // While there remain elements to shuffle…
+  while (m) {
+
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+
+  return array;
+};
+
+var TileBag = function() {
+  this.tilesPerBag = shuffle(["a", "a", "a", "a", "a", "a", "a", "a", "a", "b", "b", "c", "c", "d", "d", "d", "d", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "f", "f", "g", "g", "g", "h", "h", "i", "i", "i", "i", "i", "i", "i", "i", "i", "j", "k", "l", "l", "l", "l", "m", "m", "n", "n", "n", "n", "n", "n", "o", "o", "o", "o", "o", "o", "o", "o", "p", "p", "q", "r", "r", "r", "r", "r", "r", "s", "s", "s", "s", "t", "t", "t", "t", "t", "t", "u", "u", "u", "u", "v", "v", "w", "w", "x", "y", "y", "z"]);
+};
+
+TileBag.prototype = {
+  drawTiles: function(numberOfTiles) {
+    var tiles = [];
+    for (var i = 0; i < numberOfTiles; i++) {
+      if (this.remainingTiles() > 0) {
+        tiles.push(this.tilesPerBag.pop());
+      }
+    }
+  },
+  remainingTiles: function() {
+    return this.tilesPerBag.length;
+  }
+};
+
 var Scrabble = function() {
   this.scoreChart = {
     "a": 1,
@@ -27,6 +63,7 @@ var Scrabble = function() {
     "y": 4,
     "z": 10
   };
+  this.tileBage = new TileBag();
 };
 
 Scrabble.prototype = {
@@ -76,10 +113,10 @@ Scrabble.prototype = {
   }
 };
 
-var Player = function(name) {
+var Player = function(name, game) {
   this.name = name;
   this.plays = [];
-  this.game = new Scrabble();
+  this.game = game;
 };
 
 Player.prototype = {
@@ -112,7 +149,24 @@ Player.prototype = {
   }
 };
 
-var playerOne = new Player("InfectedSnarling");
+var Dictionary = function() {
+  this.miniDict = ["hi", "potato", "radish", "queen", "bye"];
+};
+
+Dictionary.prototype = {
+  isValidWord: function(word) {
+    return this.miniDict.includes(word);
+  }
+};
+
+
+
+
+
+
+// Testing Codes
+var newGame = new Scrabble();
+var playerOne = new Player("InfectedSnarling", newGame);
 playerOne.play("hi");
 playerOne.play("potato");
 playerOne.play("radish");
@@ -123,5 +177,7 @@ console.log(playerOne.hasWon());
 console.log(playerOne.highestScoringWord());
 console.log(playerOne.highestWordScore());
 console.log(playerOne.plays);
+
+
 
 module.exports = Scrabble;
