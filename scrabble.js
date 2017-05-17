@@ -59,8 +59,47 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
 
 module.exports = Scrabble;
 
-var scrab = new Scrabble;
-console.log(scrab.score('pigpigs'));
-console.log(scrab.score('bigbigs'));
-console.log(scrab.score('aa'));
-console.log(scrab.highestScoreFrom(['pigpiggies', 'bigbiggies', 'aa']));
+var Player = function(name) {
+  this.name = name;
+}
+
+Player.prototype = {
+  plays: []
+}
+
+Player.prototype.play = function(word) {
+  // returns false if player has already won
+  this.plays.push(word);
+};
+
+Player.prototype.totalScore = function() {
+  //iterate over plays array
+  //score each word and return sum of scores
+  // var total = this.plays.reduce(function(sum, word) {
+  //   return sum + Scrabble.score.call(this, word);
+  // })
+  total = 0;
+  var game = new Scrabble;
+  for (var i = 0; i < this.plays.length; i++) {
+    total += game.score(this.plays[i]);
+  }
+  return total;
+}
+
+var yoda = new Player("Yoda");
+console.log(yoda.name);
+console.log(yoda.plays);
+yoda.play("eelgrass");
+console.log(yoda.plays);
+yoda.play("arbitrary");
+console.log(yoda.plays);
+console.log(yoda.totalScore());
+
+
+
+
+// var scrab = new Scrabble;
+// console.log(scrab.score('pigpigs'));
+// console.log(scrab.score('bigbigs'));
+// console.log(scrab.score('aa'));
+// console.log(scrab.highestScoreFrom(['pigpiggies', 'bigbiggies', 'aa']));
