@@ -27,52 +27,58 @@ scoreChart = {
   "z": 10,
 }
 
-// var Scrabble = function() {
-//   this.score()
-//   },
-
-//
-// var score = function(word) {
-//     return totalScore;
-// };
-
-var total = 0;
 
 var score = function(word){
+  var total = 0;
   for (var i = 0, len = word.length; i < len; i++) {
     var letterScore = scoreChart[word[i]];
     total += letterScore;
-    // console.log(total);
-    return total;
   };
+  if (word.length == 7){
+    return total + 50;
+  } else {
+  return total;
+  }
 };
 
-score("dog")
+var highestScoreFrom = function(arrayOfWords){
+  var highestScore = 0;
+  var scoreArray = []
+  var highestScoreArray = [];
+  arrayOfWords.forEach(function(word){
+    wordScore = score(word);
+    scoreArray.push(wordScore);
 
-      // var Dog = function(name="default name", breed="default breed") {
-      //   this.name = name;
-      //   this.breed = breed;
-      // };
-      // Dog.prototype = {
-      //   speak: function() {
-      //     console.log(this.name + " woof");
-      //   }
-      // };
+    if (wordScore > highestScore) {
+      highestScore = wordScore;
+    }
+  });
 
-// scrabble = new score("test")
-// console.log(scrabble);
+  scoreArray.forEach(function(score, n){
 
-// ex)
-// var values = [8, 5, 3, 10, 14, 2];
-//
-// values.forEach(function(value){
-//   if (value == 10) {
-//     console.log("Special case!");
-//   }
-//   else {
-//     console.log("Regular values like " + value);
-//   }
-// });
+    if (score == highestScore) {
+      highestScoreArray.push(arrayOfWords[n]);
+    }
+  });
+
+  var winningWord = null
+  highestScoreArray.forEach(function(word){
+    if(word.length == 7){
+      winningWord = word;
+      return winningWord;
+    }
+  })
+
+  if (winningWord == null){
+    winningWord = highestScoreArray[0];
+  }
+  return winningWord;
+
+}
+
+var array = ["dog", "zawn", "gdog", "zzzzzz", "cat", "dogdo", "catca", "vaaaaaa"];
+var high = highestScoreFrom(array)
+console.log("word is " + high);
 
 
 // YOUR CODE HERE
