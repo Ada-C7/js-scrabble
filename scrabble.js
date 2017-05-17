@@ -51,10 +51,30 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
   return highestScore;
 };
 
+Scrabble.highestScoringWord = function() {
+  if ( !Array.isArray(arrayOfWords) ) {
+    return "Send me an array and we can try this again...";
+  }
 
-var myWordsList = ["ostrich", "cat", "whale", "tiger", "flamingo", "zzzzzzzzzzzz"];
+  var highestScore = 0;
+  var winner = undefined;
 
-console.log(Scrabble.score("hotdog"));
+  arrayOfWords.forEach(function(word) {
+    if ( Scrabble.score(word) > highestScore ){
+      highestScore = Scrabble.score(word);
+      winner = word; }
+    else if ( Scrabble.score(word) == highestScore)
+      if ( winner.length == 7 || word.length == 7) {
+          winner = winner.length <= word.length ? word : winner; }
+      else {
+        winner = word.length <= winner.length ? winner : word; }
+  });
+
+  return winner;
+};
+
+
+var myWordsList = ["ostrich", "cat", "whale", "tiger", "pig", "zzzzzzz"];
 console.log(Scrabble.highestScoreFrom(myWordsList));
 
 
@@ -63,46 +83,49 @@ console.log(Scrabble.highestScoreFrom(myWordsList));
 
 var Player = function(name){
     this.name = name;
-    this.words = [];
-    this.score = 0;
-};
-
-Player.prototype.plays = function() {
-  // plays: property which returns an Array of the words played by the player
+    this.plays = [];
 };
 
 Player.prototype.play = function(word) {
-  if ( this.score < 100 ) {
-    this.score += Scrabble.score(word); }
-  else if ( this.score > 100 ) {
+  if ( !this.hasWon() ){
+    this.plays.push(word); }
+  else if ( this.totalScore > 100 ) {
     return false; }
-  return this.score
-  // play(word): Function which adds the input word to the plays Array
-  // Returns false if player has already won
+  return this.name + " played " + word + ". Words played: " + this.plays;
 };
 
 Player.prototype.totalScore = function() {
-  // totalScore(): Function which sums up and returns the score of the players words
+  var total = 0;
+
+  this.plays.forEach(function(word) {
+    total += Scrabble.score(word);
+  });
+
+  return total;
 };
 
 Player.prototype.hasWon = function() {
-  // hasWon(): Function which returns true if the player has over 100 points, otherwise returns false
+  var won = this.score < 100 ? false : true;
+  return won;
 };
 
 Player.prototype.highestScoringWord = function() {
-  // highestScoringWord(): Function which returns the highest scoring word the user has played
+  return Scrabble.highestScoringWord(this.plays);
 };
 
 Player.prototype.highestWordScore = function() {
-  // highestWordScore(): Function which returns the highestScoringWord score
+  return Scrabble.highestScoreFrom(this.plays);
 };
 
 
-var myPlayer = new Player;
-console.log(myPlayer.score);
+var myPlayer = new Player("Mario");
 console.log(myPlayer.play("hippie"));
 console.log(myPlayer.play("hotdog"));
 console.log(myPlayer.play("cat"));
+console.log(myPlayer.totalScore());
+console.log(myPlayer.plays);
+console.log(myPlayer.hasWon());
+console.log(myPlayer.highestWordScore());
 
 
 module.exports = Scrabble;
