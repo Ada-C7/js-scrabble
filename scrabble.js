@@ -60,7 +60,8 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
 //legnth is 7 or min legnth
 // if (letter.match(/[a-z]/i) !== null) {
 
-var my_score = new Scrabble();
-console.log(my_score.score("aoIOUAA"));
-console.log(my_score.highestScoreFrom(["PURPLE", "PINK"]));
+// var my_score = new Scrabble();
+// console.log(my_score.score("aoIOUAA"));
+// console.log(my_score.score("pink"));
+// console.log(my_score.highestScoreFrom(["PURPLE", "PINK"]));
 module.exports = Scrabble;
