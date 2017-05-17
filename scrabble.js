@@ -20,7 +20,26 @@ var Scrabble = {
     return wordScore;
   },
   highestScoreFrom: function(arrayOfWords) {
-
+    var scoreHash = {};
+    var arrayOfWords = arrayOfWords;
+    var singleWordScore = 0;
+    var max_score = 0;
+    var max_word = 0;
+    for (var i = 0; i < arrayOfWords.length; i++) {
+      singleWordScore = this.score(arrayOfWords[i]);
+      scoreHash[arrayOfWords[i]] = singleWordScore;
+    }
+    for (var key in scoreHash) {
+      if (scoreHash[key] > max_score) {
+        max_score = scoreHash[key];
+        max_word = key;
+      } else if (scoreHash[key] == max_score && key.length == 7 && max_word.length != 7) {
+        max_word = key;
+      } else if (scoreHash[key] == max_score && key.length < max_word.length && max_word.length != 7) {
+        max_word = key;
+      }
+    }
+    return max_word;
   }
 };
 
@@ -42,3 +61,5 @@ module.exports = Scrabble;
 console.log(Scrabble.score("hello"));
 // console.log(game.helloWorld());
 // console.log(game.score("hello"));
+
+console.log(Scrabble.highestScoreFrom(["hi", "hello", "zzzz"]));

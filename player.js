@@ -18,6 +18,10 @@ Player.prototype = {
       totalScore += Scrabble.score(word);
     });
     return totalScore;
+  },
+  hasWon(): function() {
+    // this greater than is already going to return true or false, so no need for if statement or ternary
+    return (this.totalScore()) > 100;
   }
 };
 
