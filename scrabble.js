@@ -5,7 +5,7 @@ Scrabble.score = function(word) {
   // TO DO:
   // - error for invalid characters
 
-  if ( typeof(word) !== 'string' || word.length > 7 ) return "Invalid word";
+  if ( typeof(word) !== 'string' || word.length > 7 || !/^[a-zA-Z]+$/.test(word) ) return "Invalid word";
 
   var wordScore = word.length == 7 ? 50 : 0,
       letterValues = {
@@ -51,9 +51,7 @@ var Player = function(name) {
 };
 
 Player.prototype.play = function(word) {
-  if ( this.hasWon() ){
-    return false;
-  }
+  if ( this.hasWon() ) return false;
   this.plays.push(word);
   return this.name + " played " + word + ".";
 };
@@ -81,6 +79,8 @@ Player.prototype.highestWordScore = function() {
   return Scrabble.score( this.highestScoringWord() );
 };
 
+
+
 var myPlayer = new Player("Mario");
 console.log(myPlayer.play("hippie") + " : " + Scrabble.score("hippie"));
 console.log(myPlayer.play("hotdog") + " : " + Scrabble.score("hotdog"));
@@ -89,10 +89,11 @@ console.log(myPlayer.play("zzzzzz") + " : " + Scrabble.score("zzzzzz"));
 console.log(myPlayer.play("unicorn") + " : " + Scrabble.score("unicorn"));
 console.log(myPlayer.plays);
 
+console.log(Scrabble.score("tree8"));
 console.log(myPlayer.totalScore());
 console.log(myPlayer.hasWon());
 console.log(myPlayer.highestScoringWord());
 console.log(myPlayer.highestWordScore());
-console.log(Scrabble.highestScoreFrom("zzzzzzzzzzzz"));
+console.log(Scrabble.highestScoreFrom(["cat", "dog", "hippo"]));
 
 module.exports = Scrabble;
