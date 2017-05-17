@@ -1,3 +1,6 @@
+var prompt = require('prompt');
+prompt.start();
+
 var Scrabble = function() {};
 
 var scoreChart = {
@@ -29,13 +32,17 @@ var scoreChart = {
      Z: 10
 };
 
-var score = function(word) {
+var checkWord = function(word) {
 
-     if (/[^a-z]/i.test(word) || !(word)) {
-          return 'This serves as a gentle reminder that you\'re playing Scrabble. Letters only, please.';
+     if (/[^a-z]/i.test(word) || !(word) || word.length > 7) {
+          return "This serves as a gentle reminder that you're playing Scrabble. Seven letters only, please.";
      } else {
-          var wordArray = word.toUpperCase().split("");
+          return word.toUpperCase();
      }
+}
+
+var packageWord = function(word) {
+     var wordArray = word.split("");
 
      var scoreArray = [],
           total = 0,
@@ -57,31 +64,105 @@ var score = function(word) {
      return packaged;
 };
 
-var selectHighestScore = function(wordArray) {
-      highestScore = [[["a"],1]];
+var packageHighestScore = function(wordArray) {
+      var highestScore = [];
 
-     wordArray.forEach(function(word){
-          var packaged =[];
-          packaged = score(word);
+
+     wordArray.forEach(function(word) {
+          var packaged = [];
+          packaged = packageWord(word);
           console.log(highestScore);
 
-          if (highestScore[0][1] == packaged[1]) {
+          if (!highestScore.length) {
                highestScore.push(packaged);
+          } else if (highestScore[0][1] == packaged[1]) {
+               if (highestScore[0][0].length == 7) {
+               } else if (packaged[0].length == 7 && highestScore[0][0].length < 7) {
+                    highestScore = [];
+                    highestScore.push(packaged);
+               } else if (highestScore[0][0].length > packaged[0].length) {
+                    highestScore = [];
+                    highestScore.push(packaged);
+               } else {
+               }
           } else if (highestScore[0][1] < packaged[1]) {
-               highestScore.splice(-1, 1)
+               highestScore = [];
                highestScore.push(packaged);
           }
      });
      return highestScore;
 };
 
-// highestScoreFrom(arrayOfWords): returns the word in the array with the highest score.
-// Note that it’s better to use fewer tiles, so if the top score is tied between multiple words, pick the one with the fewest letters.
-// Note that there is a bonus (50 points) for using all seven letters. If the top score is tied between multiple words and one used all seven letters, choose the one with seven letters over the one with fewer tiles.
-// If the there are multiple words that are the same score and same length, pick the first one in supplied list.
-wordArray = ['empire', 'strikes', 'back', 'return', 'of', 'the', 'jedi', 'zawisto', 'zawista']
+var Player = function(name) {
+     this.name = name;
+};
 
-console.log(selectHighestScore(wordArray));
+Player.prototype = {
+     plays: [],
+     play: function(word, checkWord) {
+          if (this.hasWon()) {
+               return false;
+          } else {
+               if (checkWord(word).length < 8) {
+                    this.plays.push(checkWord(word));
+               } else {
+                    return checkWord(word);
+               }
+          }
+     },
+     totalScore: function() {
+          var total = 0;
+
+          this.plays.forEach(function(word) {
+               var packaged = [];
+               packaged = packageWord(word);
+               total += packaged[1];
+          });
+          return total;
+     },
+     hasWon: function() {
+          if (this.totalScore() > 100) {
+               return true;
+          } else {
+               return false;
+          }
+     },
+     highestScoringWord: function() {
+          packaged = packageHighestScore(this.plays)
+          return packaged[0][0].join('')
+     },
+     highestWordScore: function() {
+          packaged = packageHighestScore(this.plays)
+          return packaged[0][1]
+     }
+}
+
+var darth = new Player('Darth');
+
+console.log(darth.plays);
+var word = 'return'
+darth.play(word,checkWord);
+var word = 'of'
+darth.play(word,checkWord);
+var word = 'the'
+darth.play(word,checkWord);
+var word = 'jedi'
+darth.play(word,checkWord);
+var word = 'empire'
+darth.play(word,checkWord);
+var word = 'strikes'
+darth.play(word,checkWord);
+console.log(darth.plays);
+console.log(darth.totalScore());
+console.log(darth.hasWon());
+var word = 'back'
+darth.play(word,checkWord);
+console.log(darth.plays);
+console.log(darth.totalScore());
+console.log(darth.hasWon());
+console.log(darth.highestScoringWord());
+console.log(darth.highestWordScore());
+
 
 
 module.exports = Scrabble;
