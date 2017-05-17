@@ -43,27 +43,27 @@ Player.prototype.highestWordScore = function() {
 };
 
 
-
-console.log(Scrabble.score('pizza'));
-console.log(Scrabble.score('coffee'));
-console.log(Scrabble.score('pikkkka'));
-console.log(Scrabble.highestScoreFrom(['pizza', 'coffee', 'fizz','pikkkka', 'pizze']));
-console.log(Scrabble.score('qqqqqq'));
-console.log(Scrabble.score('aaaaaah'));
-console.log(Scrabble.highestScoreFrom(['pizza', 'coffee', 'fizz','aaaaaah', 'qqqqqq',  'pizze',]));
-console.log(Scrabble.highestScoreFrom(['pizza', 'coffee', 'uuuuuuh', 'fizz', 'qqqqqq',  'aaaaaah', 'zzzzzz', 'uuuuuuh' ,'pizze',]));
-
-
-
-var alix = new Player('Alix');
-console.log(alix.name);
-console.log(alix.plays);
-alix.play('happy');
-alix.play('dopey');
-alix.play('sleepy');
-console.log(alix.plays);
-alix.play('zzzzzzz');
-console.log(alix.totalScore());
-console.log(alix.hasWon());
-console.log(alix.highestScoringWord());
-console.log(alix.highestWordScore());
+// //Manual testing...
+// console.log(Scrabble.score('pizza'));
+// console.log(Scrabble.score('coffee'));
+// console.log(Scrabble.score('pikkkka'));
+// console.log(Scrabble.highestScoreFrom(['pizza', 'coffee', 'fizz','pikkkka', 'pizze']));
+// console.log(Scrabble.score('qqqqqq'));
+// console.log(Scrabble.score('aaaaaah'));
+// console.log(Scrabble.highestScoreFrom(['pizza', 'coffee', 'fizz','aaaaaah', 'qqqqqq',  'pizze',]));
+// console.log(Scrabble.highestScoreFrom(['pizza', 'coffee', 'uuuuuuh', 'fizz', 'qqqqqq',  'aaaaaah', 'zzzzzz', 'uuuuuuh' ,'pizze',]));
+//
+//
+//
+// var alix = new Player('Alix');
+// console.log(alix.name);
+// console.log(alix.plays);
+// alix.play('happy');
+// alix.play('dopey');
+// alix.play('sleepy');
+// console.log(alix.plays);
+// alix.play('zzzzzzz');
+// console.log(alix.totalScore());
+// console.log(alix.hasWon());
+// console.log(alix.highestScoringWord());
+// console.log(alix.highestWordScore());
