@@ -34,7 +34,9 @@ Player.prototype.highestScoringWord = function() {
 };
 
 Player.prototype.highestWordScore = function() {
-
+  var word = this.highestScoringWord();
+  var score = Scrabble.score(word);
+  return score;
 };
 
 // when I run player.js with the require uptop I am also running any code
@@ -52,4 +54,5 @@ player1.totalScore();
 console.log(player1.score);
 // console.log(player1.hasWon());
 // playr1.play("z");
-console.log(player1.highestScoringWord());
+// console.log(player1.highestScoringWord());
+console.log(player1.highestWordScore());
