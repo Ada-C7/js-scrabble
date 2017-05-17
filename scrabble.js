@@ -29,12 +29,13 @@ Scrabble.prototype.score = function(input) {
 
 Scrabble.prototype.highestScoreFrom = function(input) {
   var arrayOfWords = input;
-  var arrayOfScores = [0];
-  for (var wordInArray of arrayOfWords) {
-    var wordScore = this.score(wordInArray);
+  var arrayOfScores = [];
+  for (var word of arrayOfWords) {
+    var wordScore = this.score(word);
     arrayOfScores.push(wordScore);
   }
   return arrayOfScores;
+  // TODO: actual scoring rules
 };
 
 // initializer
@@ -44,32 +45,44 @@ console.log(myAttempt.highestScoreFrom(['potato', 'jam', 'party']));
 //module.exports = Scrabble;
 
 
-// // Player
-// // constroctor -- instance variables
-// var Player = function(input) {
-//   this.name = input;
-// };
-//
-// // iterators -- instance methods
-// Player.prototype.play = function() {
-//
-// };
-//
-// Player.prototype.totalScore = function() {
-//
-// };
-//
-// Player.prototype.hasWon = function() {
-//
-// };
-//
-// Player.prototype.highestScoringWord = function() {
-//
-// };
-//
-// Player.prototype.highestWordScore = function() {
-//
-// };
-//
-// // initializer
-// module.exports = Player;
+// Player
+// constroctor -- instance variables
+var Player = function(input) {
+  this.name = input;
+  this.plays = [];
+};
+
+// iterators -- instance methods
+Player.prototype.play = function(input) {
+  var word = input;
+  if (this.hasWon() === 'false') {
+    this.plays.push(word);
+  } else {
+    return false;
+  }
+};
+
+Player.prototype.totalScore = function() {
+  this.play();
+
+};
+
+Player.prototype.hasWon = function() {
+  if (this.totalScore() >= 100) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+Player.prototype.highestScoringWord = function() {
+
+};
+
+Player.prototype.highestWordScore = function() {
+
+};
+
+// initializer
+var myPlayer = new Player('Bernie');
+//module.exports = Player;
