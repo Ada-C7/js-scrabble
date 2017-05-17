@@ -1,15 +1,5 @@
-// TWO SECTIONS they could be separated in different modles but thats not important right now as long as they are obvious in different sections
-// Game
+// GAME
 var Scrabble = function() {};
-
-/* ##### BASELINE #####
-Scrabble.prototype.helloWorld = function() {
-return 'hello world!';
-};
-var test = new Scrabble();
-console.log(test.helloWorld());
-######################### */
-
 
 Scrabble.prototype.score = function(word) {
   var one = ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"];
@@ -53,7 +43,6 @@ Scrabble.prototype.highestScore = function(arrayOfWords) {
   var winningWord = "";
   var winningScore = 0;
 
-  //MAIN//
   for (var i = 0; i < arrayOfWords.length; i++) {
     var word = arrayOfWords[i];
     var wordScore = this.score(word);
