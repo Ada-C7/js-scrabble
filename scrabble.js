@@ -38,7 +38,7 @@ function findHighestScoring(words) {
 
   //find any tie words - or singular words with the highest score
   var highestScoring = Object.keys(wordsWithScores).filter( function(word) {
-    if ( wordsWithScores[word] == highestScore ) {
+    if ( wordsWithScores[word] === highestScore ) {
       return word;
     }
   });
