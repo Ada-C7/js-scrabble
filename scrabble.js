@@ -1,7 +1,5 @@
 var Scrabble = function() {};
 
-// YOUR CODE HERE
-
 var pointValue = {
   'a': 1,
   'e': 1,
@@ -32,13 +30,11 @@ var pointValue = {
 
 };
 
+//my initializer
 var ScrabbleGame = function() {
-  this.word = word;
-  this.wordscore = wordscore;
-  this.points = points;
 };
-
-var score = function(word) {
+// setting up the structure of scoring on any word
+ScrabbleGame.prototype.score = function(word) {
   var points = 0;
     for (var i = 0; i < word.length; i++) {
     points += pointValue[word[i]];
@@ -47,12 +43,25 @@ var score = function(word) {
   wordscore = word.score + 50;
 };
 return word.score;
-};
+}
 
+var highestScoreFrom = function(wordsPlayed) {
+  var highestScoringWord = ""
+      highestWordscore = 0
+  for (var i = 0; i < wordsPlayed.length; i++) {
+    if(score(word) > highestWordscore) {
+      highestWordscore = word;
+      highest = score(word);
+    }
+  }
+  return highestScoringWord
+}
 
-// YOUR CODE HERE
-Scrabble.prototype.helloWorld = function() {
-  return 'hello world!';
-};
+var playscrabble = new ScrabbleGame();
+playscrabble.score(word)
+
+// Scrabble.prototype.helloWorld = function() {
+//   return 'hello world!';
+// };
 
 module.exports = Scrabble;
