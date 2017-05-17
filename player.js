@@ -34,13 +34,24 @@ Player.prototype.highestScoringWord = function() {
 };
 
 Player.prototype.highestScoringWord = function() {
-    return Scrabble.highestScoreFrom(this.plays);
+  return Scrabble.highestScoreFrom(this.plays);
 };
 
 
-// Player.prototype.highestWordScore = function() {
-//     return Scrabble.highestScoreFrom(this.plays);
-// };
+Player.prototype.highestWordScore = function() {
+  return Scrabble.score(this.highestScoringWord());
+};
+
+
+
+console.log(Scrabble.score('pizza'));
+console.log(Scrabble.score('coffee'));
+console.log(Scrabble.score('pikkkka'));
+console.log(Scrabble.highestScoreFrom(['pizza', 'coffee', 'fizz','pikkkka', 'pizze']));
+console.log(Scrabble.score('qqqqqq'));
+console.log(Scrabble.score('aaaaaah'));
+console.log(Scrabble.highestScoreFrom(['pizza', 'coffee', 'fizz','aaaaaah', 'qqqqqq',  'pizze',]));
+console.log(Scrabble.highestScoreFrom(['pizza', 'coffee', 'uuuuuuh', 'fizz', 'qqqqqq',  'aaaaaah', 'zzzzzz', 'uuuuuuh' ,'pizze',]));
 
 
 
@@ -55,3 +66,4 @@ alix.play('zzzzzzz');
 console.log(alix.totalScore());
 console.log(alix.hasWon());
 console.log(alix.highestScoringWord());
+console.log(alix.highestWordScore());
