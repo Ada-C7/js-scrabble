@@ -1,13 +1,3 @@
-// Given sample
-// var Scrabble = function() {};
-//
-// // YOUR CODE HERE
-// Scrabble.prototype.helloWorld = function() {
-//   return 'hello world!';
-// };
-//
-// module.exports = Scrabble;
-
 var scoreChart = {
   'A' : 1, 'E' : 1, 'I' : 1, 'O' : 1, 'U' : 1,
   'L' : 1, 'N' : 1, 'R' : 1, 'S' : 1, 'T' : 1,
@@ -29,7 +19,7 @@ var Scrabble = function() {
 
 // prototype -- instance methods
 Scrabble.prototype.score = function(input) {
-  word = input.toUpperCase();
+  var word = input.toUpperCase();
   var sum = 0;
   for (var i = 0; i < word.length; i++) {
     sum += scoreChart[word.charAt(i)];
@@ -37,13 +27,19 @@ Scrabble.prototype.score = function(input) {
   return sum;
 };
 
-Scrabble.prototype.highestScoreFrom = function() {
-  
+Scrabble.prototype.highestScoreFrom = function(input) {
+  var arrayOfWords = input;
+  var arrayOfScores = [0];
+  for (var wordInArray of arrayOfWords) {
+    arrayOfScores.push(wordInArray.score);
+  }
+  return arrayOfScores;
 };
 
 // initializer
 var myAttempt = new Scrabble();
 console.log(myAttempt.score('kaitlin'));
+console.log(myAttempt.highestScoreFrom(['potato', 'jam', 'party']));
 //module.exports = Scrabble;
 
 
