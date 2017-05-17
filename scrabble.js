@@ -29,11 +29,7 @@ var Scrabble = function() {
   }
 };
 
-// Scrabble.prototype.helloWorld = function() {
-//   return 'hello world!';
-// };
-
-// Scrabble.prototype.scoreWord = function(word) {
+// could also do Scrabble.prototype.scoreWord = function(word) {
 Scrabble.prototype = {
   scoreWord: function(word) { var score = 0,
     word_length = word.length
@@ -44,13 +40,10 @@ Scrabble.prototype = {
     if (word_length == 7) {
       score += 50;
     }
-
     // console.log(score)
     return score
   },
 
-
-  // Scrabble.prototype.
   highestScoreFrom: function(arrayOfWords) {
     var highest_scored_word = 0
     var highest_scored_word_length = highest_scored_word.length
@@ -73,11 +66,6 @@ Scrabble.prototype = {
     console.log(highest_scored_word)
     return highest_scored_word
   }
-
-
-
-
-  //
 
 };
 
