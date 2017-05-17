@@ -29,27 +29,70 @@ var Scrabble = function() {
   }
 };
 
-Scrabble.prototype.helloWorld = function() {
-  return 'hello world!';
-};
+// Scrabble.prototype.helloWorld = function() {
+//   return 'hello world!';
+// };
 
-Scrabble.prototype.scoreWord = function(word) {
-  var score = 0
-  var word_length = word.length
+// Scrabble.prototype.scoreWord = function(word) {
+Scrabble.prototype = {
+  scoreWord: function(word) { var score = 0,
+    word_length = word.length
 
-  for(var i = 0; i < word_length; i++)
+    for(var i = 0; i < word_length; i++)
     score += tile_scores[word.charAt(i)];
 
-  if (word_length == 7) {
-    score += 50;
-  }
-  // return score
-  console.log(score)
+    if (word_length == 7) {
+      score += 50;
+    }
+
+    // console.log(score)
+    return score
+  },
+
+
+  // Scrabble.prototype.
+  highestScoreFrom: function(arrayOfWords) {
+    var highest_scored_word = 0
+    var highest_scored_word_length = highest_scored_word.length
+    var self = this
+     arrayOfWords.forEach(function(word) {
+
+       // if (this.scoreWord(word) > highest_scored_word.this.scoreWord(word))
+       if (self.scoreWord(word) == self.scoreWord(highest_scored_word)) {
+         var current_word_length = word.length
+         if (highest_scored_word_length > current_word_length) {
+           highest_scored_word = word
+         }
+
+       }
+       else if (self.scoreWord(word) >= self.scoreWord(highest_scored_word)) {
+         highest_scored_word = word;
+       }
+     })
+     console.log(highest_scored_word)
+   }
+
+
+
+
+  //
+
 };
+
+//second option
+
+// var scoreHash = {}
+// // var self = this
+// arrayOfWords.forEach(function(word) {
+//   scoreHash[word] = Scrabble.prototype.scoreWord(word)
+// })
+// // console.log(scoreHash)
+// return
 
 
 var gameOne = new Scrabble
-gameOne.scoreWord("jazzily")
-console.log(gameOne)
+// gameOne.scoreWord("yes")
+gameOne.highestScoreFrom(["yes", "no", "zo", "xaaa"])
+// console.log(gameOne)
 
 module.exports = Scrabble;
