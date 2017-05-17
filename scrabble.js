@@ -75,10 +75,6 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
 
   }
 
-
-
-
-
   console.log(scoringOfWords);
   console.log(maxValue);
   console.log(winningWords);
@@ -88,9 +84,15 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
   // If the there are multiple words that are the same score and same length, pick the first one in supplied list.
 };
 module.exports = Scrabble;
+// 
+// var scrabble = new Scrabble();
+// console.log(scrabble.score("eeeee"));
+//
+// var words = ["aaaa", "bbbbb", "eeeeeee"];
+// scrabble.highestScoreFrom(words);
 
-var scrabble = new Scrabble();
-console.log(scrabble.score("eeeee"));
 
-var words = ["aaaa", "bbbbb", "eeeeeee"];
-scrabble.highestScoreFrom(words);
+var Player = function(name) {
+  this.name = name;
+  this.plays = [];
+};
