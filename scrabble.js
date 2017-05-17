@@ -33,15 +33,20 @@ var Scrabble = function() {
   // YOUR CODE HERE
 Scrabble.prototype.score = function(word) {
     // return an array of letters in the word
-    var letters = word.toUppercase().split("");
-};
+    var letters = word.toUpperCase().split("");
+
   var scoreTotal = 0;
-  letters.forEach(function (num) {
-    scoreTotal += SCORE_CHART;
+  letters.forEach(function (letter) {
+    scoreTotal += SCORE_CHART[letter];
   });
+  if (word.length >= 7) {
+    scoreTotal += 50;
+  }
+  return scoreTotal;
+};
 
 
 var game = new Scrabble();
-play = game.score("word");
+play = game.score("apple");
 console.log(play);
 module.exports = Scrabble;
