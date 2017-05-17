@@ -70,11 +70,12 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
     }
   });
 
-  if (winningWords.length == 1) {
-    return winningWords[0];
-  } else {
+  // if (winningWords.length == 1) {
+  //   return winningWords[0];
+  // } else {
+  return winningWords[0];
+  };
 
-  }
 
   // console.log(scoringOfWords);
   // console.log(maxValue);
@@ -83,7 +84,6 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
   // if the top score is tied between multiple words, pick the one with the fewest letters
   // If the top score is tied between multiple words and one used all seven letters, choose the one with seven letters over the one with fewer tiles
   // If the there are multiple words that are the same score and same length, pick the first one in supplied list.
-};
 
 //
 // var scrabble = new Scrabble();
@@ -123,6 +123,10 @@ Player.prototype.hasWon = function() {
   return false;
 };
 
+Player.prototype.highestScoringWord = function() {
+  return Scrabble.highestScoreFrom(this.plays);
+};
+
 var player = new Player("bob");
 player.play("a");
 console.log(player.plays);
@@ -137,5 +141,5 @@ player.play("a");
 console.log(player.hasWon());
 console.log(player.plays);
 console.log(player.totalScore());
-
+console.log(player.highestScoringWord());
 module.exports = Scrabble;
