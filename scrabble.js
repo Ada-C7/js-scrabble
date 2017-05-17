@@ -72,7 +72,7 @@ var Player = function(name) {
 
 
     // hasWon returns true if the player has over 100 points
-    hasWon = false;
+    this.hasWon = false;
 };
 
 Player.prototype = {
@@ -107,16 +107,15 @@ Player.prototype = {
 }
 
 var my_game = new Player('alison');
-console.log(my_game.name);
-// my_game.play('zen');
-// my_game.play('cat');
-// my_game.play('qqqqqqqqqqqq');
+my_game.play('zen');
+my_game.play('cat');
+my_game.play('qqqqqqqqqqqq');
 
 
 console.log('This is the total score: ' + my_game.totalScore());
-// console.log(my_game.hasWon);
-console.log('This is the top word: ' + my_game.highestScoringWord());
-console.log('This is the high score: ' + my_game.highestWordScore());
+console.log('Has won? ' + my_game.hasWon);
+// console.log('This is the top word: ' + my_game.highestScoringWord());
+// console.log('This is the high score: ' + my_game.highestWordScore());
 
 
 
