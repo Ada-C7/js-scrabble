@@ -88,18 +88,80 @@ var Player = function(name) {
 
 Player.prototype = {
   play: function(word) {
-    this.plays.push(word);
+    if (this.hasWon()) {
+      return false;
+    } else {
+      this.plays.push(word);
+    }
+  },
+  totalScore: function() {
+    var wordsPlayed = this.plays;
+    var total = 0;
+    // iterate through words played
+    for (var i = 0; i < wordsPlayed.length; i++) {
+      // add up score
+      // DOING THIS B/C Score is only avail to game.  Does it matter?
+      myGame = new Scrabble();
+      total += myGame.score(wordsPlayed[i]);
+    }
+    // returns total
+    return total;
+  },
+  hasWon: function() {
+    if (this.totalScore > 100) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  highestScoringWord: function() {
+    var myGame = new Scrabble();
+    return myGame.highestScoreFrom(this.plays);
+  },
+  highestWordScore : function() {
+    var myGame = new Scrabble();
+    var word = myGame.highestScoreFrom(this.plays);
+    return myGame.score(word);
   }
 };
 
 // testing Player
 var lynn = new Player("Lynn");
-
 console.log(lynn.name);
-console.log(lynn.plays);
 
+// test plays & total score
+console.log(lynn.plays);
+console.log(lynn.totalScore());
 lynn.play("dog");
-
 console.log(lynn.plays);
+console.log(lynn.totalScore());
+lynn.play("zoo");
+console.log(lynn.plays);
+console.log(lynn.totalScore());
+lynn.play("zaaaaaa");
+console.log(lynn.plays);
+console.log(lynn.totalScore());
+
+// test highestScoringWord
+console.log("HIGHEST SCORING WORD: " + lynn.highestScoringWord());
+console.log("HIGHEST SCORING WORD SCORE: " + lynn.highestWordScore());
+
+lynn.play("zoooooo");
+console.log(lynn.plays);
+console.log(lynn.totalScore());
+
+// test highestScoringWord - should still be zaaaaaa
+console.log("HIGHEST SCORING WORD: " + lynn.highestScoringWord());
+console.log("HIGHEST SCORING WORD SCORE: " + lynn.highestWordScore());
+
+// test has won?
+console.log(lynn.hasWon());
+
+Player.prototype.totalScore = 120;
+
+// test has won when score is over 100
+console.log(lynn.hasWon());
+// shouldn't be allowed to play a word now
+console.log(lynn.play("zoo"));
 
 module.exports = Scrabble;
