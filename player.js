@@ -30,7 +30,7 @@ Player.prototype.totalScore = function(){
 Player.prototype.hasWon = function(){ return this.score >= 100 ? true : false };
 
 Player.prototype.highestScoringWord = function() {
-
+  return Scrabble.highestScoreFrom(this.plays);
 };
 
 Player.prototype.highestWordScore = function() {
@@ -42,14 +42,14 @@ Player.prototype.highestWordScore = function() {
 var player1 = new Player ("cynthia");
 console.log(player1.name);
 player1.play("hellooo");
-// player1.play("cat");
-// player1.play("dog");
-// player1.play("xo");
-// player1.play("zoo");
-player1.play("zzzz")
+player1.play("cat");
+player1.play("dog");
+player1.play("xo");
+player1.play("zoo");
+// player1.play("zzz")
 console.log(player1.plays);
 player1.totalScore();
 console.log(player1.score);
-console.log(player1.hasWon());
+// console.log(player1.hasWon());
 // playr1.play("z");
-console.log(player1.play("z"));
+console.log(player1.highestScoringWord());
