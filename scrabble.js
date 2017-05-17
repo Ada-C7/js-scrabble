@@ -17,6 +17,50 @@ Scrabble.prototype.score = function(word) {
   return ( word.length === 7 ) ? score + 50 : score;
 };
 
+Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
+  // check that is an array
+  // var maxScore = arrayOfWords.find()
+
+  // var topWords = [];
+  // // var maxScore = 0;
+  // var self = this;
+  // var topWords = arrayOfWords.reduce(function(accumulator, word)) {
+  //
+  // }
+  //
+  //
+  //   score = self.score(word);
+  //   if (score > maxScore) {
+  //     topWord = word;
+  //     maxScore = score;
+  //   } else if (score === maxScore && word.length != topWord.length) {
+  //     if (word.length === 7 || word.length < topWord.length) {
+  //       topWord = word;
+  //       maxScore = score;
+  //     }
+  //   }
+    //
+    var topWord;
+    var maxScore = 0;
+    var self = this;
+    arrayOfWords.forEach(function(word) {
+      score = self.score(word);
+      if (score > maxScore) {
+        topWord = word;
+        maxScore = score;
+      } else if (score === maxScore && word.length != topWord.length) {
+        if (word.length === 7 || word.length < topWord.length) {
+          topWord = word;
+          maxScore = score;
+        }
+      }
+  })
+  return topWord;
+};
+//legnth is 7 or min legnth
+// if (letter.match(/[a-z]/i) !== null) {
+
 var my_score = new Scrabble();
 console.log(my_score.score("aoIOUAA"));
+console.log(my_score.highestScoreFrom(["PURPLE", "PINK"]));
 module.exports = Scrabble;
