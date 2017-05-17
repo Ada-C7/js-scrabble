@@ -1,8 +1,5 @@
-'use strict';
-var prompt = require('prompt');
-
-//start the prompt
-prompt.start();
+// 'use strict';
+// var prompt = require('prompt');
 
 
 var scoreboard = {}; // object, not hash...but similar
@@ -48,48 +45,44 @@ Scrabble.prototype = {
       var word = arrayOfWords[index];
       all_words_played[word] = this.score(word);
     }
-    var highest_scores = [];
+    var highest_scoring_words = [];
     var max_score = 0;
     // search object for highest score
       for (var word in all_words_played) {
         var score = all_words_played[word]; // keys are words
         if (score > max_score) {
           max_score = score;
-          highest_scores = [word];
+          highest_scoring_words = [word];
         } else if (score == max_score) {
-          highest_scores.append(word);
+          highest_scoring_words.append(word);
         }
       }
     // if two values are the same (tie)
-    if (highest_scores.length > 1) {
-      var wordLengths = {};
-      for (var index = 0; index < highest_scores.length; index++) {
-        var word = highest_scores[index]
-        wordLengths[word.length] = 1; // we are only using the object for the keys, not the values
-        // if words are the same length
-
-        // return the first played
+    if (highest_scoring_words.length > 1) {
+      var wordLengths = [];
+      // loop that goes through the highest_scoring_words array and puts the lengths into wordLengths
+      for (var index = 0; index < highest_scoring_words.length; index++) {
+        var word = highest_scoring_words[index]
+        wordLengths.append(word.length );
       }
-      if (wordLengths.length == 1)
+      max_length = 0;
+      for (var index = 0; index < wordLengths.length; index++) {
+        if (index > max_length) {
+          max_length = index;
+      } else if (index == max_length) {
+          // return the word that came right before it
+        }
+      }
       // if one of them has 7 letters
       if (word.length == 7) {
         // return that word as the winner
         return word;
       }
-
     }
     //return winning word
-    return highest_scores[0];
+    return highest_scoring_words[0];
   }
 };
-
-// var calculate = function(error, input) {
-//   var play = new Scrabble();
-//   play.score(input.word);
-// };
-//
-// prompt.get(["word"], calculate);
-
 
 
 // code they gave us:
