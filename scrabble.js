@@ -5,7 +5,11 @@ var scoreChart = {
 }
 
 var score = function(word){
-  scoreOfWord = 0
+  if(word.length == 7){
+    var scoreOfWord = 50;
+  } else {
+    var scoreOfWord = 0;
+  }
   word = word.toLowerCase()
   for (var i = 0; i < word.length; i++)
   scoreOfWord += scoreChart[word.charAt(i)];
@@ -35,5 +39,5 @@ var highestScoreFrom = function(arrayOfWords){
 //
 // module.exports = Scrabble;
 
-// score("MaRiSol")
-console.log(highestScoreFrom(["zzz", "zzz", "man"]))
+score("MaRiSol")
+// console.log(highestScoreFrom(["zzz", "zzz", "man"]))
