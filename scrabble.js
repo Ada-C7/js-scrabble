@@ -17,7 +17,7 @@ var Scrabble = function() {};
     }
 
     word.length == 7 ? wordScore += 50 : wordScore;
-    console.log(wordScore);
+    // console.log(wordScore);
     return wordScore;
 
   };
@@ -25,22 +25,36 @@ var Scrabble = function() {};
 
   Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
 
-    var arrayOfScores = [];
+    var allScoresAndWords = [];
     var self = this;
+    var highestScore = 0;
+    var highestScores = [];
 
     arrayOfWords.forEach(function(word) {
       var score = self.score(word);
-      arrayOfScores.push(score);
+      allScoresAndWords.push([word, score]);
     })
 
-    console.log(arrayOfScores);
-    return arrayOfScores;
+    allScoresAndWords.forEach(function(scoreAndWord) {
+      if (scoreAndWord[1] >= highestScore) {
+        if (scoreAndWord[1] == highestScore) {
+          highestScores.push(scoreAndWord);
+        } else if (scoreAndWord[1] > highestScore) {
+          highestScores = [];
+          highestScores.push(scoreAndWord);
+          highestScore = scoreAndWord[1];
+        };
+      };
+    });
+
+    console.log(highestScores);
+    return highestScores;
   };
 
 
 
 var game = new Scrabble();
-game.score("heelloo");
-game.highestScoreFrom(["hello", "heelloo", "hi"]);
+// game.score("heelloo");
+game.highestScoreFrom(["hello", "heelloo", "hi", "heelloo", "moo"]);
 
 module.exports = Scrabble;
