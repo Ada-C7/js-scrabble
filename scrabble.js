@@ -1,6 +1,6 @@
 var Scrabble = function() {};
 
-Scrabble.prototype.score = function(word) {
+Scrabble.score = function(word) {
   var total = 0;
   var lookup = {
     A: 1, E: 1, I: 1, O: 1, U: 1, L: 1, N: 1, R: 1, S: 1, T: 1,
@@ -10,7 +10,7 @@ Scrabble.prototype.score = function(word) {
     K: 5,
     J: 8, X: 8,
     Q: 10, Z: 10
-  }
+  };
   word = word.toUpperCase();
   for (var i = 0; i < word.length; i++) {
     score = lookup[word[i]];
@@ -20,7 +20,7 @@ Scrabble.prototype.score = function(word) {
   return total;
 };
 
-Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
+Scrabble.highestScoreFrom = function(arrayOfWords) {
   //call score function on each word in arrayOfWords
   var self = this;
   var scores = arrayOfWords.map(function(word) {
@@ -64,27 +64,42 @@ var Player = function(name) {
 }
 
 Player.prototype = {
-  plays: []
+  plays: [],
 }
 
 Player.prototype.play = function(word) {
-  // returns false if player has already won
-  this.plays.push(word);
+  if (this.hasWon()) {
+    return false;
+  } else {
+    this.plays.push(word);
+  };
 };
 
 Player.prototype.totalScore = function() {
-  //iterate over plays array
-  //score each word and return sum of scores
-  // var total = this.plays.reduce(function(sum, word) {
-  //   return sum + Scrabble.score.call(this, word);
-  // })
-  total = 0;
-  var game = new Scrabble;
-  for (var i = 0; i < this.plays.length; i++) {
-    total += game.score(this.plays[i]);
-  }
+  var total = this.plays.reduce(function(sum, word) {
+    return sum + Scrabble.score(word);
+  }, 0);
+
   return total;
+};
+
+Player.prototype.hasWon = function() {
+  if (this.totalScore() > 100) {
+    return true;
+  } else {
+    return false;
+  };
+};
+
+Player.prototype.highestScoringWord = function() {
+  return Scrabble.highestScoreFrom(this.plays);
+};
+
+Player.prototype.highestWordScore = function() {
+  return Scrabble.score(this.highestScoringWord());
 }
+
+module.exports = Player;
 
 var yoda = new Player("Yoda");
 console.log(yoda.name);
@@ -94,12 +109,14 @@ console.log(yoda.plays);
 yoda.play("arbitrary");
 console.log(yoda.plays);
 console.log(yoda.totalScore());
+console.log(yoda.hasWon());
+yoda.play("tappanzee");
+yoda.play("haiku");
+yoda.play("quixotic");
+yoda.play("zamboni");
+yoda.play("heffalump");
 
-
-
-
-// var scrab = new Scrabble;
-// console.log(scrab.score('pigpigs'));
-// console.log(scrab.score('bigbigs'));
-// console.log(scrab.score('aa'));
-// console.log(scrab.highestScoreFrom(['pigpiggies', 'bigbiggies', 'aa']));
+console.log(yoda.totalScore());
+console.log(yoda.hasWon());
+console.log(yoda.highestScoringWord());
+console.log(yoda.highestWordScore());
