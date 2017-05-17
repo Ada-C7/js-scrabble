@@ -135,6 +135,20 @@ TileBag.prototype = {
         array[index] = temp;
     }
     this.availableTiles = array;
+  },
+  drawTiles: function(number) {
+    var selectedTiles = [];
+    if (number > 7) {
+      return "You may only have seven tiles in your hand";
+    } else if (this.availableTiles.length === 0) {
+      return "There are no more tiles";
+    } else {
+      for (i = 0; i < number; i++) {
+        var tile = this.availableTiles.pop();
+        selectedTiles.push(tile);
+      }
+    }
+    return selectedTiles;
   }
 };
 
@@ -194,6 +208,9 @@ console.log(myBag.availableTiles);
 
 // Should shuffle tiles and put them in availableTiles
 myBag.startGame();
-console.log(myBag.availableTiles);
+console.log(myBag.availableTiles.length);
+
+console.log(myBag.drawTiles(3));
+console.log(myBag.availableTiles.length);
 
 module.exports = Scrabble;
