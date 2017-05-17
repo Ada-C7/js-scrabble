@@ -8,32 +8,37 @@ const SCORECHART = {
 };
 
 // constructor
-var Scrabble = function() {
+var Scrabble = {
+  // make word into an array
+  score: function(word) {
+    var wordArray = word.toUpperCase().split("");
+    var wordScore = 0;
+    for (var i = 0; i < word.length; i += 1) {
+      letter = wordArray[i];
+      wordScore += SCORECHART[letter];
+    }
+    return wordScore;
+  },
+  highestScoreFrom: function(arrayOfWords) {
 
+  }
 };
 
 // prototypes
 
 // example prototype
-Scrabble.prototype.helloWorld = function() {
-  return 'hello world!';
-};
-
-Scrabble.prototype.score = function(word) {
-
-  // make word into an array
-  var wordArray = word.toUpperCase().split("");
-  var wordScore = 0;
-  for (var i = 0; i < word.length; i += 1) {
-    letter = wordArray[i];
-    wordScore += SCORECHART[letter];
-  }
-  return wordScore;
-};
+// Scrabble.prototype.helloWorld = function() {
+//   return 'hello world!';
+// };
+//
+// Scrabble.prototype.score = function(word) {
+//
+//
+// };
 
 
 module.exports = Scrabble;
 
-var game = new Scrabble();
-console.log(game.helloWorld());
-console.log(game.score("hello"));
+console.log(Scrabble.score("hello"));
+// console.log(game.helloWorld());
+// console.log(game.score("hello"));
