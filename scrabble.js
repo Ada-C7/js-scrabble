@@ -1,5 +1,11 @@
+'use strict';
+var prompt = require('prompt');
 
-var scoreboard = {};
+//start the prompt
+prompt.start();
+
+
+var scoreboard = {}; // object, not hash...but similar
 
 var populateScoreboard = function(letters, point) { // letters is an array
   for (var index = 0; index < letters.length; index++) {
@@ -25,17 +31,27 @@ Scrabble.prototype = {
   score: function() {
     var word_score = 0;
     // for each letter in the word, add points to word_score
-    for (var letter = 0; letter < word.length; letter++) {
-      word_score += letter.point;
+    for (var index = 0; index < this.word.length; index++) { // index is our place in the word
+      var letter = this.word[index]; // this grabs the letter from the word (e.g. "y" from "you")
+      word_score += scoreboard[letter];
     }
     // check length of word to see if they get a bonus
-    if (word.length == 7) {
+    if (this.word.length == 7) {
       word_score += 50;
     }
     // print total word score
-    console.log(word_score.sum);
+    console.log(word_score);
   }
 };
+
+var calculate = function(error, input) {
+  var word = new Scrabble(input.word);
+  word.score();
+};
+
+prompt.get(["word"], calculate);
+
+
 
 Scrabble.prototype.helloWorld = function() {
   return 'hello world!';
