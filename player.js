@@ -41,15 +41,17 @@ Player.prototype = {
   },
 
   highestWordScore: function() {
-
+    word = this.scrabble.highestScoreFrom(this.plays);
+    return this.scrabble.score(word);
   }
 };
 
 player1 = new Player("Kerry");
 player1.play("word");
-player1.play("word");
+player1.play("stuff");
 
 console.log(player1.totalScore());
 console.log(player1.hasWon());
 
 console.log(player1.highestScoringWord());
+console.log(player1.highestWordScore());
