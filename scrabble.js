@@ -2,8 +2,19 @@ var Scrabble = function(name) {
   this.name = name;
 };
 
-Scrabble.prototype = {
-  score: function(word) {
+// Scrabble.prototype = {
+//   score: function(word) {
+//     var scoreChart = new Object;
+//       scoreChart[1] = ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'];
+//       scoreChart[2] = ['D', 'G'];
+//       scoreChart[3] = ['3', 'B', 'C', 'M', 'P'];
+//       scoreChart[4] = ['F', 'H', 'V', 'W', 'Y'];
+//       scoreChart[5] = ['K'];
+//       scoreChart[8] = ['J', 'X'];
+//       scoreChart[10] = ['Q', 'Z'];
+//     var scoreCounter = 0;
+
+Scrabble.score = function(word){
     var scoreChart = new Object;
       scoreChart[1] = ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'];
       scoreChart[2] = ['D', 'G'];
@@ -29,9 +40,9 @@ Scrabble.prototype = {
       return scoreCounter;
     }
     else {return scoreCounter;}
-  },
+  };
 
-  highestScoreFrom: function(arrayOfWords) {
+  Scrabble.highestScoreFrom = function(arrayOfWords) {
     var index = 0;
     var highestScore = this.score(arrayOfWords[0]);
     for(var i = 1; i < arrayOfWords.length; i++) {
@@ -51,8 +62,9 @@ Scrabble.prototype = {
       }
     }
     return arrayOfWords[index];
-  },
-  highestWordScore: function(arrayOfWords) {
+  };
+
+  Scrabble.highestWordScore = function(arrayOfWords) {
     var index = 0;
     var highestScore = this.score(arrayOfWords[0]);
     for(var i = 1; i < arrayOfWords.length; i++) {
@@ -72,25 +84,23 @@ Scrabble.prototype = {
       }
     }
     return highestScore;
-  }
-};
+  };
 
 
-var newGame = new Scrabble("ann");
-
-console.log("ABC:" + newGame.score("ABC"));
-console.log("ZZZ:" + newGame.score("ZZZ"));
-console.log("XXXXX: " + newGame.score("XXXXX"));
-console.log("ZZZZ:" + newGame.score("ZZZZ"));
-console.log("AAAAAAA: " + newGame.score("AAAAAAA"));
-
-console.log(newGame.highestScoreFrom(["ABC", "ZZZ"]));
-console.log(newGame.highestScoreFrom(["ZZZZ", "XXXXX"]));
-console.log(newGame.highestScoreFrom(["AA","ZZZZ", "XXXXX"]));
-console.log(newGame.highestScoreFrom(["AAAAAAA","ZZZZ", "XXXXX"]));
-console.log(newGame.highestScoreFrom(["QQQQ","ZZZZ"]));
-
-
+console.log(Scrabble.score("ABC"));
+// var newGame = new Scrabble("ann");
+//
+// console.log("ABC:" + newGame.score("ABC"));
+// console.log("ZZZ:" + newGame.score("ZZZ"));
+// console.log("XXXXX: " + newGame.score("XXXXX"));
+// console.log("ZZZZ:" + newGame.score("ZZZZ"));
+// console.log("AAAAAAA: " + newGame.score("AAAAAAA"));
+//
+// console.log(newGame.highestScoreFrom(["ABC", "ZZZ"]));
+// console.log(newGame.highestScoreFrom(["ZZZZ", "XXXXX"]));
+// console.log(newGame.highestScoreFrom(["AA","ZZZZ", "XXXXX"]));
+// console.log(newGame.highestScoreFrom(["AAAAAAA","ZZZZ", "XXXXX"]));
+// console.log(newGame.highestScoreFrom(["QQQQ","ZZZZ"]));
 
 module.exports = Scrabble;
 
@@ -107,7 +117,7 @@ var Player = function(name) {
 
 Player.prototype = {
   play: function(word) {
-    if (this.hasWon() != true) {
+    if (this.hasWon() !== true) {
     this.plays[this.plays.length] = word;
   } else {
       return console.log("you've already won");
@@ -115,8 +125,8 @@ Player.prototype = {
 
   },
   totalScore: function() {
-    var game = new Scrabble;
-    var score = 0;
+    // var game = new Scrabble;
+    Scrabble.score = 0;
     for(var i = 0; i < this.plays.length; i++) {
       score = score + game.score(this.plays[i]);
     }
@@ -128,30 +138,30 @@ Player.prototype = {
     }
   },
   highestScoringWord: function() {
-    var game = new Scrabble;
-    return game.highestScoreFrom(this.plays);
+    // var game = new Scrabble;
+    return Scrabble.highestScoreFrom(this.plays);
   },
   highestWordScore: function() {
-    var game = new Scrabble;
-    return game.highestWordScore(this.plays);
+    // var game = new Scrabble;
+    return Scrabble.highestWordScore(this.plays);
   }
 
 };
 
-player = new Player("Ann");
-player.play("ZZZ");
-console.log(player.plays);
-player.play("ZZZ");
-console.log(player.plays);
-console.log(player.totalScore());
-console.log(player.highestScoringWord());
-console.log(player.highestWordScore());
-player.play("ZZZ");
-console.log(player.plays);
-player.play("ZZZ");
-console.log(player.plays);
-player.play("ZZZ");
-console.log(player.plays);
+// player = new Player("Ann");
+// player.play("ZZZ");
+// console.log(player.plays);
+// player.play("ZZZ");
+// console.log(player.plays);
+// console.log(player.totalScore());
+// console.log(player.highestScoringWord());
+// console.log(player.highestWordScore());
+// player.play("ZZZ");
+// console.log(player.plays);
+// player.play("ZZZ");
+// console.log(player.plays);
+// player.play("ZZZ");
+// console.log(player.plays);
 
 var TileBag = function() {
   var bag = new Object;
@@ -193,22 +203,23 @@ TileBag.prototype = {
           this.bag[letter] -= 1;
         }
         else {
-          console.log("not enough tiles for this letter")
+          console.log("not enough tiles for this letter");
         }
       }
     }
   }
 };
 
-var newBag = new TileBag;
-newBag.drawTiles("J");
-console.log(newBag.bag);
-newBag.drawTiles("J");
-console.log(newBag.bag);
+// var newBag = new TileBag;
+// newBag.drawTiles("J");
+// console.log(newBag.bag);
+// newBag.drawTiles("J");
+// console.log(newBag.bag);
 
 
 function Dictionary() {
   this.words = ["cat", "mouse", "human"];
+  // will be some sort of API call
 }
 
 Dictionary.prototype.search = function(guess) {
@@ -221,8 +232,8 @@ Dictionary.prototype.search = function(guess) {
 };
 
 myDic = new Dictionary;
-console.log(myDic.search("mouse"));
-console.log(myDic.search("baby"));
+// console.log(myDic.search("mouse"));
+// console.log(myDic.search("baby"));
 
 
 var Board = function() {
@@ -254,10 +265,9 @@ Board.prototype.play = function(word, position, direction) {
     this.board[position[1]-1][position[0]-1] = "X";
     console.log(this.board);
   }
-
 };
-
-myBoard = new Board;
-myBoard.play("a", [1,1], "up");
-myBoard.play("a", [2,2], "up");
-myBoard.play("a", [3,2], "up");
+//
+// myBoard = new Board;
+// myBoard.play("a", [1,1], "up");
+// myBoard.play("a", [2,2], "up");
+// myBoard.play("a", [3,2], "up");
