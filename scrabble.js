@@ -41,18 +41,18 @@ ScrabbleGame.prototype.score = function(word) {
     points += pointValue[word[i]];
   }
   if (word.length > 6)
-  wordscore = word.score + 50;
+  var wordscore = word.score + 50;
 };
-return word.score;
+return wordscore;
 }
 
-var highestScoreFrom = function(wordsPlayed) {
+ScrabbleGame.prototype.highestScoreFrom = function(wordsPlayed) {
   var highestScoringWord = ""
-      highestWordscore = 0
+  var highestWordScore = 0
   for (var i = 0; i < wordsPlayed.length; i++) {
-    if(score(word) > highestWordscore) {
-      highestWordscore = word;
-      highest = score(word);
+    if(score(wordsPlayed[i]) > highestWordScore) {
+      highestWordScore = score(wordsPlayed[i])
+      highestScoringWord = wordsPlayed[i]
     }
   }
   return highestScoringWord
@@ -66,3 +66,58 @@ playscrabble.score(word)
 // };
 
 module.exports = Scrabble;
+
+//*****************************//PLAYER//**************************
+
+var Player = function() {};
+
+//the constructor initializes and instance of of the "class", constructor is called with new Player with the addition of 'instance' vars, unlike new scrabbleGame
+var Player = function(name) {
+  this.name = name;
+  this.plays = [],
+  this.won = false;
+};
+
+Player.prototype.play = function(word) {
+  //should add the input word to the plays array
+  this.plays.push(word);
+};
+
+Player.prototype.totalScore = function() {
+  //should SUM and RETURN the score of the players words
+  var totalScore = 0;
+  var playscrabble = new ScrabbleGame();
+  //iterate over plays
+  this.plays.forEach(function(word));
+  this.plays[i] += this.plays[i];
+  Math.sum(this.plays[i]);
+  return totalScore;
+};
+}
+
+
+var sum = 0;
+for( var i = 0; i < elmt.length; i++ ){
+    sum += parseInt( elmt[i], 10 ); //don't forget to add the base
+}
+
+Player.prototype.hasWon = function() {
+  //should check if the player has 100 or more points and returns true or false
+  if (this.totalScore() >= 100)
+  this.won = true
+  else {
+    return this.won
+  }
+}
+
+Player.prototype.highestScoringWord = function() {
+  var playscrabble = new ScrabbleGame();
+  return playscrabble.highestScoreFrom(this.plays);
+}
+
+Player.prototype.highestWordScore = function() {
+  var highestWordScore = 0
+  for (var i = 0; i < wordsPlayed.length; i++) {
+    if(score(wordsPlayed[i]) > highestWordScore) {
+      highestWordScore = score(wordsPlayed[i])
+}
