@@ -37,7 +37,7 @@ Player.prototype = {
   },
 
   highestScoringWord: function() {
-
+    return this.scrabble.highestScoreFrom(this.plays);
   },
 
   highestWordScore: function() {
@@ -51,3 +51,5 @@ player1.play("word");
 
 console.log(player1.totalScore());
 console.log(player1.hasWon());
+
+console.log(player1.highestScoringWord());
