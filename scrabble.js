@@ -41,42 +41,23 @@ Scrabble.prototype.highestScoreFrom = function(input) {
     //objectOfScores.push({[word]: wordScore});
   }
 
+// VERSION 3
   for (word in objectOfScores) {
     if (objectOfScores[word] > topScore) {
       topWord = word;
       topScore = objectOfScores[word];
-    } else if (objectOfScores[word] == topScore && word.length < topWord.length && topWord.length != 7) {
-      // picks the shorter word when both are less than 7
-      topWord = word;
-    } else if (objectOfScores[word] == topScore && word.length == 7 && topWord.length != 7) {
-      // picks the 7 letter word in a tie
-      topWord = word;
-    } else if (oobjectOfScores[word] == topScore && word.length == topWord.length) {
-      // pick the already given topWord if tie and same length
-      topWord = topWord;
     }
-    return topScore;
+    return topWord;
   }
 };
 
-// I was using for..of WORKS with for..in*****
-  // This loop is returning 0
-  // Loop now returning undefined. Trying to make it iterable
-  // Object.prototype[Symbol.iterator] = function*() {
-  //   for (let word of Object.keys(this)) {
-  //     yield([word, this[word]])
-  //     if ...
-  //   }
-  // }
-
-
 // initializer
+module.exports = Scrabble;
 var myAttempt = new Scrabble();
 console.log(myAttempt.score('kaitlin'));
 // returns 61 (11 + 50)
-console.log(myAttempt.highestScoreFrom(['potato', 'jam', 'party']));
-// returns potato. WAIT. this is the lowest...
-
+console.log(myAttempt.highestScoreFrom(['party', 'potato', 'jam']));
+// 10, 8, 12
 
 // Player
 // constroctor -- instance variables
@@ -115,7 +96,7 @@ Player.prototype.hasWon = function() {
 };
 
 Player.prototype.highestScoringWord = function() {
-  this.playsTotals
+  return Scrabble.prototype.highestScoreFrom(this.plays);
 };
 
 Player.prototype.highestWordScore = function() {
@@ -124,3 +105,40 @@ Player.prototype.highestWordScore = function() {
 
 // initializer
 var myPlayer = new Player('Bernie');
+console.log(myPlayer.name); //return Bernie
+console.log(myPlayer.plays); // returns []
+myPlayer.play("eggplant");
+console.log(myPlayer.plays); // returns ['eggplant']
+console.log(myPlayer.totalScore()); // returns 0 :(
+
+// code graveyard -- ATTEMPTS MADE TO GET TO FINAL CODE
+
+// VERSION 2 -- .highestScoreFrom(arrayOfWords)
+// returns potato. WAIT. this is the lowest..
+//   for (word in objectOfScores) {
+//     if (objectOfScores[word] > topScore) {
+//       topWord = word;
+//       topScore = objectOfScores[word];
+//     } else if (objectOfScores[word] == topScore && word.length < topWord.length && topWord.length != 7) {
+//       // picks the shorter word when both are less than 7 and tied
+//       topWord = word;
+//     } else if (objectOfScores[word] == topScore && word.length == 7 && topWord.length != 7) {
+//       // picks the 7 letter word in a tie
+//       topWord = word;
+//     } else if (objectOfScores[word] == topScore && word.length == topWord.length) {
+//       // pick the already given topWord if tie and same length
+//       topWord = topWord;
+//     }
+//     return topScore;
+//   }
+
+// VERSION 1 -- highestScoreFrom(arrayOfWords)
+// I was using for..of WORKS with for..in*****
+  // This loop is returning 0
+  // Loop now returning undefined. Trying to make it iterable
+  // Object.prototype[Symbol.iterator] = function*() {
+  //   for (let word of Object.keys(this)) {
+  //     yield([word, this[word]])
+  //     if ...
+  //   }
+  // }
