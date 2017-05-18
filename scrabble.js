@@ -7,17 +7,18 @@ var Scrabble = function(){
 Scrabble.prototype = {
 
   //- FUNCTION to score a single word
-  scoreWord: function(word) {
+  scoreWord: function(str) {
     var scoring_hash = {
-      aeioulnrst: 1,
-      dg: 2,
-      bcmp: 3,
-      fhvwy: 4,
-      k: 5,
-      kx: 8,
-      qz: 10,
+      AEIOULNRST: 1,
+      DG: 2,
+      BCMP: 3,
+      FHVWY: 4,
+      K: 5,
+      JX: 8,
+      QZ: 10,
     };
 
+    var word = str.toUpperCase();
     var score = 0;
     // add 50 pts if word length is 7
     if (word.length === 7) score += 50;
@@ -76,5 +77,6 @@ var my_game = new Scrabble();
 
 // print out results of single word score
 console.log(my_game.scoreWord("zzz"));
+console.log(my_game.scoreWord("ABC"));
 console.log(my_game.scoreWord("aaaaaaa"));
 console.log(my_game.highestScoreWord(["aaa", "zzj", "zzx"]));
