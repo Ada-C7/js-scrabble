@@ -55,64 +55,31 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
     var score = Scrabble.prototype.score(word);
 
     if (score > highScore) {
-
-      // || ((score === highScore) && (word.length === 7 && winningWord.length != 7)))
       // If the top score is tied between multiple words and one used all seven letters, choose the one with seven letters over the one with fewer tiles
       // if top score tied between multiple words, pick the one with the fewest letters
       highScore = score;
       winningWord = word;
       console.log("Testing 2" + winningWord + highScore);
-    } else if (score == highScore) {
-      if (word.length == 7 || word.length < winningWord.length) {
+    } else if ((score == highScore) && (word.length == 7 || word.length < winningWord.length)) {
         if (winningWord.length != 7) {
           highScore = score;
           winningWord = word;
           console.log("Testing " + winningWord + highScore);
         }
       }
-    }
-
   });
   return winningWord;
 };
 
-// } else if ((score == highScore) && (word.length >= 7 ) && (word.length > winningWord.length)) {
-//   winningWord = word;
-//   console.log("Testing 3" + winningWord + highScore);
-
-
-// If the there are multiple words that are the same score and same length, pick the first one in supplied list
-
-
-// if (score > highScore) {
-//   highScore = score;
-//   winningWord = word;
-//     console.log("Testing " + winningWord + highScore);
-//   // if top score tied between multiple words, pick the one with the fewest letters
-// } else if ((score > highScore) && (word.length < winningWord.length)) {
-//     winningWord = word;
-//     highScore = score;
-//     console.log("Testing 2" + winningWord);
-//     // If the top score is tied between multiple words and one used all seven letters, choose the one with seven letters over the one with fewer tiles
-// // } else if ((score > highScore) && (word.length >= 7 ) && (winningWord.length < word.length)) {
-// //   winningWord = word;
-// //   highScore = score;
-// }
-//     // If the there are multiple words that are the same score and same length, pick the first one in supplied list
-
-
-
-
-var Player = function(name, plays) {
+var Player = function(name) {
   this.name = name;
   this.plays = [];
-
 };
 
 // Function which adds the input word to the plays Array, false if player has won
 Player.prototype.play = function(word) {
-  this.plays.push(word);
 
+  this.plays.push(word);
 };
 
 // Function which sums up and returns the score of the players words
@@ -126,7 +93,11 @@ Player.prototype.totalScore = function() {
 
 // Function which returns true if the player has over 100 points, otherwise returns false
 Player.prototype.hasWon = function() {
-
+  if (this.totalScore() > 100) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 // Function which returns the highest scoring word the user has played
@@ -139,11 +110,16 @@ Player.prototype.highestWordScore = function() {
 
 };
 
-//apple: 9, banana: 8, pof: 8, bananas: 59, zzzzzj: 58, gaaaaaa: 58
+var newPlayer = new Player("habs");
+console.log("New player is " + newPlayer.name);
+
+//apple: 9, banana: 8, pof: 8, bananas: 59, zzzzzj: 58, gaaaaaa: 58, maple: 9
 var game = new Scrabble();
-play = game.score("gaaaaaa");
-topScore = game.highestScoreFrom(["gaaaaaa", "zzzzzj"]);
-// topScore = game.highestScoreFrom(["banana", "pof"]);
+play = game.score("maple");
+ // topScore = game.highestScoreFrom(["gaaaaaa", "zzzzzj"]);
+ // topScore = game.highestScoreFrom(["banana", "pof"]);
+ // topScore = game.highestScoreFrom(["apple", "maple"]);
+ topScore = game.highestScoreFrom(["maple", "apple"]);
 console.log(play);
 console.log(topScore);
 module.exports = Scrabble;
