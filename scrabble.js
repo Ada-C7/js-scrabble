@@ -1,7 +1,7 @@
 var Scrabble = function() {};
 
 Scrabble.score = function(word) {
-  var tiles = {
+  var scoreCard = {
     "A": 1,
     "B": 3,
     "C": 3,
@@ -37,7 +37,7 @@ Scrabble.score = function(word) {
     }
 
     for (var i = 0; i < word.length; i++) {
-      score += tiles[word[i]];
+      score += scoreCard[word[i]];
     }
     return score;
 };
@@ -99,7 +99,22 @@ Player.prototype.highestWordScore = function() {
 
 
 var TileBag = function() {
+  this.tiles = [ "A", "A", "A", "A", "A", "A", "A", "A", "A", "B", "B", "C", "C", "D", "D", "D", "D", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "F", "F", "G", "G", "G", "H", "H", "I", "I", "I", "I", "I", "I", "I", "I", "I", "J", "K", "L", "L", "L", "L", "M", "M", "N", "N", "N", "N", "N", "N", "O", "O", "O", "O", "O", "O", "O", "O", "P", "P", "Q", "R", "R", "R", "R", "R", "R", "S", "S", "S", "S", "T", "T", "T", "T", "T", "T", "U", "U", "U", "U", "V", "V", "W", "W", "X", "Y", "Y", "Z" ];
+};
 
+TileBag.prototype.draw = function(num) {
+  var drawnTiles = [];
+
+  for (var i = 0; i < num; i++) {
+    var randomIndex = Math.floor(Math.random() * this.tiles.length);
+    drawnTiles.push(this.tiles[randomIndex]);
+    this.tiles.splice(randomIndex, 1);
+  }
+  return drawnTiles;
+};
+
+TileBag.prototype.remainingTiles = function() {
+  return this.tiles.length;
 };
 
 var player = new Player("bob");
@@ -124,5 +139,9 @@ console.log(player.plays);
 console.log(player.totalScore());
 console.log(player.highestScoringWord());
 console.log(player.highestWordScore());
+
+var tilebag = new TileBag();
+console.log(tilebag.draw(4));
+console.log(tilebag.remainingTiles());
 
 module.exports = Scrabble;
