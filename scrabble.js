@@ -1,7 +1,5 @@
 var Scrabble = function() {};
 
-
-// YOUR CODE HERE
 Scrabble.prototype.score = function(word) {
 
   var scoreChart = {
@@ -71,13 +69,14 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
   return winningWord;
 };
 
+// *****PLAYER*******
+
 var Player = function(name) {
   this.name = name;
   this.plays = [];
 };
 
 // Function which adds the input word to the plays Array, false if player has won
-
 Player.prototype.play = function(word) {
   if (this.hasWon() === true) {
     return false;
@@ -111,7 +110,9 @@ Player.prototype.highestScoringWord = function() {
 
 // Function which returns the highestScoringWord score
 Player.prototype.highestWordScore = function() {
-
+var highestWord = this.highestScoringWord(this.plays);
+// get the score for the highest scoring word
+return Scrabble.prototype.score(highestWord);
 };
 
 //  ****TESTING FUNCTIONS ******
@@ -126,7 +127,10 @@ console.log("Words that " + newPlayer.name + " played are " + newPlayer.plays);
 console.log(newPlayer.name + " has scored " + newPlayer.totalScore());
 console.log("Did " + newPlayer.name + " win? " + newPlayer.hasWon());
 console.log("The highest scoring word is " + newPlayer.highestScoringWord());
-
+console.log("The score for the highest scoring word is " + newPlayer.highestWordScore());
+newPlayer.play("zzzzzzj");
+console.log(newPlayer.name + " has scored " + newPlayer.totalScore());
+console.log("Did " + newPlayer.name + " win? " + newPlayer.hasWon());
 
 
 // Testing Scrabble
