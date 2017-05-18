@@ -43,36 +43,33 @@ Scrabble.prototype = {
 
 var Player = function(name) {
   this.name = name;
+  this.allPlays = [];
 };
 
 Player.prototype = {
-  name: function() {
-    return this.name;
-  },
-
   plays: function() {
-    return this.plays;
+    return this.allPlays;
   },
 
   play: function(word) {
-    if(this.hasWon) {
+    if(this.hasWon == true) {
       return false;
     }
-    var plays = [];
-    plays.push(word);
+    this.allPlays.push(word);
+    return this.allPlays;
   },
 
   totalScore: function() {
     var sum = 0;
     var scrabble = new Scrabble();
-    for(var i = 0; i < this.plays.length; i++) {
-      sum += scrabble.score(this.plays[i]);
+    for(var i = 0; i < this.plays().length; i++) {
+      sum += scrabble.score(this.plays()[i]);
     }
     return sum;
   },
 
   hasWon: function() {
-    if(this.totalScore > 100) {
+    if(this.totalScore() > 100) {
       return true;
     } else {
       return false;
@@ -81,10 +78,13 @@ Player.prototype = {
 
   highestScoringWord: function() {
     var scrabble = new Scrabble();
-    scrabble.highestScoreFrom(this.plays);
+    scrabble.highestScoreFrom(this.allPlays());
   },
 
-  highestWordScore: function() {},
+  highestWordScore: function() {
+    var scrabble = new Scrabble();
+    scrabble.score(this.highestScoringWord());
+  },
 };
 
 module.exports = Scrabble;
@@ -94,3 +94,13 @@ module.exports = Scrabble;
 
 // var testingArrays = new Scrabble;
 // console.log(testingArrays.highestScoreFrom(["so", "tins", "toes", "it", "to"]))
+
+var testing = new Player("Ada");
+console.log(testing.name);
+console.log(testing.play("owl"));
+console.log(testing.play("chicken"));
+console.log(testing.play("hawk"));
+console.log(testing.plays());
+console.log(testing.totalScore());
+console.log(testing.hasWon());
+console.log(testing.);
