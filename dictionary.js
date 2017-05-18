@@ -1,4 +1,4 @@
-var Dictionary = function() {}
+var Dictionary = function() {};
 
 Dictionary.prototype.findWord = function(word) {
   var fs = require('fs');
