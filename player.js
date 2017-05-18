@@ -9,9 +9,12 @@ var Player = function(name) {
 
 Player.prototype = {
   play: function(word) {
-    // ADD BOOL LOGIC FROM hasWon()
-    this.plays.push(word);
-    return this.plays;
+    if (this.hasWon === true) {
+      return false;
+    } else {
+      this.plays.push(word);
+      return this.plays;
+    }
   },
 
   totalScore: function() {
@@ -26,7 +29,11 @@ Player.prototype = {
   },
 
   hasWon: function() {
-
+    if (this.totalScore() >= 100) {
+      return true;
+    } else {
+      return false;
+    }
   },
 
   highestScoringWord: function() {
@@ -40,4 +47,7 @@ Player.prototype = {
 
 player1 = new Player("Kerry");
 player1.play("word");
+player1.play("word");
+
 console.log(player1.totalScore());
+console.log(player1.hasWon());
