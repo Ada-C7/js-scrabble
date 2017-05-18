@@ -95,12 +95,6 @@ Player.prototype.totalScore = function() {
 };
 }
 
-
-var sum = 0;
-for( var i = 0; i < elmt.length; i++ ){
-    sum += parseInt( elmt[i], 10 ); //don't forget to add the base
-}
-
 Player.prototype.hasWon = function() {
   //should check if the player has 100 or more points and returns true or false
   if (this.totalScore() >= 100)
