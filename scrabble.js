@@ -55,7 +55,7 @@ var Player = function(input) {
 // iterators -- instance methods
 Player.prototype.play = function(input) {
   var word = input;
-  if (this.hasWon() === 'false') {
+  if (this.hasWon() === false) {
     this.plays.push(word);
   } else {
     return false;
@@ -63,8 +63,14 @@ Player.prototype.play = function(input) {
 };
 
 Player.prototype.totalScore = function() {
-  this.play();
-
+  // Need to be able to use score method in Scrabble
+  var playsTotals = [];
+  for (var word of this.plays) {
+    var wordScore = Scrabble.prototype.score(word);
+    playsTotals.push(wordScore);
+  }
+  var total = playsTotals.reduce((a, b) => a + b, 0);
+  return total;
 };
 
 Player.prototype.hasWon = function() {
