@@ -33,8 +33,7 @@ Scrabble.prototype = {
     return score;
   },
 
-  //- FUNCTION to find max score word in array
-  highestScoreFrom: function(arrayOfWords) {
+  maxScore: function(arrayOfWords){
     var high_score = this.scoreWord(arrayOfWords[0]);
 
     // iterate over array of input words to find max score
@@ -42,10 +41,18 @@ Scrabble.prototype = {
       var word_score = this.scoreWord(arrayOfWords[i]);
       if ( word_score > high_score) high_score = word_score;
     }
+
+    return high_score;
+  },
+
+  //- FUNCTION to find max score word in array
+  highestScoreWord: function(arrayOfWords) {
+    var max_score = this.maxScore(arrayOfWords);
+
     // add words with high_score into an array
     var max_words = []; // to hold words with max points
     for (i = 0; i < arrayOfWords.length; i++) {
-      if (this.scoreWord(arrayOfWords[i]) === high_score) {
+      if (this.scoreWord(arrayOfWords[i]) === max_score) {
         max_words.push(arrayOfWords[i]);
       }
     }
@@ -70,4 +77,4 @@ var my_game = new Scrabble();
 // print out results of single word score
 console.log(my_game.scoreWord("zzz"));
 console.log(my_game.scoreWord("aaaaaaa"));
-console.log(my_game.highestScoreFrom(["aaa", "zzj", "zzx"]));
+console.log(my_game.highestScoreWord(["aaa", "zzj", "zzx"]));
