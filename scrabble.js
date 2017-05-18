@@ -64,25 +64,7 @@ var Scrabble = {
     return highestScoring;
   },
 
-//   // a helper function for highestScoreFrom
-//   _breakTie: function(words){
-//     var winner = undefined;
-//     var length = 8;
-//
-//     // loops through the tie words - if length is 7 - that word is the winner
-//     // else the shorest length word is the winner.
-//     words.forEach(function (word){
-//       if (word.length === 7 ) {
-//         winner = word;
-//
-//       } else if ( word.length < length ){
-//         winner = word;
-//         length = word.length; }
-//     });
-//
-//     return winner;
-//   }
-
+  // a helper function for highestScoreFrom
   _breakTie: function(words) {
     var winner = undefined;
     var length = 8;
@@ -96,7 +78,7 @@ var Scrabble = {
         winner = word[i];
         length = word[i].length; }
     }
-    
+
     return winner;
   }
 }
