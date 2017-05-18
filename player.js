@@ -15,18 +15,14 @@ Player.prototype = {
   },
 
   totalScore: function() {
-    // var wordScore = 0;
-    // var total = 0;
-    //
-    // this.play("word");
-    // //this.plays is undefined
-    // this.plays.forEach(function(word){
-    //   console.log(this.plays);
-    //   // score = this.scrabble.score(word);
-    //   wordScore = this.scrabble.score(word);
-    //   total += wordScore;
-    // });
-    // return total;
+    var wordScore = 0;
+    var total = 0;
+
+    this.plays.forEach(function(word){
+      wordScore = this.scrabble.score(word);
+      total += wordScore;
+    }.bind(this));
+    return total;
   },
 
   hasWon: function() {
@@ -38,12 +34,10 @@ Player.prototype = {
   },
 
   highestWordScore: function() {
-    
+
   }
 };
 
 player1 = new Player("Kerry");
 player1.play("word");
-// player1.totalScore();
-
-// array = ["word", "dog"];
+console.log(player1.totalScore());
