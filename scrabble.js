@@ -6,13 +6,6 @@ var LETTERS_VALUES = {
   K: 5,
   J: 8, X: 8,
   Q: 10, Z: 10
-  // "1": ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
-  // "2": ["D", "G"],
-  // "3": ["B", "C", "M", "P"],
-  // "4": ["F", "H", "V", "W", "Y"],
-  // "5": ["K"],
-  // "8": ["J", "X"],
-  // "10": ["Q", "Z"]
 };
 
 var Scrabble = function() {
@@ -33,17 +26,49 @@ Scrabble.prototype = {
       }
     }
     return total;
-  }
-};
+  },
 
+  highestScoreFrom: function(arrayOfWords){
+    var max = 0,
+    maxWords = []
+    shorterWord = "";
+
+    for (var i = 0; i < arrayOfWords.length; i++){
+      wordScore = this.score(arrayOfWords[i]);
+      if (wordScore == max){
+        maxWords.push(arrayOfWords[i]);
+      }
+      else if (wordScore > max) {
+        max = wordScore;
+        maxWords = [arrayOfWords[i]];
+      }
+    }
+
+    if (maxWords.length > 1){
+      for (var i = 0; i < maxWords.length; i++){
+        if (maxWords[i].length == 7){
+          return maxWords[i];
+        }
+        else if (maxWords[i].length < shorterWord.length) {
+          shorterWord = maxWords[i];
+        }
+      }
+      return shorterWord;
+    }
+    else {
+      return maxWords;
+    }
+  }
+}; //closing prototype
 
 
 Scrabble.prototype.helloWorld = function() {
   return 'hello world!';
 };
 
-// module.exports = Scrabble;
+module.exports = Scrabble;
 
 var aGame = new Scrabble();
-var palabra = aGame.score("Lauraaaa");
+// var palabra = aGame.score("Lauraaaa");
+var palabra = aGame.highestScoreFrom(["lau", " ", "peter", "jajajaaa", "hola"]);
 console.log(palabra)
