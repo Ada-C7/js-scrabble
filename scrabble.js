@@ -31,18 +31,14 @@ Scrabble.prototype = {
       z: 10
     };
     var score = 0;
-
     word = word.toLowerCase();
-
     for (i = 0; i < word.length; i++) {
       letter = word[i];
       score += values[letter];
     }
-
     if (word.length >= 7) {
       score += 50;
     }
-
     return score;
   },
 
@@ -79,7 +75,7 @@ Player.prototype = {
     if (this.hasWon()) {
       return false;
     } else {
-      // For each index (letter) in playing word, try to find the index of that letter in hand.  If this.hand.indexOf(letter) == -1 it means it was not found.  otherwise, hand.splice(index, 1)
+      // For each index (letter) in playing word, try to find the index of that letter in hand.
       for (var i = 0; i < word.length; i++) {
         var letter = word[i].toLowerCase();
         var letterIndex = this.hand.indexOf(letter);
@@ -245,5 +241,6 @@ console.log(lynn.hand);
 console.log(myBag.drawTiles(4, lynn));
 // should not allow me to draw b/c I already have 7 tiles.
 console.log(myBag.drawTiles(1, lynn));
+console.log(lynn.hand);
 
 module.exports = Scrabble;
