@@ -31,25 +31,39 @@ Scrabble.prototype.score = function(input) {
 
 Scrabble.prototype.highestScoreFrom = function(input) {
   var arrayOfWords = input;
-  var arrayOfScores = [];
+  var objectOfScores = [];
+  var topWord = 0;
+  var topScore = 0;
   for (var word of arrayOfWords) {
     var wordScore = this.score(word);
-    arrayOfScores.push({[word]: wordScore});
+    objectOfScores.push({[word]: wordScore});
   }
-  return arrayOfScores;
+  //return arrayOfScores;
   // TODO: actual scoring rules
-  // if (true) {
-  //
-  // } else {
-  //
-  // }
+  for (var key of objectOfScores) {
+    if (objectOfScores.hasOwnProperty(key) > topScore) {
+      topWord = key;
+      topScore = objectOfScores.hasOwnProperty(key);
+    } else if (objectOfScores.hasOwnProperty(key) == topScore && key.length < topWord.length && topWord.length != 7) {
+      // picks the shorter word when both are less than 7
+      topWord = key;
+    } else if (objectOfScores.hasOwnProperty(key) == topScore && key.length == 7 && topWord.length != 7) {
+      // picks the 7 letter word in a tie
+      topWord = key;
+    } else if (objectOfScores.hasOwnProperty(key) == topScore && key.length == topWord.length) {
+      // pick the already given topWord if tie and same length
+      topWord = topWord;
+    }
+    return topWord;
+  }
 };
 
 // initializer
 var myAttempt = new Scrabble();
-console.log(myAttempt.score('kaitlin')); // returns 61 (11 + 50)
+console.log(myAttempt.score('kaitlin'));
+// returns 61 (11 + 50)
 console.log(myAttempt.highestScoreFrom(['potato', 'jam', 'party']));
-//module.exports = Scrabble;
+// returns
 
 //
 // // Player
