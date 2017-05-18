@@ -15,7 +15,7 @@ Scrabble.prototype.helloWorld = function() {
 };
 
 Scrabble.prototype.score = function(word) {
-  score = 0;
+  var score = 0;
 
   for (i = 0; i < word.length; i++) {
     score += this.letterScores[word[i].toUpperCase()];
@@ -53,8 +53,11 @@ Scrabble.prototype.higherScoreFrom = function(word1, word2) {
 };
 
 Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
-  highestScoringWord = arrayOfWords[0];
-  highestScore = this.score(highestScoringWord);
+  var highestScoringWord = arrayOfWords[0];
+  var highestScore = this.score(highestScoringWord);
+  var currentWord,
+      currentScore,
+      higherScoringWord;
 
   for (i = 1; i < arrayOfWords.length; i++) {
     currentWord = arrayOfWords[i];
