@@ -1,18 +1,12 @@
 var shuffle = function(array) {
-  var m = array.length, t, i;
-
-  // While there remain elements to shuffle…
-  while (m) {
-
-    // Pick a remaining element…
-    i = Math.floor(Math.random() * m--);
-
+  var lengthOfArray = array.length, currentElement, randomIndex;
+  while (lengthOfArray) {
+    randomIndex = Math.floor(Math.random() * lengthOfArray--);
     // And swap it with the current element.
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
+    currentElement = array[lengthOfArray];
+    array[lengthOfArray] = array[randomIndex];
+    array[randomIndex] = currentElement;
   }
-
   return array;
 };
 
@@ -21,6 +15,9 @@ var TileBag = function() {
 };
 
 TileBag.prototype = {
+  remainingTiles: function() {
+    return this.tilesPerBag.length;
+  },
   drawTiles: function(numberOfTiles) {
     var tiles = [];
     for (var i = 0; i < numberOfTiles; i++) {
@@ -28,9 +25,7 @@ TileBag.prototype = {
         tiles.push(this.tilesPerBag.pop());
       }
     }
-  },
-  remainingTiles: function() {
-    return this.tilesPerBag.length;
+    return tiles;
   }
 };
 
@@ -63,11 +58,12 @@ var Scrabble = function() {
     "y": 4,
     "z": 10
   };
-  this.tileBage = new TileBag();
+  this.tileBag = new TileBag();
+  this.dictionary = new Dictionary();
 };
 
 Scrabble.prototype = {
-  score: function(word) {
+  score: function(word = "") {
     var letters = word.toLowerCase().split(''),
     wordScore = 0;
     letters.forEach(function(letter) {
@@ -85,7 +81,7 @@ Scrabble.prototype = {
       arrayOfScores.push(this.score(word));
     }, this);
 
-    // remove all non-max words from the arrayOfWords
+    // add all max scoring words from the arrayOfWords to the winningWords
     var max = Math.max.apply(null, arrayOfScores),
     winningWords = [],
     index = 0;
@@ -117,15 +113,40 @@ var Player = function(name, game) {
   this.name = name;
   this.plays = [];
   this.game = game;
+  this.tileHolder = [];
 };
 
 Player.prototype = {
+  draw: function() {
+    this.tileHolder = this.tileHolder.concat(this.game.tileBag.drawTiles(7 - this.tileHolder.length));
+    console.log(this.tileHolder);
+  },
   play: function(word) {
     if (this.hasWon()) {
+      console.log(this.name + " can't play the word '" + word + "': You have already won this game!");
       return false;
     } else {
-      this.plays.push(word);
+      if (this.game.dictionary.isValidWord(word)) {
+        for (var i = 0; i < word.length; i++) {
+          var index = this.tileHolder.indexOf(word[i]);
+          if (index > -1) {
+            this.tileHolder.splice(index, 1);
+          } else {
+            console.log(this.name + " can't play the word '" + word + "': You do not have the tiles needed!");
+            return false;
+          }
+        }
+        console.log(this.name + " played the word '" + word + "'");
+        this.plays.push(word);
+        this.draw();
+      } else {
+        console.log(this.name + " can't play the word '" + word + "': Not a valid word in the game dictionary!");
+        return false;
+      }
     }
+  },
+  hasLetters: function(word) {
+    var result = true;
   },
   totalScore: function() {
     var total = 0;
@@ -150,7 +171,7 @@ Player.prototype = {
 };
 
 var Dictionary = function() {
-  this.miniDict = ["hi", "potato", "radish", "queen", "bye"];
+  this.miniDict = ["e", "ai", "potato", "radish", "queen", "bye", 'hike', "rusty", "brined", "greater"];
 };
 
 Dictionary.prototype = {
@@ -159,15 +180,49 @@ Dictionary.prototype = {
   }
 };
 
+var Board = function() {
+  this.boardArray = [["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]];
+};
 
+Board.prototype = {
+  playWord: function(coordinate, direction) {
+    if (this.isFirstPlay(this.boardArray) && coordinate ) {
+    }
+    for (var i = 0; i < 15; i++) {
+    }
+  },
+  isFirstPlay: function(board) {
+    var result = true;
+    board.forEach( function(column) {
+      for (var i = 0; i < 15; i++) {
+        if (column[i] !== "") {
+          result = false;
+        }
+      }
+    });
+    return result;
+  }
+};
 
-
-
-
-// Testing Codes
+// Test codes
 var newGame = new Scrabble();
 var playerOne = new Player("InfectedSnarling", newGame);
-playerOne.play("hi");
+playerOne.draw();
+playerOne.play("e");
 playerOne.play("potato");
 playerOne.play("radish");
 playerOne.play("queen");
@@ -178,6 +233,17 @@ console.log(playerOne.highestScoringWord());
 console.log(playerOne.highestWordScore());
 console.log(playerOne.plays);
 
+var playerTwo = new Player("Coral", newGame);
+playerTwo.tileHolder = ["g", "r", "e", "a", "t", "e", "r"];
+playerTwo.draw();
+playerTwo.play("greater");
+playerTwo.play("e");
+playerTwo.play("badmove");
+console.log(playerTwo.totalScore());
+console.log(playerTwo.hasWon());
+console.log(playerTwo.highestScoringWord());
+console.log(playerTwo.highestWordScore());
+console.log(playerTwo.plays);
 
 
 module.exports = Scrabble;
