@@ -79,4 +79,23 @@ describe('Scrabble Test Suite', function () {
     expect(player1.totalScore()).toEqual(8);
     expect(player1.hasWon()).toEqual(false);
   });
+
+  it("must return false if a player plays a word after winning", function () {
+    var scrabble = new Scrabble();
+    var player1 = new Player('Alix', scrabble);
+
+    player1.play('qqqqqqq'); // 120 points
+    expect(player1.play('ham')).toEqual(false);
+    expect(player1.totalScore()).toEqual(120);
+  });
+
+  it("returns a player's highest scoring word", function () {
+    var scrabble = new Scrabble();
+    var player1 = new Player('Alix', scrabble);
+
+    player1.play('bacon'); // 9 points
+    player1.play('ham'); // 8 points
+    expect(player1.highestScoringWord()).toEqual('bacon');
+    expect(player1.highestWordScore()).toEqual(9);
+  });
 });

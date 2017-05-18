@@ -4,10 +4,6 @@ var Player = function (name, game) {
   this.plays = [];
 };
 
-Player.prototype.play = function (word) {
-  this.plays.push(word);
-};
-
 Player.prototype.totalScore = function () {
   var score = 0;
   for (var i = 0; i < this.plays.length; i++) {
@@ -18,6 +14,19 @@ Player.prototype.totalScore = function () {
 
 Player.prototype.hasWon = function () {
   return this.totalScore() >= 100;
+};
+
+Player.prototype.play = function (word) {
+  if (this.hasWon()) return false;
+  this.plays.push(word);
+};
+
+Player.prototype.highestScoringWord = function () {
+  return this.game.highestScoreFrom(this.plays);
+};
+
+Player.prototype.highestWordScore = function () {
+  return this.game.score(this.highestScoringWord());
 };
 
 module.exports = Player;
