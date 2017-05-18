@@ -106,7 +106,7 @@ Player.prototype.hasWon = function() {
 
 // Function which returns the highest scoring word the user has played
 Player.prototype.highestScoringWord = function() {
-  return Scrabble.prototype.highestScoringWord;
+  return Scrabble.prototype.highestScoreFrom(this.plays);
 };
 
 // Function which returns the highestScoringWord score
@@ -120,9 +120,13 @@ Player.prototype.highestWordScore = function() {
 
 var newPlayer = new Player("habs");
 console.log("New player is " + newPlayer.name);
-newPlayer.play("woo");
-newPlayer.play("maad");
+newPlayer.play("maple");
+newPlayer.play("apple");
 console.log("Words that " + newPlayer.name + " played are " + newPlayer.plays);
+console.log(newPlayer.name + " has scored " + newPlayer.totalScore());
+console.log("Did " + newPlayer.name + " win? " + newPlayer.hasWon());
+console.log("The highest scoring word is " + newPlayer.highestScoringWord());
+
 
 
 // Testing Scrabble
