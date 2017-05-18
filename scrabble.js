@@ -8,15 +8,17 @@ var Scrabble = {
 
     var total_score = 0;
 
-    for(var i = 0; i < word.length; i++){
-      total_score += SCORECHART[word[i]];
+    var lowerWord = word.toLowerCase();
+    for(var i = 0; i < lowerWord.length; i++){
+      total_score += SCORECHART[lowerWord[i]];
     }
 
-    if (word.length == 7){
+    if (lowerWord.length == 7){
       total_score +=50;
       }
     return total_score;
   },
+
   highestScoreFrom : function(arrayOfWords){
     var self = this;
     return arrayOfWords.reduce(function(winner, element){
