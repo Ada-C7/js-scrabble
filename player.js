@@ -31,7 +31,7 @@ Player.prototype = {
     this.plays.forEach(function(word) {
       score += self.game.scoreWord(word)
     })
-    console.log(score)
+    console.log("Your total score is: " + score)
     return score
   },
 
@@ -39,23 +39,27 @@ Player.prototype = {
     var self = this
     var score = self.totalScore()
     if (score >= 100) {
-      console.log("You won with a score of " + score)
+      console.log("You won with a score of: " + score)
       return score
     } else {
-      console.log("You haven't won yet")
+      console.log("You haven't won yet. Your current score is: " + score)
       return score
     }
   },
 
   highestScoringWord: function() {
     var self = this
-    var highest_score = self.game.highestScoreFrom(this.plays)
-    console.log("the highest scoring word is " + highest_score)
-    // return highest_score
+    var highest_score_word = self.game.highestScoreFrom(this.plays)
+    console.log("the highest scoring word is: " + highest_score_word)
+    return highest_score_word
   },
 
   highestScoringWordScore: function () {
-
+    var self = this
+    var highest_scoring_word = self.highestScoringWord()
+    var highest_word_score = self.game.scoreWord(highest_scoring_word)
+    console.log("The score of the highest scoring word is: " + highest_word_score)
+    return highest_word_score
   }
 
 };
@@ -66,6 +70,7 @@ gameOne.play("yep");
 gameOne.play("jazzily");
 gameOne.totalScore();
 gameOne.highestScoringWord();
+gameOne.highestScoringWordScore();
 gameOne.hasWon();
 console.log(gameOne)
 
