@@ -27,10 +27,12 @@ Player.prototype.hasWon = function() {
 };
 
 Player.prototype.highestScoringWord = function() {
+  // if plays empty?
   return this.scrabble.highestScoreFrom(this.plays);
 };
 
 Player.prototype.highestWordScore = function() {
+  // if plays empty?
   topWord = this.highestScoringWord();
   return this.scrabble.score(topWord);
 };
