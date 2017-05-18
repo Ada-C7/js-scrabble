@@ -6,12 +6,12 @@ var Player = function(name) {
 };
 
 Player.prototype.play = function(word) {
-  // if (hasWon() == true) {
-  //   return false;
-  // } else {
+  if (this.hasWon() == true) {
+    return false;
+  } else {
     this.plays.push(word);
     return true;
-  // };
+  };
 };
 
 // Function which sums up and returns the score of the players words
@@ -23,6 +23,14 @@ Player.prototype.totalScore = function() {
   return sum;
 };
 
+// hasWon(): Function which returns true if the player has over 100 points, otherwise returns false
+Player.prototype.hasWon = function() {
+  if (this.totalScore >= 100) {
+    return true;
+  } else {
+    return false;
+  };
+};
 
 
 var me = new Player("Sahana");
@@ -30,3 +38,4 @@ console.log(me.plays);
 console.log(me.play("hello"));
 console.log(me.plays);
 console.log(me.totalScore());
+console.log(me.hasWon());
