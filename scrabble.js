@@ -144,6 +144,7 @@ testPlayer.play("animalz"); //18+50=68
 testPlayer.play("qqqa");
 console.log("New total score: " + testPlayer.totalScore());
 console.log("Has player won? " + testPlayer.hasWon());
+console.log("All plays: " + testPlayer.plays);
 
 
-module.exports = Scrabble;
+// module.exports = Scrabble;
