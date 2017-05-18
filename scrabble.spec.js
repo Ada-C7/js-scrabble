@@ -52,4 +52,31 @@ describe('Scrabble Test Suite', function () {
     player1.play('bacon');
     expect(player1.plays).toEqual(['bacon']);
   });
+
+  it("correctly calculates a player's total score", function () {
+    var scrabble = new Scrabble();
+    var player1 = new Player('Alix', scrabble);
+
+    player1.play('bacon'); // 9 points
+    player1.play('ham'); // 8 points
+    expect(player1.totalScore()).toEqual(17);
+  });
+
+  it("shows that a player with over 100 points has won", function () {
+    var scrabble = new Scrabble();
+    var player1 = new Player('Alix', scrabble);
+
+    player1.play('qqqqqqq'); // 120 points
+    expect(player1.totalScore()).toEqual(120);
+    expect(player1.hasWon()).toEqual(true);
+  });
+
+  it("shows that a player with under 100 points has not won", function () {
+    var scrabble = new Scrabble();
+    var player1 = new Player('Alix', scrabble);
+
+    player1.play('ham'); // 8 points
+    expect(player1.totalScore()).toEqual(8);
+    expect(player1.hasWon()).toEqual(false);
+  });
 });
