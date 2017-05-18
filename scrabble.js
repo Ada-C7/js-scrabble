@@ -40,7 +40,7 @@ Scrabble.prototype.highestScoreFrom = function(input) {
     objectOfScores[word] = wordScore;
     //objectOfScores.push({[word]: wordScore});
   }
-  // return objectOfScores; //-- this works
+
   for (word in objectOfScores) {
     if (objectOfScores[word] > topScore) {
       topWord = word;
@@ -51,11 +51,11 @@ Scrabble.prototype.highestScoreFrom = function(input) {
     } else if (objectOfScores[word] == topScore && word.length == 7 && topWord.length != 7) {
       // picks the 7 letter word in a tie
       topWord = word;
-    } else if (objectOfScores[word] == topScore && word.length == topWord.length) {
+    } else if (oobjectOfScores[word] == topScore && word.length == topWord.length) {
       // pick the already given topWord if tie and same length
       topWord = topWord;
     }
-    return topWord;
+    return topScore;
   }
 };
 
@@ -75,53 +75,52 @@ var myAttempt = new Scrabble();
 console.log(myAttempt.score('kaitlin'));
 // returns 61 (11 + 50)
 console.log(myAttempt.highestScoreFrom(['potato', 'jam', 'party']));
-// returns
+// returns potato. WAIT. this is the lowest...
 
-//
-// // Player
-// // constroctor -- instance variables
-// var Player = function(input) {
-//   this.name = input;
-//   this.plays = [];
-// };
-//
-// // iterators -- instance methods
-// Player.prototype.play = function(input) {
-//   var word = input;
-//   if (this.hasWon() === false) {
-//     this.plays.push(word);
-//   } else {
-//     return false;
-//   }
-// };
-//
-// Player.prototype.totalScore = function() {
-//   // Need to be able to use score method in Scrabble
-//   this.playsTotals = [];
-//   for (var word of this.plays) {
-//     var wordScore = Scrabble.prototype.score(word);
-//     this.playsTotals.push(wordScore);
-//   }
-//   var total = this.playsTotals.reduce((a, b) => a + b, 0);
-//   return total;
-// };
-//
-// Player.prototype.hasWon = function() {
-//   if (this.totalScore() >= 100) {
-//     return true;
-//   } else {
-//     return false;
-//   }
-// };
-//
-// Player.prototype.highestScoringWord = function() {
-//   this.playsTotals
-// };
-//
-// Player.prototype.highestWordScore = function() {
-//   return Math.max(this.playsTotals);
-// };
-//
-// // initializer
-// var myPlayer = new Player('Bernie');
-// //module.exports = Player;
+
+// Player
+// constroctor -- instance variables
+var Player = function(input) {
+  this.name = input;
+  this.plays = [];
+};
+
+// iterators -- instance methods
+Player.prototype.play = function(input) {
+  var word = input;
+  if (this.hasWon() === false) {
+    this.plays.push(word);
+  } else {
+    return false;
+  }
+};
+
+Player.prototype.totalScore = function() {
+  // Need to be able to use score method in Scrabble
+  this.playsTotals = [];
+  for (var word of this.plays) {
+    var wordScore = Scrabble.prototype.score(word);
+    this.playsTotals.push(wordScore);
+  }
+  var total = this.playsTotals.reduce((a, b) => a + b, 0);
+  return total;
+};
+
+Player.prototype.hasWon = function() {
+  if (this.totalScore() >= 100) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+Player.prototype.highestScoringWord = function() {
+  this.playsTotals
+};
+
+Player.prototype.highestWordScore = function() {
+  return Math.max(this.playsTotals);
+};
+
+// initializer
+var myPlayer = new Player('Bernie');
