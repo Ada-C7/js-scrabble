@@ -28,7 +28,6 @@ var x = fs.readFileSync('CSV/XWords.csv', 'utf8');
 var y = fs.readFileSync('CSV/YWords.csv', 'utf8');
 var z = fs.readFileSync('CSV/ZWords.csv', 'utf8');
 
-
 var words = a.concat(b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z);
 
 console.log(words.length);
