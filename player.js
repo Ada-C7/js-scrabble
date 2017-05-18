@@ -13,8 +13,12 @@ var Player = function(name, plays = []) {
 // };
 
 Player.prototype.play = function(word) {
+  if(this.hasWon()){
+    return false
+  }else{
   this.plays.push(word);
   return this.plays;
+}
 };
 
 Player.prototype.totalScore = function() {
@@ -55,15 +59,16 @@ Player.prototype.highestWordScore = function() {
 //
 //
 //
-// var alix = new Player('Alix');
-// console.log(alix.name);
-// console.log(alix.plays);
-// alix.play('happy');
-// alix.play('dopey');
-// alix.play('sleepy');
-// console.log(alix.plays);
-// alix.play('zzzzzzz');
-// console.log(alix.totalScore());
-// console.log(alix.hasWon());
+var alix = new Player('Alix');
+console.log(alix.name);
+console.log(alix.plays);
+alix.play('happy');
+alix.play('dopey');
+alix.play('sleepy');
+console.log(alix.plays);
+console.log(alix.play('zzzzzzz'));
+console.log(alix.totalScore());
+console.log(alix.hasWon());
+console.log(alix.play('zzzzzzz'));
 // console.log(alix.highestScoringWord());
 // console.log(alix.highestWordScore());
