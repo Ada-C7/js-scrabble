@@ -249,7 +249,7 @@ var Board = function() {
 // position is x and then y, so if given [0,0], equivalent space is
 // this.board[0]
 Board.prototype.play = function(word, position, direction) {
-  for(var i = 0; i < word.length; i++)
+  // for(var i = 0; i < word.length; i++)
   if (this.board[position[1]-1][position[0]-1] === "_") {
     this.board[position[1]-1][position[0]-1] = "X";
     console.log(this.board);
