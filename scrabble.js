@@ -31,8 +31,8 @@ Scrabble.prototype.score = function(input) {
 
 Scrabble.prototype.highestScoreFrom = function(input) {
   var arrayOfWords = input;
-  //var objectOfScores = [];
-  var objectOfScores = {};
+  //var objectOfScores = []; // this made an array of objects
+  var objectOfScores = {}; // this makes one object
   var topWord = 0;
   var topScore = 0;
   for (var word of arrayOfWords) {
@@ -40,25 +40,35 @@ Scrabble.prototype.highestScoreFrom = function(input) {
     objectOfScores[word] = wordScore;
     //objectOfScores.push({[word]: wordScore});
   }
-  return objectOfScores; //-- this works
-  // This loop is returning 0
-  // for (var key of objectOfScores) {
-  //   if (objectOfScores.hasOwnProperty(key) > topScore) {
-  //     topWord = key;
-  //     topScore = objectOfScores.hasOwnProperty(key);
-  //   } else if (objectOfScores.hasOwnProperty(key) == topScore && key.length < topWord.length && topWord.length != 7) {
-  //     // picks the shorter word when both are less than 7
-  //     topWord = key;
-  //   } else if (objectOfScores.hasOwnProperty(key) == topScore && key.length == 7 && topWord.length != 7) {
-  //     // picks the 7 letter word in a tie
-  //     topWord = key;
-  //   } else if (objectOfScores.hasOwnProperty(key) == topScore && key.length == topWord.length) {
-  //     // pick the already given topWord if tie and same length
-  //     topWord = topWord;
-  //   }
-  //   return topWord;
-  // }
+  // return objectOfScores; //-- this works
+  for (word in objectOfScores) {
+    if (objectOfScores[word] > topScore) {
+      topWord = word;
+      topScore = objectOfScores[word];
+    } else if (objectOfScores[word] == topScore && word.length < topWord.length && topWord.length != 7) {
+      // picks the shorter word when both are less than 7
+      topWord = word;
+    } else if (objectOfScores[word] == topScore && word.length == 7 && topWord.length != 7) {
+      // picks the 7 letter word in a tie
+      topWord = word;
+    } else if (objectOfScores[word] == topScore && word.length == topWord.length) {
+      // pick the already given topWord if tie and same length
+      topWord = topWord;
+    }
+    return topWord;
+  }
 };
+
+// I was using for..of WORKS with for..in*****
+  // This loop is returning 0
+  // Loop now returning undefined. Trying to make it iterable
+  // Object.prototype[Symbol.iterator] = function*() {
+  //   for (let word of Object.keys(this)) {
+  //     yield([word, this[word]])
+  //     if ...
+  //   }
+  // }
+
 
 // initializer
 var myAttempt = new Scrabble();
