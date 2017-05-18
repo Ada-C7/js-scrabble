@@ -17,7 +17,7 @@ var Scrabble = function() {};
     }
 
     word.length == 7 ? wordScore += 50 : wordScore;
-    // console.log(wordScore);
+
     return wordScore;
 
   };
@@ -43,7 +43,6 @@ var Scrabble = function() {};
     });
 
     console.log(highestScores);
-    // [ 'eollooh', 'heelloo' ]
 
     if (highestScores.length == 1) {
       highestWord = highestScores[0];
@@ -62,12 +61,11 @@ var Scrabble = function() {};
           return highestWord;
         };
     };
-    // return highestWord;
   };
 
 
-var game = new Scrabble();
-// game.score("heelloo");
-console.log(game.highestScoreFrom(["hi", "moo", "eo", "q"]));
-
-module.exports = Scrabble;
+// var game = new Scrabble();
+//
+// console.log(game.highestScoreFrom(["hi", "moo", "eo", "q"]));
+//
+// module.exports = Scrabble;

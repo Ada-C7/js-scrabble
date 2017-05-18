@@ -45,12 +45,12 @@ Player.prototype.highestWordScore = function() {
   return score;
 };
 
-var me = new Player("Sahana");
-console.log(me.plays);
-console.log(me.play("hello"));
-console.log(me.play("hi"));
-console.log(me.plays);
-console.log(me.totalScore());
-console.log(me.hasWon());
-console.log(me.highestScoringWord());
-console.log(me.highestWordScore());
+// var me = new Player("Sahana");
+// console.log(me.plays);
+// console.log(me.play("hello"));
+// console.log(me.play("hi"));
+// console.log(me.plays);
+// console.log(me.totalScore());
+// console.log(me.hasWon());
+// console.log(me.highestScoringWord());
+// console.log(me.highestWordScore());
