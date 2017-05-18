@@ -8,7 +8,7 @@ var Scrabble = function() {};
     "r": 1, "u": 1, "t": 1, "w": 4, "v": 4, "y": 4,
     "x": 8, "z": 10};
 
-
+    word = word.toLowerCase();
     var wordScore = 0;
 
     for (var i = 0; i < word.length; i++) {
@@ -64,8 +64,8 @@ var Scrabble = function() {};
   };
 
 
-// var game = new Scrabble();
-//
-// console.log(game.highestScoreFrom(["hi", "moo", "eo", "q"]));
-//
-// module.exports = Scrabble;
+var game = new Scrabble();
+
+console.log(game.highestScoreFrom(["HI", "moo", "eo", "q"]));
+
+module.exports = Scrabble;
