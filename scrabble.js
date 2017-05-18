@@ -43,7 +43,6 @@ var Scrabble = {
   },
 
   highestScoreFrom: function(arrayOfWords){
-    // console.log("here", arrayOfWords);
     var highestScore = 0;
     var scoreArray = [];
     var highestScoreArray = [];
@@ -72,17 +71,7 @@ var Scrabble = {
 
 
     var winningWord = null
-    console.log("after sort " , highestScoreArray);
-
-    // highestScoreArray.forEach(function(word){
-    //   console.log("highest each : ", word);
-    //   if(word.length == 7){
-    //     winningWord = word;
-    //     return winningWord;
-    //   }
-    // })
     for (var n = 0, len = highestScoreArray.length; n < len; n++) {
-        console.log("highest each : ", highestScoreArray[n]);
         if(highestScoreArray[n].length == 7){
           winningWord = highestScoreArray[n];
           return winningWord;
@@ -98,74 +87,4 @@ var Scrabble = {
 };
 
 
-// module.exports = Scrabble;
-
-
-var playedWordsArray = []
-
-var Player = function(name = "Player") {
-  this.name = name;
-};
-
-Player.prototype.plays = function(playedWords){
-  if(playedWords != null){
-  playedWordsArray = playedWords;
-  }
-  return playedWordsArray;
-};
-
-Player.prototype.play = function(word){
-  playedWordsArray.push(word);
-  if (this.hasWon) {
-    return false;
-  } else {
-  return playedWordsArray;
-  }
-};
-
-Player.prototype.totalScore = function(){
-  var playedWords = this.plays();
-  var total = 0
-  for (var n = 0, len = playedWords.length; n < len; n++) {
-    total += Scrabble.score(playedWords[n]);
-  }
-  return total;
-};
-
-Player.prototype.hasWon = function(){
-  var total = this.totalScore();
-  // console.log("has won total is : " + total);
-  if (total >= 100){
-    return true
-  } else {
-    return false;
-  }
-};
-
-Player.prototype.highestScoringWord = function(){
- var playedWords = this.plays();
- var topWord = Scrabble.highestScoreFrom(playedWords);
- return topWord;
-}
-
-Player.prototype.highestWordScore = function(){
- topScore = Scrabble.score(this.highestScoringWord());
- return topScore;
-}
-
-var playerOne = new Player("Tom");
-var array = ["dog", "fkkaaaa", "gdog", "aaaajhd", "aaaaqgg", "cat", "dogdo", "catca"];
-console.log(playerOne.name);
-playerOne.plays(array);
-playerOne.play("cat");
-// console.log(playerOne.plays(array));
-playerOne.play("dog");
-// console.log(playerOne.plays(array));
-// console.log("test " + Scrabble.highestScoreFrom(array));
-
-
-console.log(playerOne.totalScore());
-// console.log(Scrabble.score("angry"));
-console.log("has won??  " + playerOne.hasWon());
-console.log(playerOne.highestScoringWord());
-console.log(playerOne.highestWordScore());
+module.exports = Scrabble;
