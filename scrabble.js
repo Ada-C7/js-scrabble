@@ -66,7 +66,6 @@ playscrabble.score(word)
 // };
 
 module.exports = Scrabble;
-
 //*****************************//PLAYER//**************************
 
 var Player = function() {};
