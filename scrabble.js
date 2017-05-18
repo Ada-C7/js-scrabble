@@ -1,7 +1,7 @@
-var Game = function(player1, player2) {
-  this.player1 = new Player(player1);
-  this.player2 = new Player(player2);
-  this.tileBag = new TileBag();
+var Game = function(player1, player2, tileBag) {
+  this.tileBag = tileBag; //never figured out how to access this
+  this.player1 = player1;
+  this.player2 = player2;
 };
 
 Game.prototype = {};
@@ -14,8 +14,7 @@ var TileBag = function() {
 
 TileBag.prototype = {
   //draw: function(num) {
-    //remove a tile from this.bag and add it to the player's rack
-  }
+  //remove a tile from this.bag and add it to the player's rack
 };
 
 var Scoring = function() {};
@@ -59,7 +58,7 @@ Scoring.highestScoreFrom = function(words) {
 var Player = function(name) {
   this.name = name;
   this.plays = [];
-  this.rack = TileBag.draw(7);
+  // this is not functional -- this.rack = TileBag.draw(7);
 };
 
 Player.prototype = {
@@ -67,9 +66,11 @@ Player.prototype = {
   play: function(word) {
     if (!this.hasWon()) {
       this.plays.push(word);
+      return "You played: " + word;
     } else {
       return false;
     }
+  //remove letters from rack
   // draw tiles to update rack
   },
 
@@ -100,37 +101,41 @@ Player.prototype = {
 };
 
 
-
+var rory = new Player("rory");
+var leela = new Player("leela");
+var tiles = new TileBag();
 
 module.exports = Game;
-var scrabble = new Game("rory", "leela");
+var scrabble = new Game(rory, leela, tiles);
 
 console.log(scrabble.player1.name);
 console.log(scrabble.player1.play("hat"));
-console.log("Plays: " + scrabble.player1.plays);
-console.log(scrabble.player2.play("pet"));
-console.log("Plays: " + scrabble.player1.plays);
-console.log(scrabble.player1.name + " total score: " + scrabble.player1.totalScore());
+console.log(scrabble.player1.name + "'s plays: " + scrabble.player1.plays);
+console.log("**********************************");
 
+console.log(scrabble.player2.name);
+console.log(scrabble.player2.play("pet"));
+console.log(scrabble.player2.name + "'s plays: " + scrabble.player2.plays);
+console.log(scrabble.player2.name + " total score: " + scrabble.player2.totalScore());
+
+console.log("**********************************");
 console.log(scrabble.player2.play("penguin"));
-console.log(scrabble.player2.name  + "plays: " + scrabble.player2.plays);
+console.log(scrabble.player2.name  + " plays: " + scrabble.player2.plays);
 console.log(scrabble.player2.name + " total score: " + scrabble.player2.totalScore());
 
 console.log("**********************************");
 console.log(scrabble.player1.play("zzzz"));
-console.log(scrabble.player1.name + " plays: " + scrabble.player1.plays);
+console.log(scrabble.player1.name + "'s plays: " + scrabble.player1.plays);
 console.log(scrabble.player1.name + " has won? " + scrabble.player1.hasWon());
 console.log(scrabble.player1.name + " total score: " + scrabble.player1.totalScore());
 
 console.log("**********************************");
-console.log("Highest scoring word: " + scrabble.player1.highestScoringWord());
-
-console.log("**********************************");
-console.log("Highest score: " + scrabble.player1.highestWordScore());
+console.log(scrabble.player1.name + " highest scoring word: " + scrabble.player1.highestScoringWord());
+console.log(scrabble.player1.name + " highest score: " + scrabble.player1.highestWordScore());
 
 
 
-
+console.log("**************[testing Scoring]*****************");
 console.log(Scoring.score("hat"));
 
 words = ["cat", "penguin", "horse", "frog", "menguin"];
