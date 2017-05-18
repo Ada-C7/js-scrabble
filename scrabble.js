@@ -40,7 +40,7 @@ Scrabble.prototype.highestScoreFrom = function(input) {
     objectOfScores[word] = wordScore;
     //objectOfScores.push({[word]: wordScore});
   }
-
+  // return objectOfScores
   for (word in objectOfScores) {
     if (objectOfScores[word] > topScore) {
       topWord = word;
@@ -55,8 +55,8 @@ Scrabble.prototype.highestScoreFrom = function(input) {
       // pick the already given topWord if tie and same length
       topWord = topWord;
     }
-    return topScore;
   }
+  return topScore;
 };
 
 // initializer
