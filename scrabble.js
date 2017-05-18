@@ -9,7 +9,7 @@ Scrabble.prototype.helloWorld = function() {
 
 // work should be case insensitive
 Scrabble.score = function(word) {
-  var _tiles = {
+  var tiles = {
     "A": 1,
     "B": 3,
     "C": 3,
@@ -45,53 +45,36 @@ Scrabble.score = function(word) {
     }
 
     for (var i = 0; i < word.length; i++) {
-      score += _tiles[word[i]];
+      score += tiles[word[i]];
     }
     return score;
 };
 
 Scrabble.highestScoreFrom = function(arrayOfWords) {
+  var highestScore = 0,
+      winningWord = "";
 
-  var scoringOfWords = arrayOfWords.map(function(scoredWord) {
-    var word = {};
-    word.word = scoredWord;
-    word.score = this.score(scoredWord);
-    return word;
-  }, this);
+  for (var i = 0; i < arrayOfWords.length; i++) {
+    var score = Scrabble.score(arrayOfWords[i]);
+    var word = arrayOfWords[i];
 
-  var maxValue = Math.max.apply(Math, scoringOfWords.map(function(o) {
-      return o.score;
-  }));
+    if (word.length == 7) {
+      return word;
+    } else if (score > highestScore) {
+      winningWord = word;
+      highestScore = score;
+    } else if (score == highestScore && winningWord.length > word.length) {
+      winningWord = word;
+      highestScore = score;
+      }
+  }
 
-  var winningWords = [];
-  scoringOfWords.forEach (function(word) {
-    if (word.score == maxValue) {
-      winningWords.push(word.word);
-    }
-  });
-
-  // if (winningWords.length == 1) {
-  //   return winningWords[0];
-  // } else {
-  return winningWords[0];
-  };
-
-
-  // console.log(scoringOfWords);
-  // console.log(maxValue);
-  // console.log(winningWords);
+  return winningWord;
+};
 
   // if the top score is tied between multiple words, pick the one with the fewest letters
   // If the top score is tied between multiple words and one used all seven letters, choose the one with seven letters over the one with fewer tiles
   // If the there are multiple words that are the same score and same length, pick the first one in supplied list.
-
-//
-// var scrabble = new Scrabble();
-// console.log(scrabble.score("eeeee"));
-//
-// var words = ["aaaa", "bbbbb", "eeeeeee"];
-// scrabble.highestScoreFrom(words);
-
 
 var Player = function(name) {
   this.name = name;
@@ -128,16 +111,16 @@ Player.prototype.highestWordScore = function() {
 };
 
 var player = new Player("bob");
-player.play("a");
+player.play("aaa");
 console.log(player.plays);
 console.log(player.totalScore());
-player.play("w");
+player.play("eee");
 console.log(player.plays);
 console.log(player.totalScore());
-player.play("zzzzzzz");
+player.play("ooo");
 console.log(player.plays);
 console.log(player.totalScore());
-player.play("a");
+player.play("uuu");
 console.log(player.hasWon());
 console.log(player.plays);
 console.log(player.totalScore());
