@@ -25,36 +25,49 @@ var Scrabble = function() {};
 
   Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
 
-    var allScoresAndWords = [];
+    var highestWord = "";
     var self = this;
     var highestScore = 0;
     var highestScores = [];
 
     arrayOfWords.forEach(function(word) {
       var score = self.score(word);
-      allScoresAndWords.push([word, score]);
-    })
 
-    allScoresAndWords.forEach(function(scoreAndWord) {
-      if (scoreAndWord[1] >= highestScore) {
-        if (scoreAndWord[1] == highestScore) {
-          highestScores.push(scoreAndWord);
-        } else if (scoreAndWord[1] > highestScore) {
-          highestScores = [];
-          highestScores.push(scoreAndWord);
-          highestScore = scoreAndWord[1];
-        };
+      if (score == highestScore) {
+        highestScores.push(word);
+      } else if (score > highestScore) {
+        highestScores = [];
+        highestScores.push(word);
+        highestScore = score;
       };
     });
 
     console.log(highestScores);
-    return highestScores;
-  };
+    // [ 'eollooh', 'heelloo' ]
 
+    if (highestScores.length == 1) {
+      highestWord = highestScores[0];
+      return highestWord;
+    } else if (highestScores.length > 1) {
+        for (i = 0; i < highestScores.length; i++) {
+          if (highestScores[i].length == 7) {
+            highestWord = highestScores[i];
+          } else {
+            var shortestWord = highestScores[0];
+            if(highestScores[i].length < shortestWord.length) {
+              shortestWord = highestScores[i];
+              highestWord = shortestWord;
+            };
+          };
+          return highestWord;
+        };
+    };
+    // return highestWord;
+  };
 
 
 var game = new Scrabble();
 // game.score("heelloo");
-game.highestScoreFrom(["hello", "heelloo", "hi", "heelloo", "moo"]);
+console.log(game.highestScoreFrom(["hi", "moo", "eo", "q"]));
 
 module.exports = Scrabble;
