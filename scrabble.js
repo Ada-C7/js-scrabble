@@ -65,7 +65,6 @@ Scrabble.prototype = {
           highestWords.push([element[0], element[0].length]);
         }
       });
-      // console.log(highestWords);
 
       var smallestWordPosition = 0;
       var smallestWordLength = 0;
@@ -82,18 +81,4 @@ Scrabble.prototype = {
   }
 };
 
-// Scrabble.prototype.helloWorld = function() {
-//   return 'hello world!';
-// };
-
 module.exports = Scrabble;
-
-var newWord = new Scrabble();
-// console.log(newWord.score('zebra'))
-
-// array = ["test", "tast"];
-// array = ["aaaaaaa", "dk"];
-// array = ["test", "zebra", "a", "big"];
-// array = ["a", "b", "c", "m"];
-
-console.log(newWord.highestScoreFrom(array));
