@@ -8,7 +8,7 @@ Scrabble.prototype.score = function(word) {
   //proud of this ternary that is assigning scoreOfWord based on whether word used all 7 tiles to get 50 point bonus
   var scoreOfWord = word.length == 7? 50: 0;
   //accounting for if user input is varied in upper and lower case.
-  word = word.toLowerCase();
+  // word = word.toLowerCase();
   //loop that is iterating through word letter by letter and comparing it to scoreChart object
   for (var i = 0; i < word.length; i++)
   scoreOfWord += scoreChart[word.charAt(i)];
@@ -23,6 +23,7 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
     var wordScore = this.score(arrayOfWords[i]);
     if ( wordScore > highScoringWord) {
       highScoringWord = wordScore;
+      return highScoringWord
     }
   };
 
@@ -31,6 +32,7 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
   for (var i = 0; i < arrayOfWords.length; i++) {
     if (this.score(arrayOfWords[i]) == highScoringWord) {
       collectionHighestScoringWords.push(arrayOfWords[i])
+      return collectionHighestScoringWords
     }
   };
 
@@ -39,6 +41,7 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
   for (var i = 0; i < collectionHighestScoringWords.length; i++){
     if (collectionHighestScoringWords[i].length < selectShortestWord.length) {
       selectShortestWord = collectionHighestScoringWords[i];
+      return selectShortestWord
     }
   };
 
@@ -52,14 +55,14 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
 
 
 
-Scrabble.prototype.helloWorld = function() {
-  return 'hello world!';
-};
-
+// Scrabble.prototype.helloWorld = function() {
+//   return 'hello world!';
+// };
+//
 module.exports = Scrabble;
 
-var player1 = new Scrabble();
-var player2 = new Scrabble();
-console.log("Player 1 played: 'Marisol', and received " + player1.score("MaRiSoL") + " points.")
-console.log("Player 1's highest scoring word was: " + player1.highestScoreFrom([ "QqQq", "zZzZ"]))
-console.log("Player 2's highest scoring word was: " + player2.highestScoreFrom([ "zZzZ", "QqQq"]))
+// var player1 = new Scrabble();
+// var player2 = new Scrabble();
+// console.log("Player 1 played: 'Marisol', and received " + player1.score("MaRiSoL") + " points.")
+// console.log("Player 1's highest scoring word was: " + player1.highestScoreFrom([ "QqQq", "zZzZ"]))
+// console.log("Player 2's highest scoring word was: " + player2.highestScoreFrom([ "zZzZ", "QqQq"]))
