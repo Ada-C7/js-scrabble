@@ -68,7 +68,7 @@ Scrabble.prototype.helloWorld = function() {
 
 module.exports = Scrabble;
 
-var aGame = new Scrabble();
+// var aGame = new Scrabble();
 // var palabra = aGame.score("Lauraaaa");
-var palabra = aGame.highestScoreFrom(["lau", " ", "peter", "jajajaaa", "hola"]);
-console.log(palabra)
+// var palabra = aGame.highestScoreFrom(["lau", " ", "peter", "jajajaaa", "hola"]);
+// console.log(palabra)

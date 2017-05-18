@@ -32,14 +32,21 @@ Player.prototype = {
   },
 
   highestScoringWord: function(){
-    return Scrabble.prototype.highestScoreFrom(this.play);
+    return Scrabble.prototype.highestScoreFrom(this.plays);
   }
 }; //closing prototype
 
 var aPlayer = new Player("Lau");
 var palabra = aPlayer.play("Lauraaaa");
+var palabra1 = aPlayer.play("Lauraa");
+var palabra2 = aPlayer.play("qqq");
+var palabra = aPlayer.play("Laqqq");
+
+
+
 var scoress = aPlayer.totalScore();
-// var palabras = aPlayer.highestScoreFrom(["lau", " ", "peter", "jajajaaa", "hola"]);
-console.log(palabra)
+var palabras = aPlayer.highestScoringWord();
+// var palabras = aPlayer.highestScoringWord(["lau", " ", "peter", "jajajaaa", "hola"]);
+console.log(palabras)
 
 console.log(scoress)
