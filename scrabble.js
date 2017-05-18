@@ -112,8 +112,8 @@ Player.prototype = {
     if (this.hasWon() === true) {
       return false;
     }
-    if (word !== "" && word.length <= 1) {
-      plays.push(word);
+    if (word !== "" && word.length >= 1) {
+      this.plays.push(word);
       var scrabble = new Scrabble();
       var wordScore = scrabble.score(word);
       totalPoints += wordScore;
@@ -133,23 +133,29 @@ Player.prototype = {
   },
   highestScoringWord: function() {
     var scrabble = new Scrabble();
-    var topWord = scrabble.highestScore(plays);
+    var topWord = scrabble.highestScore(this.plays);
     return topWord;
   },
   highestWordScore: function() {
-    for (var index = 0; index < playScores.length; index++) {
-      if (index > playerHighestWordScore) {
-        playerHighestWordScore = index;
-      }
-      return playerHighestWordScore;
-    }
+    var word = this.highestScoringWord();
+    var scrabble = new Scrabble();
+    return scrabble.score(word);
   }
 };
 
+var player = new Player("Chantal");
+player.play("i");
+console.log(player.totalScore());
+console.log(player.highestScoringWord());
 
-// code they gave us:
-// Scrabble.prototype.helloWorld = function() {
-//   return 'hello world!';
-// };
-//
-// module.exports = Scrabble;
+player.play("love");
+console.log(player.totalScore());
+console.log(player.highestScoringWord());
+
+player.play("javascript");
+console.log(player.totalScore());
+console.log(player.highestScoringWord());
+console.log(player.highestWordScore());
+
+
+module.exports = Scrabble;
