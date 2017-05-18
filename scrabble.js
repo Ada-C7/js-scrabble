@@ -52,7 +52,7 @@ Player.prototype = {
   },
 
   play: function(word) {
-    if(this.hasWon == true) {
+    if(this.hasWon === true) {
       return false;
     }
     this.allPlays.push(word);
@@ -78,23 +78,29 @@ Player.prototype = {
 
   highestScoringWord: function() {
     var scrabble = new Scrabble();
-    scrabble.highestScoreFrom(this.allPlays());
+    return scrabble.highestScoreFrom(this.allPlays);
   },
 
   highestWordScore: function() {
     var scrabble = new Scrabble();
-    scrabble.score(this.highestScoringWord());
+    return scrabble.score(this.highestScoringWord());
   },
 };
 
 module.exports = Scrabble;
 
-// var testing = new Scrabble;
-// console.log(testing.score("chicken"));
 
-// var testingArrays = new Scrabble;
-// console.log(testingArrays.highestScoreFrom(["so", "tins", "toes", "it", "to"]))
 
+// Manual testing Scrabble object and its functions
+var testing = new Scrabble;
+console.log(testing.score("chicken"));
+
+var testingArrays = new Scrabble;
+console.log(testingArrays.highestScoreFrom(["so", "tins", "toes", "it", "to"]))
+
+console.log("===========================================");
+
+// Manual testing Player object and its functions
 var testing = new Player("Ada");
 console.log(testing.name);
 console.log(testing.play("owl"));
@@ -103,4 +109,61 @@ console.log(testing.play("hawk"));
 console.log(testing.plays());
 console.log(testing.totalScore());
 console.log(testing.hasWon());
-console.log(testing.);
+console.log(testing.highestScoringWord());
+console.log(testing.highestWordScore());
+//
+// console.log("===========================================");
+//
+// var test2 = new Player("May");
+// console.log(test2.name);
+// console.log(test2.play("owl"));
+// console.log(test2.play("chicken"));
+// console.log(test2.play("hawk"));
+// console.log(test2.play("penguin"));
+// console.log(test2.plays());
+// console.log(test2.totalScore());
+// console.log(test2.hasWon());
+// console.log(test2.highestScoringWord());
+// console.log(test2.highestWordScore());
+//
+// console.log("===========================================");
+//
+// var test3 = new Player("April");
+// console.log(test3.name);
+// console.log(test3.play("tins"));
+// console.log(test3.play("doe"));
+// console.log(test3.play("it"));
+// console.log(test3.play("to"));
+// console.log(test3.plays());
+// console.log(test3.totalScore());
+// console.log(test3.hasWon());
+// console.log(test3.highestScoringWord());
+// console.log(test3.highestWordScore());
+//
+// console.log("===========================================");
+//
+// var test4 = new Player("June");
+// console.log(test4.name);
+// console.log(test4.play("aaaaaad"));
+// console.log(test4.play("zzzzzj"));
+// console.log(test4.play("aaaaatg"));
+// console.log(test4.plays());
+// console.log(test4.totalScore());
+// console.log(test4.hasWon());
+// console.log(test4.highestScoringWord());
+// console.log(test4.highestWordScore());
+//
+// console.log("===========================================");
+//
+// var test5 = new Player("Hey");
+// console.log(test5.name);
+// console.log(test5.play("so"));
+// console.log(test5.play("tins"));
+// console.log(test5.play("toes"));
+// console.log(test5.play("it"));
+// console.log(test5.play("do"));
+// console.log(test5.plays());
+// console.log(test5.totalScore());
+// console.log(test5.hasWon());
+// console.log(test5.highestScoringWord());
+// console.log(test5.highestWordScore());
