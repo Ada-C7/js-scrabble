@@ -3,9 +3,7 @@ var Scrabble = function() {};
 // Returns the total score value for the given word.
 Scrabble.prototype.score = function(word) {
   // Checks if word is longer than 7 letters or contains a char other than a-z.
-  if ((!(word instanceof String)) || !/^[a-zA-Z]+$/.test(word) || word.length > 7) {
-    return 0
-  };
+  if (!/^[a-zA-Z]+$/.test(word) || word.length > 7) { return 0 };
 
   var scoreChart = {
     'A': 1, 'E': 1, 'I': 1, 'O': 1, 'U': 1, 'L': 1, 'N': 1,'R': 1, 'S': 1,
@@ -77,9 +75,9 @@ Scrabble.prototype.highestScore = function(words) {
   // return topScore;
 };
 
+module.exports = Scrabble;
 
-var my_score = new Scrabble();
-// console.log(my_score.score(undefined));
+// var my_score = new Scrabble();
 // console.log(my_score.score("aoIOUAA"));
 // console.log(my_score.score("pink"));
 // console.log(my_score.score("elephant"));
@@ -89,4 +87,3 @@ var my_score = new Scrabble();
 // console.log(my_score.highestScoreFrom(["rainbov", "rainbow"]));
 // console.log(my_score.highestScoreFrom([]));
 // console.log(my_score.highestScoreFrom("elephan"));
-module.exports = Scrabble;

@@ -1,16 +1,18 @@
 var Scrabble = require('./scrabble');
 
-var Player = function(name) {
+var Player = function(name, game= new Scrabble()) {
   this.name = name;
   this.plays = ["PURPLE", "PINK"];
-  this.scrabble = new Scrabble();
+  this.scrabble = game;
 };
 
 Player.prototype.play = function(word) {
   if (this.hasWon()) { return false };
-  // check to see if valid word?
-  this.plays.push(word);
-  // return score?
+
+  var score = this.scrabble.score(word);
+  // Only add word to plays array if it is a valid word.
+  if (score !== 0) { this.plays.push(word) };
+  return score;
 };
 
 Player.prototype.totalScore = function() {
@@ -27,14 +29,11 @@ Player.prototype.hasWon = function() {
 };
 
 Player.prototype.highestScoringWord = function() {
-  // if plays empty?
   return this.scrabble.highestScoreFrom(this.plays);
 };
 
 Player.prototype.highestWordScore = function() {
-  // if plays empty?
-  topWord = this.highestScoringWord();
-  return this.scrabble.score(topWord);
+  return this.scrabble.highestScore(this.plays);
 };
 
 // var my_player = new Player('Ada');
@@ -44,4 +43,9 @@ Player.prototype.highestWordScore = function() {
 // console.log(my_player.highestWordScore());
 // console.log(my_player.play("happy"));
 // console.log(my_player.plays);
+// console.log(my_player.play(""));
+// console.log(my_player.plays);
+// console.log(my_player.play(8));
+// console.log(my_player.plays);
 // console.log(my_player.highestScoringWord());
+// console.log(my_player.highestWordScore());
