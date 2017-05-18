@@ -10,22 +10,22 @@ var Player = function(name) {
 
 // PLAYER Prototype
 Player.prototype = {
-  //- function for Player to play(word)
-  play: function(word) {
-    this.plays.push(word);
-    var single_score = Scrabble.prototype.scoreWord(word);
-    this.score += single_score;
-    return single_score;
-  },
-
-  //- function to return totalScore()
-  totalScore: function() {
-    return this.score;
-  }, //function not necessary? .score does the same thing
-
   //- function to show win (T/F)
   hasWon: function() {
     if (this.score >= 100 ) { this.won = true; }
+    return this.won;
+  },
+
+  //- function for Player to play(word)
+  play: function(word) {
+    if (this.hasWon()) {
+      return console.log("WIN!");
+    } else {
+      this.plays.push(word);
+      var single_score = Scrabble.prototype.scoreWord(word);
+      this.score += single_score;
+      return single_score;
+    }
   },
 
   //- function to return highest WORD
@@ -41,14 +41,20 @@ Player.prototype = {
   },
 };
 
-// print out single player data
-var tamiko = new Player("Tamiko");
+/**********************END OF MODULES****************************/
 
+// initiate new player
+var tamiko = new Player("Tamiko");
 console.log(tamiko.name);
-console.log(tamiko.play("zzz"));
-console.log(tamiko.play("zzz"));
-console.log(tamiko.play("zzza"));
-console.log(tamiko.play("zzz"));
-console.log(tamiko.totalScore());
+
+// create plays by the player > 100 pts
+console.log(tamiko.play("zzzz"));
+console.log(tamiko.play("zzzz"));
+console.log(tamiko.play("zzzza"));
+console.log(tamiko.play("zzzz"));
+
+console.log(tamiko.score);
 console.log(tamiko.highestScoringWord());
 console.log(tamiko.highestWordScore());
+console.log(tamiko.won);
+console.log(tamiko.plays);
