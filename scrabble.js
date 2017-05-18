@@ -12,7 +12,7 @@ var scoreChart = {
 // SCRABBLE
 // constroctor -- instance variables
 var Scrabble = function() {
-  /* where to put in the score chart?
+  /* where to put the score chart?
   Before I thought I put it in here as an object
   Now I have it as a hash value outside*/
 };
@@ -20,10 +20,12 @@ var Scrabble = function() {
 // prototype -- instance methods
 Scrabble.prototype.score = function(input) {
   var word = input.toUpperCase();
+  if (word.length > 7) { return 0 ;}
   var sum = 0;
   for (var i = 0; i < word.length; i++) {
     sum += scoreChart[word.charAt(i)];
   }
+  if (word.length === 7) { return sum += 50 ;}
   return sum;
 };
 
@@ -36,59 +38,64 @@ Scrabble.prototype.highestScoreFrom = function(input) {
   }
   return arrayOfScores;
   // TODO: actual scoring rules
+  // if (true) {
+  //
+  // } else {
+  //
+  // }
 };
 
 // initializer
 var myAttempt = new Scrabble();
-console.log(myAttempt.score('kaitlin'));
+console.log(myAttempt.score('kaitlin')); // return 61 (11 + 50)
 console.log(myAttempt.highestScoreFrom(['potato', 'jam', 'party']));
 //module.exports = Scrabble;
 
-
-// Player
-// constroctor -- instance variables
-var Player = function(input) {
-  this.name = input;
-  this.plays = [];
-};
-
-// iterators -- instance methods
-Player.prototype.play = function(input) {
-  var word = input;
-  if (this.hasWon() === false) {
-    this.plays.push(word);
-  } else {
-    return false;
-  }
-};
-
-Player.prototype.totalScore = function() {
-  // Need to be able to use score method in Scrabble
-  var playsTotals = [];
-  for (var word of this.plays) {
-    var wordScore = Scrabble.prototype.score(word);
-    playsTotals.push(wordScore);
-  }
-  var total = playsTotals.reduce((a, b) => a + b, 0);
-  return total;
-};
-
-Player.prototype.hasWon = function() {
-  if (this.totalScore() >= 100) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-Player.prototype.highestScoringWord = function() {
-
-};
-
-Player.prototype.highestWordScore = function() {
-
-};
-
-// initializer
-var myPlayer = new Player('Bernie');
-//module.exports = Player;
+//
+// // Player
+// // constroctor -- instance variables
+// var Player = function(input) {
+//   this.name = input;
+//   this.plays = [];
+// };
+//
+// // iterators -- instance methods
+// Player.prototype.play = function(input) {
+//   var word = input;
+//   if (this.hasWon() === false) {
+//     this.plays.push(word);
+//   } else {
+//     return false;
+//   }
+// };
+//
+// Player.prototype.totalScore = function() {
+//   // Need to be able to use score method in Scrabble
+//   this.playsTotals = [];
+//   for (var word of this.plays) {
+//     var wordScore = Scrabble.prototype.score(word);
+//     this.playsTotals.push(wordScore);
+//   }
+//   var total = this.playsTotals.reduce((a, b) => a + b, 0);
+//   return total;
+// };
+//
+// Player.prototype.hasWon = function() {
+//   if (this.totalScore() >= 100) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// };
+//
+// Player.prototype.highestScoringWord = function() {
+//   this.playsTotals
+// };
+//
+// Player.prototype.highestWordScore = function() {
+//   return Math.max(this.playsTotals);
+// };
+//
+// // initializer
+// var myPlayer = new Player('Bernie');
+// //module.exports = Player;
