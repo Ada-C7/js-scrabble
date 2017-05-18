@@ -88,9 +88,10 @@ Player.prototype.totalScore = function() {
   var totalScore = 0;
   var playscrabble = new ScrabbleGame();
   //iterate over plays
-  this.plays.forEach(function(word));
-  this.plays[i] += this.plays[i];
-  Math.sum(this.plays[i]);
+  this.plays.forEach(function(word)) {
+    this.plays[i] += this.plays[i];
+    Math.sum(this.plays[i]);
+  }
   return totalScore;
 };
 }
@@ -115,3 +116,4 @@ Player.prototype.highestWordScore = function() {
     if(score(wordsPlayed[i]) > highestWordScore) {
       highestWordScore = score(wordsPlayed[i])
 }
+};
