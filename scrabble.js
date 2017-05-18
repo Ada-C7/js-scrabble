@@ -57,22 +57,39 @@ Scrabble.prototype = {
     if (highest_scoring_words.length > 1) {
       var wordLengths = [];
       // loop that goes through the highest_scoring_words array and puts the lengths into wordLengths
-      for (var index = 0; index < highest_scoring_words.length; index++) {
-        var word = highest_scoring_words[index]
-        wordLengths.push(word.length );
+      for (index = 0; index < highest_scoring_words.length; index++) {
+        word = highest_scoring_words[index];
+        wordLengths.push(word.length);
       }
-      max_length = 0;
-      for (var index = 0; index < wordLengths.length; index++) {
-        if (index > max_length) {
-          max_length = index;
-        } else if (index == max_length) {
-          // return the word that came right before it ******
+      var allSame = true;
+      var max_length = wordLengths[0];
+
+      for (index = 0; index < wordLengths.length; index++) {
+        if (wordLengths[index] !== max_length) {
+          allSame = false;
         }
       }
-      // if one of them has 7 letters
-      if (word.length == 7) {
-        return word;
+      if (allSame) {
+        return highest_scoring_words[0];
       }
+      for (index = 0; index < highest_scoring_words.length; index++) {
+        word = highest_scoring_words[index];
+        // if one of them has 7 letters
+        if (word.length == 7) {
+          return word;
+        }
+      }
+      var minLengthWord = highest_scoring_words[0];
+      var minLength = minLengthWord.length; // so that we have an actual minimum length for starting point
+
+      for (index = 0; index < highest_scoring_words.length; index++) {
+        word = highest_scoring_words[index];
+        if (word.length < minLength) {
+          minLength = word.length;
+          minLengthWord = word;
+        }
+      }
+      return minLengthWord;
     }
     return highest_scoring_words[0];
   }
