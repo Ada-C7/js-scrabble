@@ -63,10 +63,6 @@ Scrabble.highestScoreFrom = function(arrayOfWords) {
 };
 
 
-
-
-
-
 var Player = function(name) {
   this.name = name;
   this.plays = [];
@@ -117,31 +113,31 @@ TileBag.prototype.remainingTiles = function() {
   return this.tiles.length;
 };
 
-var player = new Player("bob");
-player.play("aaa");
-console.log(player.plays);
-console.log(player.totalScore());
-player.play("b");
-console.log(player.plays);
-console.log(player.totalScore());
-player.play("ooo");
-console.log(player.plays);
-console.log(player.totalScore());
-player.play("uuu");
-console.log(player.hasWon());
-console.log(player.plays);
-console.log(player.totalScore());
-console.log(player.highestScoringWord());
-console.log(player.highestWordScore());
-player.play("xxxxxxx");
-console.log(player.hasWon());
-console.log(player.plays);
-console.log(player.totalScore());
-console.log(player.highestScoringWord());
-console.log(player.highestWordScore());
-
-var tilebag = new TileBag();
-console.log(tilebag.draw(4));
-console.log(tilebag.remainingTiles());
+// var player = new Player("bob");
+// player.play("aaa");
+// console.log(player.plays);
+// console.log(player.totalScore());
+// player.play("b");
+// console.log(player.plays);
+// console.log(player.totalScore());
+// player.play("ooo");
+// console.log(player.plays);
+// console.log(player.totalScore());
+// player.play("uuu");
+// console.log(player.hasWon());
+// console.log(player.plays);
+// console.log(player.totalScore());
+// console.log(player.highestScoringWord());
+// console.log(player.highestWordScore());
+// player.play("xxxxxxx");
+// console.log(player.hasWon());
+// console.log(player.plays);
+// console.log(player.totalScore());
+// console.log(player.highestScoringWord());
+// console.log(player.highestWordScore());
+//
+// var tilebag = new TileBag();
+// console.log(tilebag.draw(4));
+// console.log(tilebag.remainingTiles());
 
 module.exports = Scrabble;
