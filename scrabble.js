@@ -34,7 +34,7 @@ Scrabble.prototype.highestScoreFrom = function(input) {
   var arrayOfScores = [];
   for (var word of arrayOfWords) {
     var wordScore = this.score(word);
-    arrayOfScores.push(wordScore);
+    arrayOfScores.push({[word]: wordScore});
   }
   return arrayOfScores;
   // TODO: actual scoring rules
@@ -47,7 +47,7 @@ Scrabble.prototype.highestScoreFrom = function(input) {
 
 // initializer
 var myAttempt = new Scrabble();
-console.log(myAttempt.score('kaitlin')); // return 61 (11 + 50)
+console.log(myAttempt.score('kaitlin')); // returns 61 (11 + 50)
 console.log(myAttempt.highestScoreFrom(['potato', 'jam', 'party']));
 //module.exports = Scrabble;
 
