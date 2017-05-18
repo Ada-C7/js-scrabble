@@ -1,6 +1,3 @@
-// 'use strict';
-// var prompt = require('prompt');
-
 
 var scoreboard = {}; // object, not hash...but similar
 
@@ -19,8 +16,7 @@ populateScoreboard(["j", "x"], 8);
 populateScoreboard(["q", "z"], 10);
 
 
-
-var Scrabble = function() { // this is basically a class
+var Scrabble = function() { // constructor (like a class)
 };
 
 Scrabble.prototype = {
@@ -48,107 +44,87 @@ Scrabble.prototype = {
     var highest_scoring_words = [];
     var max_score = 0;
     // search object for highest score
-      for (var word in all_words_played) {
-        var score = all_words_played[word]; // keys are words
-        if (score > max_score) {
-          max_score = score;
-          highest_scoring_words = [word];
-        } else if (score == max_score) {
-          highest_scoring_words.append(word);
-        }
+    for (var word in all_words_played) {
+      var score = all_words_played[word]; // keys are words
+      if (score > max_score) {
+        max_score = score;
+        highest_scoring_words = [word];
+      } else if (score == max_score) {
+        highest_scoring_words.push(word);
       }
+    }
     // if two values are the same (tie)
     if (highest_scoring_words.length > 1) {
       var wordLengths = [];
       // loop that goes through the highest_scoring_words array and puts the lengths into wordLengths
       for (var index = 0; index < highest_scoring_words.length; index++) {
         var word = highest_scoring_words[index]
-        wordLengths.append(word.length );
+        wordLengths.push(word.length );
       }
       max_length = 0;
       for (var index = 0; index < wordLengths.length; index++) {
         if (index > max_length) {
           max_length = index;
-      } else if (index == max_length) {
-          // return the word that came right before it
+        } else if (index == max_length) {
+          // return the word that came right before it ******
         }
       }
       // if one of them has 7 letters
       if (word.length == 7) {
-        // return that word as the winner
         return word;
       }
     }
-    //return winning word
     return highest_scoring_words[0];
   }
 };
 
-var plays = [];
 
-var Player = function(name) {
+var Player = function(name) { // constructor
   this.name = name;
-  this.plays = function() {
-    return name.plays;  // is this right?????????
-  };
-};
-
-
-Player.prototype = {
-  play: function(word) {  // is this right?????????
-  // if player hasWon == true, return false
-    if (word !== "" && word.length < 7) {
-      plays.append(word);
-  } else {
-      console.log("Error, please enter a word that is at least 1 character long.");
-    }
-  }
+  this.plays = [];
 };
 
 var playsScores = [];
 var totalPoints = 0;
+var playerHighestScoringWord = "";
+var playerHighestWordScore = 0;
 
-Player.prototype = { // do I need another prototype, or can I put it above?
-  totalScore: function() {
-    for (var index = 0; index < plays.length; index++){
-      // sum up scores of words played
-      totalPoints += word.score; // ?????
+Player.prototype = {
+  play: function(word) {
+    // if player hasWon == true, return false
+    if (this.hasWon() === true) {
+      return false;
     }
-    // returns total score
-    return total;
-  }
-};
-
-Player.prototype = { // do I need another prototype, or can I put it in the original?
+    if (word !== "" && word.length <= 1) {
+      plays.push(word);
+      var scrabble = new Scrabble();
+      var wordScore = scrabble.score(word);
+      totalPoints += wordScore;
+      return true;
+    } else {
+      console.log("Error, please enter a word that is at least 1 character long.");
+    }
+  },
+  totalScore: function() {
+      return totalPoints;
+  },
   hasWon: function() {
     if (totalPoints >= 100) {
       return true;
     }
-    }
-};
-
-var playerHighestScoringWord = "";
-
-Player.prototype = { // do I need another prototype, or can I put it in the original?
+    return false;
+  },
   highestScoringWord: function() {
-    for (var index = 0; index < playScores.length; index++) {
-      if (index > playerHighestScoringWord) { // haha, nope, this won't work
-        playerHighestScoringWord = index;
-      }
-      return playerHighestScoringWord;
-    }
-  }
-};
-
-var playerHighestWordScore = 0;
-
-Player.prototype = { // do I need another prototype, or can I put it in the original?
-  higestWordScore: function() {
+    var scrabble = new Scrabble();
+    var topWord = scrabble.highestScore(plays);
+    return topWord;
+  },
+  highestWordScore: function() {
     for (var index = 0; index < playScores.length; index++) {
       if (index > playerHighestWordScore) {
         playerHighestWordScore = index;
       }
-      return playerHighestScoringWord;
+      return playerHighestWordScore;
     }
   }
 };
