@@ -78,7 +78,7 @@ Scrabble.prototype.highestScore = function(arrayOfWords) {
 
 
 // PLAYER
-var Player = function(name, game) {
+var Player = function(name) {
   this.name = name;
   this.plays = [];
   game = new Scrabble();
@@ -123,6 +123,7 @@ Player.prototype.highestScoringWord = function() {
 
 Player.prototype.highestWordScore = function() {
   // Function which returns the highestScoringWord score
+  return this.scrabble.score(this.highestScoringWord());
 };
 
 // Game set up:
@@ -137,7 +138,12 @@ console.log("Player: " + testPlayer.name + "'s total points: " + testPlayer.tota
 // Has the player won
 console.log("Has player won? " + testPlayer.hasWon());
 // Highest Scoring word and its associated score
-console.log("Winning word: " );
+console.log("Winning word: " + testPlayer.highestScoringWord() + " = " + testPlayer.highestWordScore() + " points!");
+// Can play another word when hasWon is false
+testPlayer.play("animalz"); //18+50=68
+testPlayer.play("qqqa");
+console.log("New total score: " + testPlayer.totalScore());
+console.log("Has player won? " + testPlayer.hasWon());
 
 
 module.exports = Scrabble;
