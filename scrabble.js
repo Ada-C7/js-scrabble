@@ -105,21 +105,25 @@ Player.prototype.hasWon = function() {
 };
 
 Player.prototype.highestScoringWord = function() {
-  return Scrabble.prototype.highestScoreFrom(this.plays);
+    return Math.max(this.playsTotals);
 };
 
 Player.prototype.highestWordScore = function() {
-  return Math.max(this.playsTotals);
+  return Scrabble.prototype.highestScoreFrom(this.plays);
 };
 
 // initializer
 var myPlayer = new Player('Bernie');
 console.log(myPlayer.name); //return Bernie
 console.log(myPlayer.plays); // returns []
-myPlayer.play("eggplant");
-console.log(myPlayer.plays); // returns ['eggplant']
-console.log(myPlayer.totalScore()); // returns 0 :(
-
+myPlayer.play("jump");
+console.log(myPlayer.plays); // returns ['jump']
+myPlayer.play("grr");
+console.log(myPlayer.plays); // returns ['jump', 'grr']
+console.log(myPlayer.totalScore()); /* returns 19 -- was returning 0 b/c
+eggplant was 8 letters!*/
+console.log(myPlayer.highestScoringWord());
+console.log(myPlayer.highestWordScore());
 
 
 // code graveyard -- ATTEMPTS MADE TO GET TO FINAL CODE
