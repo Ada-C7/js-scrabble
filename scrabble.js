@@ -65,8 +65,7 @@ var myAttempt = new Scrabble();
 console.log(myAttempt.score('kaitlin'));
 // returns 61 (11 + 50)
 console.log(myAttempt.highestScoreFrom(['party', 'potato', 'jam']));
-// 10, 8, 12
-// right now always returning the first item in the arry...
+// 10, 8, 12 - correctly returns 12
 
 // Player
 // constroctor -- instance variables
@@ -88,8 +87,10 @@ Player.prototype.play = function(input) {
 Player.prototype.totalScore = function() {
   // Need to be able to use score method in Scrabble
   this.playsTotals = [];
+  this.playsObject = {};
   for (var word of this.plays) {
     var wordScore = Scrabble.prototype.score(word);
+    this.playsObject[word] = wordScore;
     this.playsTotals.push(wordScore);
   }
   var total = this.playsTotals.reduce((a, b) => a + b, 0);
@@ -104,12 +105,17 @@ Player.prototype.hasWon = function() {
   }
 };
 
-Player.prototype.highestScoringWord = function() {
-    return Math.max(this.playsTotals);
+Player.prototype.highestWordScore = function() {
+  this.highest = Scrabble.prototype.highestScoreFrom(this.plays);
+  return this.highest;
 };
 
-Player.prototype.highestWordScore = function() {
-  return Scrabble.prototype.highestScoreFrom(this.plays);
+Player.prototype.highestScoringWord = function() {
+  // match up this.plays and this.playsTotals by index
+  //var index = this.playsObject.keys(this.highest);
+  //return index;
+  //this.playsTotals.filter(Player.prototype.highestWordScore);
+  //return Math.max(this.playsTotals);
 };
 
 // initializer
@@ -122,8 +128,8 @@ myPlayer.play("grr");
 console.log(myPlayer.plays); // returns ['jump', 'grr']
 console.log(myPlayer.totalScore()); /* returns 19 -- was returning 0 b/c
 eggplant was 8 letters!*/
-console.log(myPlayer.highestScoringWord());
 console.log(myPlayer.highestWordScore());
+console.log(myPlayer.highestScoringWord());
 
 
 // code graveyard -- ATTEMPTS MADE TO GET TO FINAL CODE
