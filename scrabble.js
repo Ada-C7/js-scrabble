@@ -59,14 +59,14 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords) {
       // if top score tied between multiple words, pick the one with the fewest letters
       highScore = score;
       winningWord = word;
-      console.log("Testing 2" + winningWord + highScore);
+      console.log("Testing 2 " + winningWord + highScore);
     } else if ((score == highScore) && (word.length == 7 || word.length < winningWord.length)) {
-        if (winningWord.length != 7) {
-          highScore = score;
-          winningWord = word;
-          console.log("Testing " + winningWord + highScore);
-        }
+      if (winningWord.length != 7) {
+        highScore = score;
+        winningWord = word;
+        console.log("Testing " + winningWord + highScore);
       }
+    }
   });
   return winningWord;
 };
@@ -77,16 +77,20 @@ var Player = function(name) {
 };
 
 // Function which adds the input word to the plays Array, false if player has won
-Player.prototype.play = function(word) {
 
-  this.plays.push(word);
+Player.prototype.play = function(word) {
+  if (this.hasWon() === true) {
+    return false;
+  } else {
+    this.plays.push(word);
+  }
 };
 
 // Function which sums up and returns the score of the players words
 Player.prototype.totalScore = function() {
   var totalScore = 0;
   this.plays.forEach(function(word) {
-    totalScore += this.Scrabble.prototype.score(word);
+    totalScore += Scrabble.prototype.score(word);
   });
   return totalScore;
 };
@@ -102,7 +106,7 @@ Player.prototype.hasWon = function() {
 
 // Function which returns the highest scoring word the user has played
 Player.prototype.highestScoringWord = function() {
-
+  return Scrabble.prototype.highestScoringWord;
 };
 
 // Function which returns the highestScoringWord score
@@ -110,16 +114,26 @@ Player.prototype.highestWordScore = function() {
 
 };
 
+//  ****TESTING FUNCTIONS ******
+
+// Testing Player
+
 var newPlayer = new Player("habs");
 console.log("New player is " + newPlayer.name);
+newPlayer.play("woo");
+newPlayer.play("maad");
+console.log("Words that " + newPlayer.name + " played are " + newPlayer.plays);
+
+
+// Testing Scrabble
 
 //apple: 9, banana: 8, pof: 8, bananas: 59, zzzzzj: 58, gaaaaaa: 58, maple: 9
 var game = new Scrabble();
 play = game.score("maple");
- // topScore = game.highestScoreFrom(["gaaaaaa", "zzzzzj"]);
- // topScore = game.highestScoreFrom(["banana", "pof"]);
- // topScore = game.highestScoreFrom(["apple", "maple"]);
- topScore = game.highestScoreFrom(["maple", "apple"]);
+// topScore = game.highestScoreFrom(["gaaaaaa", "zzzzzj"]);
+// topScore = game.highestScoreFrom(["banana", "pof"]);
+// topScore = game.highestScoreFrom(["apple", "maple"]);
+topScore = game.highestScoreFrom(["maple", "apple"]);
 console.log(play);
 console.log(topScore);
 module.exports = Scrabble;
