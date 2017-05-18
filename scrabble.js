@@ -43,23 +43,11 @@ var Scrabble = {
   }
 };
 
-// prototypes
-
-// example prototype
-// Scrabble.prototype.helloWorld = function() {
-//   return 'hello world!';
-// };
-//
-// Scrabble.prototype.score = function(word) {
-//
-//
-// };
-
-
 module.exports = Scrabble;
 
+// prompts for trying it out!
 console.log(Scrabble.score("hello"));
 // console.log(game.helloWorld());
 // console.log(game.score("hello"));
 
-console.log(Scrabble.highestScoreFrom(["hi", "hello", "zzzz"]));
+// console.log(Scrabble.highestScoreFrom(["hi", "hello", "zzzz"]));
