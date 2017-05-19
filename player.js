@@ -11,7 +11,7 @@ Player.prototype = {
       return false;
     }
     this.plays.push(word);
-    return this.plays
+    return this.plays;
   },
 
   totalScore: function(){
@@ -21,7 +21,7 @@ Player.prototype = {
       wordScore = Scrabble.prototype.score(this.plays[i]);
       total += wordScore;
     }
-    return total
+    return total;
   },
 
   hasWon: function(){
