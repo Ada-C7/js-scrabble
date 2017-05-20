@@ -33,44 +33,22 @@ Scrabble.prototype = {
 
   highestScoreFrom: function(arrayOfWords) {
     var wordInfo = [];
-    var self = this;
 
     arrayOfWords.forEach(function(word) {
-      wordInfo.push([word, self.score(word)]);
-    });
+      wordInfo.push([word, this.score(word)]);
+    }.bind(this));
 
     sortedWords = wordInfo.sort(function(scoreOne, scoreTwo) {
       return scoreOne[1] - scoreTwo[1];
     });
 
-
-    var size = sortedWords.length;
-    var lastPair = sortedWords[size - 1];
-
-    if (lastPair[1] > sortedWords[size - 2]){
-      return lastPair[0];
-    } else {
-
-      var highestWords = [];
-
-      sortedWords.forEach(function(element) {
-        if (lastPair[1] === element[1]) {
-          highestWords.push([element[0], element[0].length]);
-        }
-      });
-
-      var smallestWordPosition = 0;
-      var smallestWordLength = 0;
-
-      highestWords.forEach(function(element) {
-        if (element[1] === 7) {
-          return element[0];
-        } else if (element[1] < smallestWordLength) {
-          smallestWordPosition = highestWords.indexOf(element);
-        }
-      });
-      return highestWords[0][smallestWordPosition];
-    }
+    var highestWord = sortedWords.reduce(function(acc, pair) {
+      if (pair[1] > acc[1] || (pair[1] >= acc[1] && pair[0].length == 7)) {
+        return pair;
+      }
+      return acc;
+    }, ["", 0]);
+    return highestWord;
   }
 };
 
@@ -78,6 +56,13 @@ module.exports = Scrabble;
 
 var newStuff = new Scrabble();
 
-array = ["word", "srtuff","things"];
+// array = ["word", "stuff", "things"];
+array = ["eeeeeee", "zzzzzj", "aaaaaga"];
+// array = ["a", "i", "o"];
 
-newStuff.highestScoreFrom(array);
+// console.log(newStuff.score("word"));
+
+console.log(newStuff.score("aaaaaga"));
+console.log(newStuff.score("zzzzzj"));
+
+console.log(newStuff.highestScoreFrom(array));
