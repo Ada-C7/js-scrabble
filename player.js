@@ -45,19 +45,3 @@ Player.prototype = {
     return this.scrabble.score(word);
   }
 };
-
-player1 = new Player("Kerry");
-player1.play("word");
-player1.play("stuff");
-player1.play("eeeeeee");
-player1.play("aaaaaga");
-player1.play("zzzzzj");
-
-
-
-player1.totalScore();
-player1.hasWon();
-
-console.log(player1.highestScoringWord());
-
-console.log(player1.highestWordScore());
