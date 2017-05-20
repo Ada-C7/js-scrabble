@@ -2,35 +2,27 @@ var Scrabble = function () {};
 
 Scrabble.prototype = {
   score: function (word) {
-    var i = 0;
-    var total = 0;
-    while (i < word.length) {
-      var letter = word[i].toLowerCase();
+
+    var total = word.reduce(function(acc, letter) {
+
       if (letter.match(/[a|e|i|o|u|l|n|r|s|t]/i)) {
-        total = total + 1;
-        i++;
+        return acc + 1;
       } else if (letter.match(/[d|g]/i)) {
-        total = total + 2;
-        i++;
+        return acc + 2;
       } else if (letter.match(/[b|c|m|p]/i)) {
-        total = total + 3;
-        i++;
+        return acc + 3;
       } else if (letter.match(/[f|h|v|w|y]/i)) {
-        total = total + 4;
-        i++;
+        return acc + 4;
       } else if (letter.match(/[k]/i)) {
-        total = total + 5;
-        i++;
+        return acc + 5;
       } else if (letter.match(/[j|x]/i)) {
-        total = total + 8;
-        i++;
+        return acc + 8;
       } else if (letter.match(/[q|z]/i)) {
-        total = total + 10;
-        i++;
+        return acc + 10;
       } else {
-        return console.log("Invalid word.");
+        throw new Error("Invalid word.");
       }
-    }
+    }, 0);
 
     if (word.length === 7) {
       total += 50;
