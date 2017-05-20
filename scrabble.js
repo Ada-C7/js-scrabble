@@ -2,6 +2,7 @@ var Scrabble = function () {};
 
 Scrabble.prototype = {
   score: function (word) {
+
     wordArray = word.split("");
 
     var total = wordArray.reduce(function(acc, letter) {
@@ -48,21 +49,8 @@ Scrabble.prototype = {
       }
       return acc;
     }, ["", 0]);
-    return highestWord;
+    return highestWord[0];
   }
 };
 
 module.exports = Scrabble;
-
-var newStuff = new Scrabble();
-
-// array = ["word", "stuff", "things"];
-array = ["eeeeeee", "zzzzzj", "aaaaaga"];
-// array = ["a", "i", "o"];
-
-// console.log(newStuff.score("word"));
-
-console.log(newStuff.score("aaaaaga"));
-console.log(newStuff.score("zzzzzj"));
-
-console.log(newStuff.highestScoreFrom(array));
