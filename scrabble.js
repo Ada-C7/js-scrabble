@@ -8,7 +8,7 @@ var scoreChart = {
   'K': 5,
   'J': 8, 'X': 8,
   'Q': 10, 'Z': 10
-}
+};
 
 Scrabble.prototype = {
   score: function(word) {
@@ -31,7 +31,7 @@ Scrabble.prototype = {
     var self = this;
 
     var scores = arrayOfWords.map(function(thisword){
-      return self.score(thisword)
+      return self.score(thisword);
     });
 
     var max = 0;
@@ -46,15 +46,16 @@ Scrabble.prototype = {
         max_index = i;
       }
     });
-    return arrayOfWords[max_index]
+    return arrayOfWords[max_index];
   }
 };
 
 var player = function(playerName) {
   this.playerName = playerName;
   this.arrayOfWords = [];
-  this.playerTotalpoints = 0;
-}
+  this.playerTotalPoints = 0;
+  this.won = false
+};
 
 player.prototype.name = function() {
   return this.playerName
@@ -69,7 +70,28 @@ player.prototype.play = function(word) {
   return this.arrayOfWords.push(word)
 };
 
+player.prototype.totalPoints = function(){
+  for (var i = 0; i< this.arrayOfWords.length; i++){
+    thisScore = ( new Scrabble() ).score(this.arrayOfWords[i])
+    this.playerTotalPoints += thisScore
+  }
+  if (this.playerTotalPoints > 100){
+    this.won = true
+  }
+  return this.playerTotalPoints
+};
 
+player.prototype.highestScoringWord = function() {
+return( new Scrabble()).highestScoreFrom(this.arrayOfWords)
+};
+
+player.prototype.highestWordScore = function(){
+  return( new Scrabble()).score(this.highestScoringWord())
+};
+
+player.prototype.hasWon = function() {
+  return this.won
+}
 
 var myScrabble = new Scrabble;
 console.log(scoreChart);
@@ -80,6 +102,14 @@ console.log(myScrabble.highestScoreFrom([ "book","gap", "winner"]));
 var emma = new player("Emma")
 console.log(emma.name());
 
+console.log(emma.play("puzzle"));
+console.log(emma.play("quickly"));
+console.log(emma.play("ada"));
+console.log(emma.play("plane"));
+
 console.log(emma.wordsPlayed());
+console.log(emma.totalPoints());
+
+console.log(emma.hasWon());
 
 module.exports = Scrabble;
